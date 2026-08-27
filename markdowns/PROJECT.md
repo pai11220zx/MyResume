@@ -1,6 +1,6 @@
 # 🏗️ โครงสร้างระบบและสเปกการทำงาน (Project Architecture & Specification)
 
-เอกสารนี้ระบุรายละเอียดโครงสร้างหน้าเว็บ (Sitemap), ลำดับการแสดงผลของ Section, ข้อกำหนดของแต่ละ Component, Data Schema และขั้นตอนการพัฒนาสำหรับโปรเจกต์ **Developer Portfolio Website** ตามข้อกำหนดใน [`PROJECT_SPEC.md.md`](file:///c:/xampp/htdocs/Resume/PROJECT_SPEC.md.md)
+เอกสารนี้ระบุรายละเอียดโครงสร้างหน้าเว็บ (Sitemap), ลำดับการแสดงผลของแต่ละ Section, ข้อกำหนดของ Component, สถาปัตยกรรมข้อมูล Supabase (PostgreSQL), การกำหนดค่า Vercel Deployment และขั้นตอนการพัฒนาสำหรับโปรเจกต์ **Developer Portfolio Website**
 
 ---
 
@@ -19,7 +19,7 @@ Home (Landing Page)
 ├── 7. Activities & Achievements (Workshops, Competitions, Certificates)
 ├── 8. Education (University, Degree, Faculty, Academic Status)
 ├── 9. GitHub Activity (Contribution Stats / Repository Showcase)
-├── 10. Contact CTA & Form (Contact Information & Message Form)
+├── 10. Contact CTA & Form (Contact Information & Message Form -> Supabase)
 └── 11. Footer (Quick Links, Social Profiles, Copyright)
 ```
 
@@ -28,128 +28,124 @@ Home (Landing Page)
 ## 2. รายละเอียดข้อกำหนดของแต่ละ Section (Section Specifications)
 
 ### 🧭 1. Navbar (`Navbar.jsx`)
-- **คุณสมบัติ:**
-  - ติดอยู่ด้านบนตลอดเวลา (Sticky / Fixed) พร้อมเอฟเฟกต์เบลอพื้นหลัง (`backdrop-blur-md bg-[#0F1117]/80`)
-  - โลโก้ / ชื่อย่อ: `PAI`
-  - เมนูหลัก (Desktop): `Home`, `About`, `Skills`, `Projects`, `Experience`, `Contact`
-  - ปุ่ม Action: **`Resume`** (สำหรับดูหรือดาวน์โหลดเรซูเม่)
-  - รองรับ Mobile Menu (Hamburger Icon ที่เปิด-ปิดด้วย Animation)
-  - มี Active Section Indicator เมื่อผู้ใช้เลื่อนหน้าจอไปยัง Section นั้นๆ
+- ติดอยู่ด้านบนตลอดเวลา (Sticky / Fixed) พร้อมเอฟเฟกต์เบลอพื้นหลัง (`backdrop-blur-md bg-[#0F1117]/80`)
+- โลโก้: `PAI`
+- เมนูหลัก (Desktop): `Home`, `About`, `Skills`, `Projects`, `Experience`, `Contact`
+- ปุ่ม Action: **`Resume`**
+- รองรับ Mobile Menu (Hamburger Icon พร้อมแอนิเมชันเปิดปิด)
+- มี Active Section Indicator ตามตำแหน่งการเลื่อนหน้าจอ
 
 ### 🚀 2. Hero Section (`Hero.jsx`)
-- **ข้อมูลที่ต้องแสดง:**
-  - คำทักทาย (Greeting): `HELLO, I'M`
-  - ชื่อ (Name): `PAI`
-  - ตำแหน่ง/บทบาท (Role): `Computer Science Student & Aspiring Software Developer`
-  - คำแนะนำตัวสั้น (Short Bio): อธิบายความสนใจและเป้าหมายในสายงานพัฒนาซอฟต์แวร์
-  - รูปโปรไฟล์ (Profile Image) ที่จัดวางอย่างสมดุล
-  - ปุ่ม CTA: `[ View Projects ]` (Scroll ไปที่ Projects) และ `[ Download Resume ]`
-  - ลิงก์โซเชียลมีเดีย: GitHub, LinkedIn, Facebook, Email
-- **Animation:** Fade in, Slide up, Floating elements และ Stagger animations สำหรับปุ่ม
+- ข้อมูล: คำทักทาย, ชื่อ (`PAI`), บทบาท (`Computer Science Student & Aspiring Software Developer`), คำแนะนำตัวสั้น, รูปโปรไฟล์
+- ปุ่ม CTA: `[ View Projects ]`, `[ Download Resume ]`
+- ลิงก์โซเชียล: GitHub, LinkedIn, Facebook, Email
 
 ### 👤 3. About Me (`About.jsx`)
-- **ข้อมูลที่ต้องแสดง:**
-  - ประวัติความเป็นมาและการศึกษา
-  - ความสนใจเฉพาะทาง (Web Development, Software Engineering)
-  - สรุปเป็นการ์ดสั้นๆ (Summary Cards):
-    - **Education:** Computer Science
-    - **Focus:** Web Development
-    - **Goal:** Frontend / Software Developer
+- ประวัติและความสนใจด้าน Software Development
+- การ์ดสรุปย่อ (Summary Cards): Education (Computer Science), Focus (Web Development), Goal (Frontend / Software Developer)
 
 ### 💡 4. Tech Stack & Skills (`Skills.jsx`)
-- **การจัดหมวดหมู่:**
-  - **Programming Languages:** C, C++, Java, Python, JavaScript
-  - **Web Development:** HTML5, CSS3, JavaScript, React, PHP
-  - **Databases:** MySQL, PostgreSQL, Firebase
-  - **Tools & DevOps:** Git, GitHub, VS Code, Figma
-- **กฎสำคัญ:** หลีกเลี่ยงการใช้ Progress Bar แบบเปอร์เซ็นต์ (เช่น `React 90%`) เพราะวัดผลได้ยาก ให้ใช้ระดับความชำนาญ (Beginner / Intermediate / Advanced) หรือแสดงผ่านโปรเจกต์ที่ใช้งานจริง
+- จัดหมวดหมู่: Programming Languages, Web Development, Databases (Supabase, PostgreSQL, MySQL), Tools (Git, GitHub, VS Code, Figma, Vercel)
+- แสดงผลตามระดับความชำนาญ หรือการใช้งานจริงในโปรเจกต์ (ไม่ใช้ Progress bar % ที่วัดผลไม่ได้)
 
 ### 💻 5. Featured Projects (`Projects.jsx`)
-- **การแสดงผล:** แสดงผลงานเด่น 3–4 โปรเจกต์ในรูปแบบ Grid Cards
-- **ข้อมูลในการ์ดโปรเจกต์:**
-  - รูปภาพตัวอย่างโปรเจกต์ (Project Screenshot)
-  - ชื่อโปรเจกต์ (Project Title)
-  - คำอธิบายโปรเจกต์ (Short Description)
-  - รายการเทคโนโลยีที่ใช้ (Tech Badges: e.g. React, PHP, MySQL)
-  - ปีที่พัฒนา (Year) และประเภทของโปรเจกต์ (Project Type)
-  - ปุ่ม Action: `[ View Project / Details ]`, `[ GitHub ]`, `[ Live Demo ]`
+- แสดงผลงานเด่น 3–4 โปรเจกต์ในรูปแบบ Grid Cards
+- ข้อมูลในการ์ด: รูปภาพ, ชื่อโปรเจกต์, คำอธิบาย, Tech Badges, ปีที่พัฒนา, ลิงก์ `GitHub` และ `Live Demo`
 
 ### ⏳ 6. Experience & Activities (`Experience.jsx`)
-- **รูปแบบ:** แสดงผลแบบ Timeline เรียงตามลำดับปี/เวลา (จากปัจจุบันไปอดีต)
-- **ข้อมูล:**
-  - โครงการที่ทำในมหาวิทยาลัย (University Projects)
-  - การฝึกงาน (Internships)
-  - การเข้าร่วม Workshop, การแข่งขัน หรือ Hackathon
+- รูปแบบ Timeline เรียงตามลำดับเวลา: โครงการในมหาวิทยาลัย, การฝึกงาน, การเข้าร่วม Workshop / Hackathon
 
 ### 🏆 7. Activities & Achievements (`Activities.jsx`)
-- **ข้อมูล:** กิจกรรมด้านเทคโนโลยี ใบประกาศนียบัตร (Certificates) พร้อมรูปภาพและองค์กรผู้จัด
+- กิจกรรมด้านเทคโนโลยี ใบประกาศนียบัตร (Certificates) พร้อมรูปภาพและองค์กรผู้จัด
 
 ### 🎓 8. Education (`Education.jsx`)
-- **ข้อมูล:**
-  - วุฒิการศึกษา: Bachelor of Science (Computer Science)
-  - คณะ / สถาบัน: Faculty of Information Technology, Phetchaburi Rajabhat University
-  - สถานะ / ปีที่คาดว่าจะสำเร็จการศึกษา: Expected Graduation: 202X
-  - ผลการเรียนและวิชาสำคัญที่เกี่ยวข้อง
+- ข้อมูลการศึกษา: วุฒิ Bachelor of Science (Computer Science), มหาวิทยาลัยราชภัฏเพชรบุรี (PBRU)
 
 ### 📊 9. GitHub Activity (`GitHubActivity.jsx`)
-- **ข้อมูล:** สถิติการพัฒนาบน GitHub, GitHub Contribution Chart หรือแสดง Top Repositories เพื่อตอกย้ำภาพลักษณ์ Active Developer
+- สถิติการพัฒนาบน GitHub, GitHub Contribution Chart หรือ Top Repositories
 
 ### 📬 10. Contact Section (`Contact.jsx`)
-- **ข้อมูล:** ช่องทางการติดต่อโดยตรง (Email, GitHub, LinkedIn, Socials)
-- **Contact Form:** ช่องกรอก Name, Email, Subject, Message พร้อมระบบ Client-side Form Validation
+- ช่องทางการติดต่อโดยตรง (Email, Social Links)
+- แบบฟอร์มติดต่อ (Contact Form): กรอก Name, Email, Subject, Message และส่งบันทึกลงฐานข้อมูล **Supabase (PostgreSQL)**
 
 ### 🦶 11. Footer (`Footer.jsx`)
-- **ข้อมูล:** สรุปชื่อ, Quick Links, Social Icons และข้อความลิขสิทธิ์ © 2026
+- สรุปชื่อ, Quick Links, Social Icons และข้อความลิขสิทธิ์ © 2026
 
 ---
 
-## 3. โครงสร้างข้อมูล (Data Layer Architecture)
+## 3. สถาปัตยกรรมข้อมูลและการเชื่อมต่อ Supabase (Data & Database Layer)
 
-ข้อมูลทั้งหมดจะถูกจัดเก็บในโฟลเดอร์ `src/data/` เพื่อให้สามารถแก้ไขข้อมูลได้ง่ายโดยไม่ต้องแก้ UI Component:
+### 📂 การแยกเลเยอร์ข้อมูล:
+1. **Static Data Layer (`src/data/`):** เก็บข้อมูลโปรไฟล์, สกิล, โปรเจกต์ และประวัติการศึกษาในไฟล์ `.js`
+2. **Dynamic Database Layer (`Supabase`):** สำหรับเก็บข้อมูลที่มีการโต้ตอบจากผู้ใช้ (เช่น Contact Messages)
 
+### 🔌 การเชื่อมต่อ Supabase Client (`src/lib/supabaseClient.js`):
 ```javascript
-// src/data/projects.js
-export const projectsData = [
-  {
-    id: "hotel-booking",
-    title: "Smart Hotel Booking System",
-    description: "ระบบจองห้องพักออนไลน์สำหรับจัดการห้องพัก ลูกค้า และข้อมูลการจอง",
-    technologies: ["React", "PHP", "MySQL", "Tailwind CSS"],
-    year: 2026,
-    image: "/images/projects/hotel.png",
-    githubUrl: "https://github.com/pai11220zx/...",
-    demoUrl: "https://...",
-    featured: true
-  }
-];
+import { createClient } from '@supabase/supabase-js';
 
-// src/data/skills.js
-export const skillsData = {
-  programming: ["C", "C++", "Java", "Python", "JavaScript"],
-  webDevelopment: ["HTML5", "CSS3", "React", "Tailwind CSS", "PHP"],
-  database: ["MySQL", "PostgreSQL", "Firebase"],
-  tools: ["Git", "GitHub", "VS Code", "Figma"]
-};
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-// src/data/experience.js
-export const experienceData = [
-  {
-    year: "2026",
-    title: "Portfolio Website & Modern Web Apps",
-    role: "Frontend Developer",
-    description: "ออกแบบและพัฒนาเว็บไซต์ด้วย React, Tailwind CSS และ Framer Motion"
-  }
-];
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+```
+
+### 🔒 กฎการจัดการฐานข้อมูล (Rule 10 Compliance):
+- ห้าม AI สร้าง Table หรือ Import Data ใน Supabase เองเด็ดขาด
+- ทุกครั้งที่ต้องใช้ Table ใหม่ AI จะจัดเตรียมคำสั่ง SQL ที่ปลอดภัย (พร้อม RLS Policies) ไว้ในไฟล์ `database/schema.sql` เพื่อให้ผู้ใช้นำไปรันเองบน Supabase SQL Editor
+
+ตัวอย่างสคริปต์ตารางสำหรับ Contact Messages:
+```sql
+-- ตัวอย่างสคริปต์สำหรับให้ผู้ใช้นำไปรันบน Supabase SQL Editor
+CREATE TABLE IF NOT EXISTS contact_messages (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    subject TEXT,
+    message TEXT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- เปิดใช้งาน Row Level Security (RLS)
+ALTER TABLE contact_messages ENABLE ROW LEVEL SECURITY;
+
+-- อนุญาตให้ผู้ใช้ทั่วไป (Anon) ส่งข้อความได้
+CREATE POLICY "Allow public insert contact messages"
+ON contact_messages
+FOR INSERT
+TO anon
+WITH CHECK (true);
 ```
 
 ---
 
-## 4. ลำดับขั้นตอนการพัฒนา (Development Phases)
+## 4. สถาปัตยกรรมและการตั้งค่า Vercel Deployment
 
-การสร้างโปรเจกต์จริงจะดำเนินตาม 6 ขั้นตอนตาม `PROJECT_SPEC.md.md`:
+### ⚙️ การตั้งค่า `vercel.json` (สำหรับ SPA Routing & Rewrites):
+เพื่อป้องกันปัญหาหน้าเว็บ Error 404 เมื่อ Refresh หน้าเว็บบน Vercel:
+
+```json
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
+```
+
+### 🔐 การตั้งค่า Environment Variables บน Vercel:
+ต้องตั้งค่าใน Vercel Project Settings > Environment Variables:
+- `VITE_SUPABASE_URL` = URL ของโปรเจกต์ Supabase
+- `VITE_SUPABASE_ANON_KEY` = Public Anon Key ของ Supabase
+
+---
+
+## 5. ลำดับขั้นตอนการพัฒนา (Development Phases)
+
 1. **Phase 1 — Project Setup:** Setup Vite + React + Tailwind CSS + Lucide React + Framer Motion
 2. **Phase 2 — Core UI:** สร้าง Components ครบทั้ง 11 ส่วน และเชื่อมต่อกับ Data Layer
 3. **Phase 3 — Responsive Design:** ตรวจสอบและปรับปรุงการแสดงผลบน Mobile, Tablet, Desktop
 4. **Phase 4 — Animation:** ใส่ Framer Motion (Page entrance, Scroll reveal, Hover, Stagger)
-5. **Phase 5 — Optimization:** จัดการ Performance, Image optimization, Accessibility, SEO
-6. **Phase 6 — Testing & Verification:** ตรวจสอบการทำงานของปุ่ม ลิงก์ ฟอร์ม และ Build Production
+5. **Phase 5 — Supabase & Dynamic Features:** เชื่อมต่อ Contact Form กับ Supabase (จัดเตรียมไฟล์ `.sql`)
+6. **Phase 6 — Vercel Deployment & Testing:** ตั้งค่า `vercel.json`, ตรวจสอบ Environment Variables และทดสอบ Production Build

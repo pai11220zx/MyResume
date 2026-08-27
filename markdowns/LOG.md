@@ -7,26 +7,23 @@
 ## 📌 1. สถานะโปรเจกต์ปัจจุบัน (Current Project Status)
 
 - **สถานะ:** 🟢 ในขั้นตอนการเตรียมเอกสารและข้อกำหนดทางเทคนิค (Documentation & Specs Setup)
-- **เวอร์ชันปัจจุบัน:** `v0.1.0`
-- **สถาปัตยกรรมหลัก:** React + Tailwind CSS + Framer Motion + Vite
+- **เวอร์ชันปัจจุบัน:** `v0.2.0`
+- **สถาปัตยกรรมหลัก:** React + Tailwind CSS + Framer Motion + Vite + **Vercel (Hosting)** + **Supabase PostgreSQL (Database)**
 
 ---
 
 ## 📝 2. บันทึกการเปลี่ยนแปลง (Changelog)
 
+### [v0.2.0] — 2026-08-27 (Vercel & Supabase PostgreSQL Integration)
+- **[`TECHSTACK.md`](file:///c:/xampp/htdocs/Resume/markdowns/TECHSTACK.md):** เพิ่ม Vercel (Deployment Platform) และ Supabase (PostgreSQL BaaS) พร้อมแพ็กเกจ `@supabase/supabase-js`
+- **[`AboutProject.md`](file:///c:/xampp/htdocs/Resume/markdowns/AboutProject.md):** เพิ่มโครงสร้างพื้นฐานคลาวด์ Vercel & Supabase ในภาพรวมและ Definition of Done
+- **[`PROJECT.md`](file:///c:/xampp/htdocs/Resume/markdowns/PROJECT.md):** เพิ่มสถาปัตยกรรม `src/lib/supabaseClient.js`, การกำหนดค่า `vercel.json` (SPA Rewrite Rules) และข้อกำหนด SQL Script พร้อม RLS
+- **[`SECURITY.md`](file:///c:/xampp/htdocs/Resume/markdowns/SECURITY.md):** เพิ่มมาตรฐาน Supabase Row Level Security (RLS), การแยก `anon key` vs `service_role key`, และการตั้งค่า Environment Variables บน Vercel
+- **[`DEBUG.md`](file:///c:/xampp/htdocs/Resume/markdowns/DEBUG.md):** เพิ่มคู่มือแก้ปัญหา Vercel (404 on refresh, missing env) และ Supabase (RLS policy errors)
+
 ### [v0.1.0] — 2026-08-27 (Initialization & Documentation Sync)
-
-#### ✨ เพิ่มเติมเอกสารหลัก (Core Documentation):
-- **[`AboutProject.md`](file:///c:/xampp/htdocs/Resume/markdowns/AboutProject.md):** บันทึกภาพรวม วัตถุประสงค์ กลุ่มเป้าหมาย และลำดับความสำคัญของโปรเจกต์
-- **[`TECHSTACK.md`](file:///c:/xampp/htdocs/Resume/markdowns/TECHSTACK.md):** บันทึกรายการเทคโนโลยี บทบาทหน้าที่ นโยบายการติดตั้งแพ็กเกจ และสถาปัตยกรรมโฟลเดอร์
-- **[`DESIGN.md`](file:///c:/xampp/htdocs/Resume/markdowns/DESIGN.md):** บันทึก Design System, Dark Theme Tokens (`#0F1117`, `#171A21`, `#8B5CF6`), ระบบ Animation Principles และการรองรับ Accessibility / Reduced Motion
-- **[`PROJECT.md`](file:///c:/xampp/htdocs/Resume/markdowns/PROJECT.md):** บันทึก Sitemap ครบทั้ง 11 Section, สเปกของทุก Component, Data Schema Layer และ 6 Phases of Development
-- **[`SECURITY.md`](file:///c:/xampp/htdocs/Resume/markdowns/SECURITY.md):** บันทึกมาตรการความปลอดภัย XSS Prevention, Secure External Links, Form Validation, และ Environment Secrets Management
-- **[`DEBUG.md`](file:///c:/xampp/htdocs/Resume/markdowns/DEBUG.md):** บันทึกคู่มือการแก้ปัญหา Vite, Tailwind CSS, Framer Motion, และ Pre-launch Checklist
-
-#### 🔄 ปรับปรุงและจัดระเบียบ Coding Guides (11 ไฟล์):
-- ทำความสะอาดส่วนหัวและจัดโครงสร้าง Markdown ให้เป็นมาตรฐานเดียวกันใน `HTMLCodingGuide.md`, `CSSCodingGuide.md`, `JavascriptCodingGuide.md`, `PHPCodingGuide.md`, `SQLCodingGuide.md`, `REFACTORCODE.md`, `REACTCodingGuide.md`, `TailwindCodingGuide.md`, `TypeScriptCodingGuide.md`, `NodeJSCodingGuide.md`, `DeMorgansLaws.md`
-- รักษาเนื้อหาและหลักการเขียนโค้ดเดิมไว้อย่างครบถ้วน 100%
+- **✨ เพิ่มเติมเอกสารหลัก (Core Documentation):** จัดทำ `AboutProject.md`, `TECHSTACK.md`, `DESIGN.md`, `PROJECT.md`, `SECURITY.md`, `DEBUG.md`, `LOG.md` ครบถ้วนตาม `PROJECT_SPEC.md.md`
+- **🔄 ปรับปรุงและจัดระเบียบ Coding Guides (11 ไฟล์):** ปรับส่วนหัวให้สะอาดและรักษาเนื้อหา 100%
 
 ---
 
@@ -36,4 +33,5 @@
 - [x] **Step 2:** จัดทำเอกสารสเปกระบบและความปลอดภัย (`PROJECT.md`, `SECURITY.md`)
 - [x] **Step 3:** จัดทำเอกสารการบำรุงรักษาและประวัติการพัฒนา (`DEBUG.md`, `LOG.md`)
 - [x] **Step 4:** ตรวจสอบและปรับปรุงความสอดคล้องของ Coding Guides ทั้ง 11 ไฟล์
-- [ ] **Step 5:** สรุปรายงานความสมบูรณ์ของเอกสารทั้งหมด และเตรียมพร้อมสำหรับการเริ่มต้นพัฒนาโค้ดโปรเจกต์ (Phase 1: Project Setup)
+- [x] **Step 5:** อัปเดตสเปกโครงสร้างคลาวด์ Vercel และ Supabase (PostgreSQL) ครบทุกไฟล์
+- [ ] **Step 6:** เริ่มต้นพัฒนาโปรเจกต์ Phase 1 — Project Setup (Setup Vite + React + Tailwind CSS + Lucide React + Framer Motion)

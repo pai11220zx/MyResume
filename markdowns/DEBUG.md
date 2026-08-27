@@ -1,6 +1,6 @@
 # 🐞 คู่มือการแก้ปัญหาและดีบัก (Debugging & Troubleshooting Guide)
 
-เอกสารนี้รวบรวมแนวทางและวิธีแก้ไขปัญหาทางเทคนิคที่พบบ่อย (Common Issues & Solutions) สำหรับโปรเจกต์ **Developer Portfolio Website** (React + Tailwind CSS + Framer Motion + Vite)
+เอกสารนี้รวบรวมแนวทางและวิธีแก้ไขปัญหาทางเทคนิคที่พบบ่อย (Common Issues & Solutions) สำหรับโปรเจกต์ **Developer Portfolio Website** (React + Tailwind CSS + Framer Motion + Vite + Vercel + Supabase)
 
 ---
 
@@ -84,21 +84,56 @@
 
 ---
 
-## 4. ปัญหาเกี่ยวกับ React State & Rendering
+## 4. ปัญหาเกี่ยวกับการ Deploy บน Vercel
 
-### 🔴 ปัญหาที่ 4.1: Infinite Re-render Loop
-- **สาเหตุ:** เรียกฟังก์ชันเซ็ต State ภายใน Function Body ของ Component โดยตรง หรือใส่ State เข้าไปใน Dependency Array ของ `useEffect` ที่มีการอัปเดต State นั้น
-- **วิธีแก้:**
-  1. ย้ายการอัปเดต State เข้าไปใน Event Handler (เช่น `onClick`)
-  2. ตรวจสอบ Dependency Array ของ `useEffect` ให้รัดกุม
+### 🔴 ปัญหาที่ 4.1: หน้าเว็บ 404 เมื่อ Refresh บน Vercel
+- **สาเหตุ:** เบราว์เซอร์พยายามขอไฟล์ HTML ตรงตาม URL แต่ Vercel ไม่พบไฟล์แบบ Single Page Application (SPA)
+- **วิธีแก้:** สร้างไฟล์ `vercel.json` ที่ Root Directory เพื่อตั้งค่า Rewrites:
+  ```json
+  {
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
+      }
+    ]
+  }
+  ```
+
+### 🔴 ปัญหาที่ 4.2: ข้อมูลเชื่อมต่อ Supabase หายบน Vercel Production
+- **สาเหตุ:** ลืมเพิ่ม Environment Variables บน Vercel Project Settings
+- **วิธีแก้:** เข้าไปที่ **Vercel Dashboard > Project > Settings > Environment Variables** แล้วเพิ่ม:
+  - `VITE_SUPABASE_URL`
+  - `VITE_SUPABASE_ANON_KEY`
+  จากนั้นสั่ง **Redeploy**
 
 ---
 
-## 5. รายการตรวจสอบก่อนส่งมอบงาน (Pre-launch Checklist)
+## 5. ปัญหาเกี่ยวกับการเชื่อมต่อ Supabase & PostgreSQL
+
+### 🔴 ปัญหาที่ 5.1: Error: `new row violates row-level security policy`
+- **สาเหตุ:** ตารางใน Supabase เปิดใช้งาน RLS แต่ยังไม่ได้เพิ่ม Policy อนุญาตให้ Anonymous ส่งข้อมูล (`INSERT`)
+- **วิธีแก้:** นำสคริปต์นี้ไปรันใน Supabase SQL Editor:
+  ```sql
+  CREATE POLICY "Allow public insert"
+  ON contact_messages
+  FOR INSERT
+  TO anon
+  WITH CHECK (true);
+  ```
+
+### 🔴 ปัญหาที่ 5.2: Supabase Client คืนค่า `undefined`
+- **สาเหตุ:** ตัวแปร `.env` ไม่ได้ขึ้นต้นด้วยคำนำหน้า `VITE_`
+- **วิธีแก้:** ตรวจสอบชื่อตัวแปรใน `.env` ต้องเป็น `VITE_SUPABASE_URL` และ `VITE_SUPABASE_ANON_KEY` เท่านั้น (ใน Vite ตัวแปรที่ไม่มี `VITE_` จะไม่ถูกส่งต่อไปยังเบราว์เซอร์)
+
+---
+
+## 6. รายการตรวจสอบก่อนส่งมอบงาน (Pre-launch Checklist)
 
 - [ ] รัน `npm run build` ผ่านโดยไม่มีข้อผิดพลาด (Zero errors)
 - [ ] ทดสอบ Responsive บน Chrome DevTools ครบทั้งขนาด Mobile (375px), Tablet (768px), Desktop (1280px)
-- [ ] ลิงก์ภายนอกทั้งหมด (GitHub, LinkedIn, Demo) สามารถเปิดในแท็บใหม่ได้อย่างถูกต้อง
-- [ ] ฟอร์มติดต่อมีระบบตรวจสอบความถูกต้อง และปุ่มไม่สามารถกดส่งซ้ำรัวๆ ได้
+- [ ] ลิงก์ภายนอกทั้งหมด (GitHub, LinkedIn, Demo) สามารถเปิดในแท็บใหม่ได้อย่างถูกต้อง (`rel="noopener noreferrer"`)
+- [ ] ฟอร์มติดต่อเชื่อมต่อ Supabase ได้ถูกต้อง และมี RLS Policy กำกับความปลอดภัย
+- [ ] มีไฟล์ `vercel.json` และทดสอบ Deploy บน Vercel สำเร็จ
 - [ ] รูปภาพทั้งหมดมี `alt` และแสดงผลได้อย่างสมบูรณ์
 - [ ] แอนิเมชันทำงานราบรื่นและไม่ทำให้เนื้อหาอ่านยาก

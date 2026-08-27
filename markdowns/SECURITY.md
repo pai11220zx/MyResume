@@ -1,6 +1,6 @@
-# 🛡️ มาตรการความปลอดภัยของระบบ (Frontend & Application Security)
+# 🛡️ มาตรการความปลอดภัยของระบบ (Frontend & Cloud Application Security)
 
-เอกสารนี้ระบุแนวทางและมาตรการด้านความปลอดภัย (Security Best Practices) สำหรับโปรเจกต์ **Developer Portfolio Website** เพื่อป้องกันช่องโหว่และปกป้องข้อมูลของผู้ใช้
+เอกสารนี้ระบุแนวทางและมาตรการด้านความปลอดภัย (Security Best Practices) สำหรับโปรเจกต์ **Developer Portfolio Website** ครอบคลุม Frontend, ระบบฐานข้อมูล **Supabase (PostgreSQL)** และการ Deploy บน **Vercel**
 
 ---
 
@@ -52,8 +52,7 @@
   - กำหนดความยาวต่ำสุดและสูงสุดของข้อความ (e.g. `minLength={3}`, `maxLength={1000}`)
   - ป้องกันการส่งฟอร์มเปล่า (`required`)
 - **Rate Limiting / Spam Protection:**
-  - เพิ่มปุ่ม Disable ชั่วคราวหลังกดส่ง (`isSubmitting`) เพื่อป้องกันการกดรัวซ้ำๆ (Spamming)
-  - หากเชื่อมต่อกับ Form Service (เช่น Formspree, EmailJS) ให้เปิดใช้งานฟีเจอร์ Honeypot หรือ reCAPTCHA
+  - เพิ่มปุ่ม Disable ชั่วคราวหลังกดส่ง (`isSubmitting`) เพื่อป้องกันการกดรัวซ้ำๆ (Double Submission Prevention)
 
 ```jsx
 // ตัวอย่าง State ป้องกันการกดส่งซ้ำ
@@ -65,7 +64,11 @@ const handleSubmit = async (e) => {
   
   setIsSubmitting(true);
   try {
-    // ส่งข้อมูลแบบฟอร์ม...
+    const { error } = await supabase.from('contact_messages').insert([formData]);
+    if (error) throw error;
+    alert('ส่งข้อความสำเร็จ');
+  } catch (err) {
+    console.error('Error submitting form:', err);
   } finally {
     setIsSubmitting(false);
   }
@@ -74,20 +77,50 @@ const handleSubmit = async (e) => {
 
 ---
 
-## 4. การจัดการความลับและตัวแปรแวดล้อม (Environment Variables & Secrets)
+## 4. ความปลอดภัยของฐานข้อมูล Supabase และ Row Level Security (RLS)
 
-- **กฎสำคัญ:** โค้ดฝั่ง Frontend (Vite/React) จะถูก Build และส่งไปยังเบราว์เซอร์ของผู้ใช้ทั้งหมด ดังนั้น **ห้ามเก็บ Secret Key, Private Database Credentials, หรือ Private API Keys ไว้ในโค้ดฝั่ง Client เด็ดขาด**
-- การใช้ตัวแปรใน Vite ต้องขึ้นต้นด้วย `VITE_` และต้องเป็นเพียง Public Config เท่านั้น (เช่น Public Key, Service ID):
-  ```env
-  # .env.example (Public Configuration)
-  VITE_EMAILJS_PUBLIC_KEY=your_public_key_here
-  VITE_APP_URL=https://pai-portfolio.dev
-  ```
-- เพิ่ม `.env` และ `.env.local` ลงใน `.gitignore` เสมอ เพื่อป้องกันการอัปโหลดไฟล์ที่มีข้อมูลส่วนตัวขึ้น Git
+ฐานข้อมูล Supabase เป็น PostgreSQL บนระบบคลาวด์ ต้องปฏิบัติตามกฎความปลอดภัยดังนี้:
+
+### 🔑 4.1 การจัดการ API Keys:
+- **`anon public key`:** อนุญาตให้ใช้ในฝั่ง Client/Frontend ได้ เพื่อเรียกใช้ API ภายใต้สิทธิ์ RLS
+- **`service_role key`:** ❌ **ห้ามนำมาใส่ในโค้ดฝั่ง Frontend หรือ Git เด็ดขาด** เพราะมีสิทธิ์ Bypass ทุกนโยบายความปลอดภัย
+
+### 🛡️ 4.2 บังคับเปิดใช้งาน Row Level Security (RLS) ทุกตาราง:
+ทุกตารางที่สร้างขึ้นใน Supabase ต้องเปิด RLS และกำหนดนโยบาย (Policies) ที่รัดกุมเสมอ:
+
+```sql
+-- 1. บังคับเปิด RLS
+ALTER TABLE contact_messages ENABLE ROW LEVEL SECURITY;
+
+-- 2. อนุญาตให้เฉพาะ Anonymous ส่งข้อความเข้าได้ (INSERT)
+CREATE POLICY "Allow public insert"
+ON contact_messages
+FOR INSERT
+TO anon
+WITH CHECK (true);
+
+-- 3. ไม่อนุญาตให้ Anonymous หรือ Public อ่านข้อความคนอื่น (SELECT)
+-- (ข้อความติดต่อจะอ่านได้เฉพาะ Admin / Dashboard เจ้าของโปรเจกต์เท่านั้น)
+```
 
 ---
 
-## 5. การตรวจสอบความปลอดภัยของ Dependencies (Dependency Security)
+## 5. การจัดการความลับและตัวแปรแวดล้อมบน Vercel (Environment Variables & Secrets)
+
+- โค้ดฝั่ง Frontend (Vite) จะส่งตัวแปรที่ขึ้นต้นด้วย `VITE_` ไปยังเบราว์เซอร์ของผู้ใช้
+- **การจัดเก็บไฟล์ `.env`:**
+  - `.env` และ `.env.local` ต้องถูกเพิ่มไว้ใน `.gitignore` เสมอ
+  - ให้สร้าง `.env.example` เป็นตัวอย่างโครงสร้างโดยไม่มีค่าจริง:
+    ```env
+    # .env.example
+    VITE_SUPABASE_URL=https://your-project.supabase.co
+    VITE_SUPABASE_ANON_KEY=your-anon-key
+    ```
+- **การตั้งค่าบน Vercel:** ให้กำหนดค่าผ่านหน้าแดชบอร์ด **Vercel Project Settings > Environment Variables** โดยตรงสำหรับการ Deploy
+
+---
+
+## 6. การตรวจสอบความปลอดภัยของ Dependencies (Dependency Security)
 
 - ดำเนินการตรวจสอบช่องโหว่ของ Third-party Packages เป็นประจำด้วยคำสั่ง:
   ```bash

@@ -57,9 +57,6 @@
    ↓
 5. Performance (โหลดเร็ว ไม่กระตุก รองรับ Reduced Motion)
 ```
-
----
-
 ## 5. นิยามความสำเร็จของงาน (Definition of Done)
 
 โปรเจกต์จะถือว่าเสร็จสมบูรณ์เมื่อผ่านเกณฑ์ต่อไปนี้:
@@ -69,3 +66,12 @@
 - [x] รองรับ Responsive Design ครบทั้ง Mobile, Tablet, และ Desktop
 - [x] แอนิเมชันทำงานได้อย่างราบรื่น และรองรับ `prefers-reduced-motion`
 - [x] ข้อมูล (Data) ถูกแยกออกจาก UI Component เพื่อความสะดวกในการบำรุงรักษาในระยะยาว
+- [x] รองรับการ Deploy สู่ Production บน **Vercel** อย่างราบรื่น
+- [x] รองรับการเชื่อมต่อฐานข้อมูล **Supabase (PostgreSQL)** พร้อมระบบรักษาความปลอดภัย RLS
+
+---
+
+## 6. โครงสร้างพื้นฐานคลาวด์ (Cloud Infrastructure & Services)
+
+- **Hosting & CI/CD:** **Vercel** (เชื่อมโยงกับ GitHub Repository เพื่อ Automated Deployment)
+- **Database Backend:** **Supabase** (ฐานข้อมูล PostgreSQL บนระบบคลาวด์ พร้อม RESTful API และ RLS)
