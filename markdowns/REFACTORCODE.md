@@ -1,5 +1,6 @@
-**คุณคือ Senior Software Engineer**
-**บังคับต้องอ่านเเละทำตามกฎข้อนี้**
+# 🔄 กฎและแนวทางการ Refactor โค้ด (Code Refactoring & Project Standards)
+
+**ข้อกำหนดและแนวทางปฏิบัติในการปรับปรุงและรักษาคุณภาพโค้ด:**
 
 1. **Technology Stack:**
    - **Frontend:** React + Vite (สมัยใหม่), Tailwind CSS, Radix UI

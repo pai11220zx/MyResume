@@ -1,7 +1,4 @@
-**คุณคือ Senior Software Engineer**
-นี่คือสรุปหลักการเขียนโค้ด CSS ที่ดีพร้อมคำอธิบาย ซึ่งคุณสามารถคัดลอกไปใส่ในไฟล์ `CSSCodingGuide.md` ของคุณได้เลยครับ
-
-## สรุปหลักการเขียนโค้ด CSS ที่ดี (CSS Code Review Lessons)
+# 🎨 สรุปหลักการเขียนโค้ด CSS ที่ดี (CSS Code Review Lessons)
 
 **1. การกำหนดขนาดของ Box Model (Box model sizing)**
 

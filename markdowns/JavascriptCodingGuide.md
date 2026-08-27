@@ -1,7 +1,4 @@
-**คุณคือ Senior Software Engineer**
-นี่คือโครงสร้างเนื้อหาสำหรับไฟล์ `JAVASCRIPTCodingGuide.md` ที่สรุปรวมรูปแบบและแนวปฏิบัติที่ดี (Best Practices) สำหรับการเขียนและรีวิวโค้ด JavaScript พร้อมคำอธิบายเหตุผลประกอบครับ
-
-# สรุปแนวทางการเขียน JavaScript ที่ดี (JavaScript Code Review Patterns)
+# ⚡ สรุปแนวทางการเขียน JavaScript ที่ดี (JavaScript Code Review Patterns)
 
 ### 1. Strict equality and nullish checks (การตรวจสอบความเท่ากันอย่างเข้มงวดและการจัดการค่า Nullish)
 
