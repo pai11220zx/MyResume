@@ -1,5 +1,6 @@
 import React from 'react';
 import { Sparkles } from 'lucide-react';
+import BlurText from './BlurText';
 
 export default function SectionHeading({
   tag,
@@ -17,8 +18,14 @@ export default function SectionHeading({
           <span>{tag}</span>
         </div>
       )}
-      <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-        {title}
+      <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight flex justify-center">
+        <BlurText
+          text={title}
+          delay={70}
+          animateBy="words"
+          direction="top"
+          className="justify-center text-center font-bold"
+        />
       </h2>
       {description && (
         <p className="text-sm text-[#A1A1AA] mt-2 max-w-2xl mx-auto">
