@@ -94,7 +94,7 @@
 
 ## 6. ลำดับคำสั่งตรวจสอบสถานะโปรเจกต์ (Diagnostic Commands)
 
-```bash
+```bash 
 # 1. ทดสอบการรัน Development Server
 npm run dev
 
