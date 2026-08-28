@@ -43,6 +43,7 @@ export default function ProjectModal({ project, onClose }) {
             <img
               src={project.image}
               alt={project.title}
+              decoding="async"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#171A21] via-[#171A21]/40 to-transparent" />

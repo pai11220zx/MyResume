@@ -5,9 +5,12 @@
 @layer base {
   body {
     @apply bg-[#0F1117] text-[#FFFFFF] font-sans selection:bg-[#8B5CF6]/30 selection:text-[#8B5CF6];
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Custom Brand Theme Scrollbar (Rule 11) */
+  /* Custom Brand Theme Scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -33,39 +36,53 @@
 }
 
 @layer components {
-  /* Card Surfaces */
+  /* Performance Rendering Optimizations: Off-screen Content Skipping */
+  #about,
+  #skills,
+  #projects,
+  #education,
+  #contact {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 650px;
+  }
+
+  /* Frameless & Seamless Card Surfaces */
   .card-surface {
-    @apply bg-[#171A21] border border-[#272A33] rounded-2xl;
+    @apply bg-transparent rounded-2xl;
   }
 
   .card-surface-hover {
-    @apply hover:border-[#8B5CF6]/40 transition-colors;
+    @apply transition-colors;
   }
 
   .card-surface-interactive {
-    @apply bg-[#171A21] border border-[#272A33] rounded-2xl hover:border-[#8B5CF6]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#8B5CF6]/10;
+    @apply bg-transparent rounded-2xl transition-all duration-300;
   }
 
   /* Buttons */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white font-medium transition-all shadow-lg shadow-[#8B5CF6]/25 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50;
+    will-change: transform;
   }
 
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#171A21] hover:bg-[#1E222D] text-white border border-[#272A33] hover:border-[#8B5CF6]/40 font-medium transition-all hover:scale-[1.02] active:scale-[0.98];
+    will-change: transform;
   }
 
   /* Form Elements */
   .form-input {
-    @apply w-full px-4 py-3 rounded-xl bg-[#0F1117] border border-[#272A33] text-white focus:outline-none focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6] transition-colors text-sm;
+    @apply w-full px-4 py-3.5 rounded-xl bg-[#171A21]/40 border border-[#272A33]/80 text-white placeholder-[#A1A1AA]/50 focus:outline-none focus:border-[#8B5CF6] focus:ring-1 focus:ring-[#8B5CF6] transition-colors text-sm;
   }
 
-  /* Background Glow Orbs */
+  /* Background Glow Orbs with GPU containment */
   .glow-orb-purple {
     @apply absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#8B5CF6]/15 blur-[120px] pointer-events-none rounded-full;
+    transform: translate3d(-50%, 0, 0);
   }
 
   .glow-orb-blue {
     @apply absolute bottom-10 right-10 w-[300px] h-[300px] bg-blue-500/10 blur-[100px] pointer-events-none rounded-full;
+    transform: translate3d(0, 0, 0);
   }
 }

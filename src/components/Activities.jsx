@@ -7,15 +7,16 @@ import Badge from './common/Badge';
 
 export default function Activities() {
   return (
-    <section className="py-20 relative z-10 border-t border-[#272A33]/50">
+    <section className="py-20 relative z-10 border-t border-[#272A33]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           tag="Achievements"
-          title="Activities & Workshops"
+          title="กิจกรรมและประกาศนียบัตร (Activities & Workshops)"
+          description="กิจกรรมทางวิชาการ การแข่งขัน และการอบรมเชิงปฏิบัติการ"
           className="mb-12"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {activitiesData.map((act, index) => (
             <motion.div
               key={`${act.title}-${act.date}`}
@@ -23,17 +24,17 @@ export default function Activities() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="p-6 rounded-2xl bg-[#171A21] border border-[#272A33] hover:border-[#8B5CF6]/40 transition-colors space-y-2"
+              className="space-y-2 group"
             >
               <div className="flex items-center justify-between">
                 <Badge variant="accent">{act.date}</Badge>
                 <span className="text-xs text-[#A1A1AA]">{act.organization}</span>
               </div>
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <Award className="w-4 h-4 text-[#8B5CF6]" />
-                {act.title}
+              <h3 className="text-lg font-bold text-white flex items-center gap-2 group-hover:text-[#8B5CF6] transition-colors">
+                <Award className="w-4 h-4 text-[#8B5CF6] shrink-0" />
+                <span>{act.title}</span>
               </h3>
-              <p className="text-sm text-[#A1A1AA] leading-relaxed">{act.description}</p>
+              <p className="text-sm text-[#A1A1AA] leading-relaxed pl-6">{act.description}</p>
             </motion.div>
           ))}
         </div>

@@ -7,7 +7,7 @@ import Badge from './common/Badge';
 
 export default function Education() {
   return (
-    <section className="py-20 relative z-10 border-t border-[#272A33]/50 bg-[#0F1117]/50">
+    <section className="py-20 relative z-10 border-t border-[#272A33]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           tag="Academic Background"
@@ -16,7 +16,7 @@ export default function Education() {
           className="mb-12"
         />
 
-        <div className="max-w-4xl mx-auto space-y-6">
+        <div className="max-w-4xl mx-auto space-y-10">
           {educationList.map((edu, idx) => (
             <motion.div
               key={edu.institution}
@@ -24,18 +24,18 @@ export default function Education() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
-              className="p-6 sm:p-8 card-surface space-y-6"
+              className="space-y-4"
             >
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 flex items-center justify-center text-[#8B5CF6] shrink-0">
-                    <GraduationCap className="w-6 h-6" />
+                  <div className="w-11 h-11 rounded-xl bg-[#8B5CF6]/10 flex items-center justify-center text-[#8B5CF6] shrink-0">
+                    <GraduationCap className="w-5 h-5" />
                   </div>
                   <div>
                     <span className="text-xs font-semibold text-[#8B5CF6] uppercase tracking-wider">{edu.status}</span>
-                    <h3 className="text-xl font-bold text-white mt-1">{edu.institution}</h3>
+                    <h3 className="text-xl font-bold text-white mt-0.5">{edu.institution}</h3>
                     <p className="text-sm font-medium text-white/90">{edu.degree} — {edu.faculty}</p>
-                    <p className="text-xs text-[#A1A1AA] mt-1">{edu.description}</p>
+                    <p className="text-xs text-[#A1A1AA] mt-1 leading-relaxed">{edu.description}</p>
                   </div>
                 </div>
 
@@ -53,8 +53,8 @@ export default function Education() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-[#272A33]">
-                <h4 className="text-xs font-semibold text-[#A1A1AA] uppercase tracking-wider mb-3 flex items-center gap-2">
+              <div className="pt-2 pl-15 sm:pl-15">
+                <h4 className="text-xs font-semibold text-[#A1A1AA] uppercase tracking-wider mb-2.5 flex items-center gap-2">
                   <BookOpen className="w-4 h-4 text-[#8B5CF6]" />
                   <span>หลักสูตรและรายวิชาสำคัญ (Relevant Coursework)</span>
                 </h4>

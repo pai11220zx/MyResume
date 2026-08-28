@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, ArrowUpRight } from 'lucide-react';
 import { GithubIcon } from './Icons';
 import { projectsData } from '../data/projects';
-import ProjectModal from './ProjectModal';
 import SectionHeading from './common/SectionHeading';
 import Badge from './common/Badge';
+
+const ProjectModal = lazy(() => import('./ProjectModal'));
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <section id="projects" className="py-24 relative z-10 border-t border-[#272A33]/50">
+    <section id="projects" className="py-24 relative z-10 border-t border-[#272A33]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           tag="Featured Work"
@@ -20,15 +21,15 @@ export default function Projects() {
         />
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
           {projectsData.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="group rounded-2xl bg-[#171A21] border border-[#272A33] hover:border-[#8B5CF6]/50 overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:shadow-[#8B5CF6]/10"
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              className="group rounded-2xl bg-[#171A21]/30 border border-[#272A33]/60 hover:border-[#8B5CF6]/50 overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:shadow-[#8B5CF6]/10"
             >
               {/* Thumbnail Image */}
               <div
@@ -47,10 +48,14 @@ export default function Projects() {
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  decoding="async"
+                  width="400"
+                  height="225"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 will-change-transform"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#171A21] via-transparent to-transparent opacity-80" />
-                <span className="absolute top-3 right-3 px-2.5 py-1 text-[11px] font-semibold rounded-md bg-[#0F1117]/80 text-[#8B5CF6] border border-[#272A33] backdrop-blur-md">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F1117] via-transparent to-transparent opacity-80" />
+                <span className="absolute top-3 right-3 px-2.5 py-1 text-[11px] font-semibold rounded-md bg-[#0F1117]/80 text-[#8B5CF6] border border-[#272A33]/60 backdrop-blur-md">
                   {project.category}
                 </span>
               </div>
@@ -89,11 +94,11 @@ export default function Projects() {
                 </div>
 
                 {/* Card Action Links */}
-                <div className="pt-4 border-t border-[#272A33] flex items-center justify-between">
+                <div className="pt-4 border-t border-[#272A33]/50 flex items-center justify-between">
                   <button
                     type="button"
                     onClick={() => setSelectedProject(project)}
-                    className="text-xs font-semibold text-[#8B5CF6] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] rounded"
+                    className="text-xs font-semibold text-[#8B5CF6] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] rounded cursor-pointer"
                   >
                     View Details &rarr;
                   </button>
@@ -129,9 +134,11 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* Project Detail Modal */}
+      {/* Project Detail Modal (Lazy loaded & Suspense guarded) */}
       {selectedProject && (
-        <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+        <Suspense fallback={null}>
+          <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+        </Suspense>
       )}
     </section>
   );

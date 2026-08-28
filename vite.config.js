@@ -8,6 +8,9 @@ export default defineConfig({
     open: true
   },
   build: {
+    target: 'esnext',
+    cssCodeSplit: true,
+    chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
         manualChunks: {

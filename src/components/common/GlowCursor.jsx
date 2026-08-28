@@ -123,20 +123,20 @@ const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 const GlowCursor = ({
   color = '#8B5CF6',
   secondaryColor = '#38BDF8',
-  trailLength = 40,
-  trailWidth = 8,
+  trailLength = 35,
+  trailWidth = 7,
   trailTaper = 0.8,
   followSpeed = 0.16,
-  glowIntensity = 1.9,
+  glowIntensity = 1.8,
   glowSpread = 1.2,
-  hotspot = 0.65,
-  brightness = 1.25,
+  hotspot = 0.6,
+  brightness = 1.2,
   opacity = 1,
-  pulseSpeed = 1.1,
-  noiseStrength = 0.035,
+  pulseSpeed = 1.0,
+  noiseStrength = 0.03,
   idleFade = true,
-  idleTimeout = 700,
-  fadeDuration = 900,
+  idleTimeout = 600,
+  fadeDuration = 800,
   blendMode = 'screen',
   maxDevicePixelRatio = 1.5,
   enabled = true,
@@ -219,8 +219,8 @@ const GlowCursor = ({
     let width = 1;
     let height = 1;
     let initialized = false;
-    let pointerInside = false;
-    let fade = 0;
+    let pointerInside = true;
+    let fade = 1;
     let lastInputTime = performance.now();
     let lastFrameTime = performance.now();
     let raf = 0;
@@ -263,6 +263,7 @@ const GlowCursor = ({
 
     const render = now => {
       if (destroyed) return;
+
       const config = propsRef.current;
       const delta = Math.min((now - lastFrameTime) / 16.667, 3);
       lastFrameTime = now;
@@ -315,6 +316,7 @@ const GlowCursor = ({
     window.addEventListener('resize', resize);
     window.addEventListener('pointermove', updatePointer);
     window.addEventListener('pointerleave', onPointerLeave);
+
     resize();
     raf = requestAnimationFrame(render);
 
