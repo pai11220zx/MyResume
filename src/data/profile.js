@@ -1,20 +1,30 @@
 export const profileData = {
-  name: "PAI",
-  fullName: "Purachet (Pai)",
+  name: "PURACHET AOBORM",
+  thaiName: "ปุรเชษฐ์ อบรม",
+  nickname: "Pai",
+  projectName: "MyResume",
+  fullName: "Purachet Aoborm (ปุรเชษฐ์ อบรม)",
   title: "Computer Science Student & Aspiring Software Developer",
-  shortBio: "I build modern web applications, design clean user experiences, and explore innovative cloud technologies.",
+  shortBio: "คติประจำใจ : Never Stop learning",
+  careerObjective: "กำลังมองหาโอกาสฝึกงานด้าน Automation เพื่อพัฒนาทักษะด้านการเขียนโปรแกรมและระบบอัตโนมัติ",
+  phone: "095-882-9113",
   email: "664244132@mail.pbru.ac.th",
-  location: "Phetchaburi, Thailand",
+  location: "มหาวิทยาลัยราชภัฏเพชรบุรี",
   resumeUrl: "/resume.pdf",
+  languages: [
+    { language: "ภาษาไทย", level: "เจ้าของภาษา (Native)", tag: "TH" },
+    { language: "ภาษาอังกฤษ", level: "ระดับดี (B1)", tag: "EN" },
+    { language: "ภาษาจีน", level: "ระดับเบื้องต้น (Elementary)", tag: "CN" }
+  ],
   socialLinks: {
-    github: "https://github.com/pai11220zx",
+    github: "https://github.com/664244132",
     linkedin: "https://linkedin.com",
-    facebook: "https://facebook.com",
-    email: "mailto:664244132@mail.pbru.ac.th"
+    email: "mailto:664244132@mail.pbru.ac.th",
+    phone: "tel:0958829113"
   },
   highlights: [
-    { label: "Education", value: "Computer Science", subValue: "PBRU University" },
-    { label: "Focus", value: "Web & Software", subValue: "Frontend & Cloud" },
-    { label: "Goal", value: "Software Engineer", subValue: "Full-Stack Ready" }
+    { label: "Education", value: "Computer Science", subValue: "PBRU (ชั้นปีที่ 4, GPA 2.80)" },
+    { label: "Target Internship", value: "Automation", subValue: "Software & Automated Systems" },
+    { label: "Motto", value: "Never Stop Learning", subValue: "Continuous Growth" }
   ]
 };

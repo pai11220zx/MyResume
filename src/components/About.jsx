@@ -1,13 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Target, Compass, Sparkles } from 'lucide-react';
+import { GraduationCap, Target, Compass, Sparkles, Languages, Quote, Briefcase } from 'lucide-react';
 import { profileData } from '../data/profile';
 import SectionHeading from './common/SectionHeading';
+import Badge from './common/Badge';
 
 const iconMap = {
   Education: GraduationCap,
-  Focus: Compass,
-  Goal: Target
+  "Target Internship": Target,
+  Motto: Quote
 };
 
 export default function About() {
@@ -16,21 +17,53 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           tag="About Me"
-          title="Background & Career Interest"
+          title="ประวัติและเป้าหมายการทำงาน (About & Objective)"
+          description="ทำความรู้จักกับตัวตน ความสนใจ และเส้นทางการพัฒนาตนเอง"
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Bio Text */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Bio & Details */}
           <div className="lg:col-span-7 space-y-6 text-[#A1A1AA] text-base sm:text-lg leading-relaxed">
-            <p>
-              สวัสดีครับ ผม <strong className="text-white">{profileData.name}</strong> นักศึกษาสาขาวิทยาการคอมพิวเตอร์ (Computer Science) มหาวิทยาลัยราชภัฏเพชรบุรี ผู้มีความหลงใหลในการพัฒนาเว็บแอปพลิเคชันและซอฟต์แวร์สมัยใหม่
-            </p>
-            <p>
-              ผมมุ่งมั่นที่จะพัฒนาทักษะทางด้าน <span className="text-[#8B5CF6]">Frontend & Modern Web Technologies</span> โดยเน้นการสร้าง User Interface ที่สวยงาม ลื่นไหล ใช้งานง่ายตามมาตรฐาน Clean Code และ Responsive Web Design
-            </p>
-            <p>
-              นอกจากนี้ยังศึกษาและฝึกฝนการออกแบบระบบฐานข้อมูลเชิงสัมพันธ์ (PostgreSQL / MySQL) และการใช้งาน Cloud Platform เช่น Supabase และ Vercel เพื่อเตรียมความพร้อมสู่การทำงานจริงในฐานะ Software Developer
-            </p>
+            <div className="p-6 rounded-2xl bg-[#171A21] border border-[#272A33] space-y-4">
+              <div className="flex items-center gap-3 text-white">
+                <span className="text-xl font-bold">{profileData.thaiName} ({profileData.name})</span>
+                <Badge variant="accent">ชั้นปีที่ 4 PBRU</Badge>
+              </div>
+              <p className="text-sm sm:text-base text-[#A1A1AA]">
+                นักศึกษาสาขาวิทยาการคอมพิวเตอร์ คณะเทคโนโลยีสารสนเทศ มหาวิทยาลัยราชภัฏเพชรบุรี (GPA 2.80) มีความมุ่งมั่นในการเรียนรู้สิ่งใหม่ๆ และแก้ปัญหาผ่านการลงมือพัฒนาซอฟต์แวร์จริง
+              </p>
+            </div>
+
+            {/* Career Objective */}
+            <div className="p-6 rounded-2xl bg-[#171A21] border border-[#272A33] space-y-3">
+              <div className="flex items-center gap-2 text-white font-bold text-base">
+                <Briefcase className="w-5 h-5 text-[#8B5CF6]" />
+                <span>ความสนใจด้านงานและเป้าหมายการฝึกงาน (Career Objective)</span>
+              </div>
+              <p className="text-sm sm:text-base text-white/90 leading-relaxed">
+                "{profileData.careerObjective}"
+              </p>
+            </div>
+
+            {/* Language Skills */}
+            <div className="p-6 rounded-2xl bg-[#171A21] border border-[#272A33] space-y-3">
+              <div className="flex items-center gap-2 text-white font-bold text-base">
+                <Languages className="w-5 h-5 text-[#8B5CF6]" />
+                <span>ทักษะด้านภาษา (Language Proficiency)</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                {profileData.languages.map((lang) => (
+                  <div
+                    key={lang.language}
+                    className="p-3 rounded-xl bg-[#0F1117] border border-[#272A33] flex flex-col gap-1"
+                  >
+                    <div className="text-xs text-[#8B5CF6] font-semibold">{lang.tag}</div>
+                    <div className="text-sm font-bold text-white">{lang.language}</div>
+                    <div className="text-xs text-[#A1A1AA]">{lang.level}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Summary Cards */}

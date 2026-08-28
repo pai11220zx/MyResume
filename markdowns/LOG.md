@@ -6,13 +6,28 @@
 
 ## 📌 1. สถานะโปรเจกต์ปัจจุบัน (Current Project Status)
 
-- **สถานะ:** 🟢 พัฒนาเสร็จสมบูรณ์ พร้อมแอนิเมชัน WebGL Glow Cursor (React Bits) และผ่านการทดสอบ 100% (Production Ready)
-- **เวอร์ชันปัจจุบัน:** `v1.3.0`
+- **สถานะ:** 🟢 อัปเดตข้อมูลจริงครบถ้วน (ปุรเชษฐ์ อบรม / MyResume) พร้อมใช้งานและผ่านการทดสอบ 100% (Production Ready)
+- **เวอร์ชันปัจจุบัน:** `v1.5.0`
 - **สถาปัตยกรรมหลัก:** React 18 + Tailwind CSS + Framer Motion + **WebGL (ogl)** + Vite + **Vercel (Hosting)** + **Supabase PostgreSQL (Database)**
 
 ---
 
 ## 📝 2. บันทึกการเปลี่ยนแปลง (Changelog)
+
+### [v1.5.0] — 2026-08-28 (Personal Profile Overhaul & MyResume Branding)
+- **👤 Profile Data Overhaul:** อัปเดตชื่อ `ปุรเชษฐ์ อบรม (PURACHET AOBORM)`, เบอร์โทร `095-882-9113`, อีเมล `664244132@mail.pbru.ac.th`, ลิงก์ GitHub `https://github.com/664244132`, และคติประจำใจ `Never Stop learning`
+- **🏷️ Branding & Identity:** เปลี่ยนชื่อโปรเจกต์และโลโก้จาก `PAI.DEV` เป็น **`MyResume`** ทั่วทั้ง Navbar, Footer, และ `index.html`
+- **🎓 Education Details:** อัปเดตประวัติการศึกษาครบ 2 สถาบัน (มรภ.เพชรบุรี วท.บ. วิทยาการคอมพิวเตอร์ ปี 4 GPA 2.80 และ ร.ร.เตรียมอุดมศึกษาพัฒนาการปราณบุรี)
+- **💼 Work Experience & Projects:** บันทึกข้อมูลงาน Earn while learn คณะ IT มรภ.เพชรบุรี และอัปเดต 5 ผลงานโปรเจกต์จริง (`KaDaCooked`, `Dev Note Snippets`, `AI Investment Portfolio Simulator`, `MyResume`, `PBRU Clean Air & PM 2.5 Sound Pitching`)
+- **🗣️ Language Proficiency:** เพิ่มข้อมูลทักษะภาษา: ภาษาไทย (เจ้าของภาษา), ภาษาอังกฤษ (B1), ภาษาจีน (เบื้องต้น)
+- **🎯 Career Objective:** เพิ่มเป้าหมายความสนใจในการฝึกงานด้าน **Automation & Software Development**
+- **🧪 Verification:** `npm run build` ผ่านสมบูรณ์ (0 errors, 0 warnings)
+
+### [v1.4.0] — 2026-08-28 (UI Simplification & Pruning)
+- **✂️ Hero Section Cleanup:** นำ Availability Status Badge และกลุ่มปุ่ม CTA (View Projects / Download Resume) ออกจาก `Hero.jsx` เพื่อลดความซ้ำซ้อนและทำให้ส่วนหัวโปร่งโล่ง อ่านง่าย
+- **✂️ Layout Streamlining:** นำ Section `<Experience />` และ `<GitHubActivity />` ออกจาก `Home.jsx` ตามความต้องการของผู้ใช้
+- **🔗 Navbar Menu Synchronization:** นำรายการเมนู Experience ออกจาก Navigation Links ใน `Navbar.jsx` เพื่อป้องกัน Dead Links
+- **🧪 Verification:** `npm run build` ผ่านสมบูรณ์ (0 errors, 0 warnings)
 
 ### [v1.3.0] — 2026-08-28 (React Bits Glow Cursor Integration)
 - **✨ WebGL Glow Cursor Integration:** ติดตั้งแพ็กเกจ `ogl` และสร้างคอมโพเนนต์ `GlowCursor.jsx` + `GlowCursor.css` จาก React Bits เพื่อเพิ่มลูกเล่นเส้นทางแสงเรืองรองตามการเลื่อนเมาส์

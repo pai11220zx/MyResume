@@ -8,7 +8,6 @@ const navItems = [
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
-  { label: 'Experience', href: '#experience' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -61,8 +60,7 @@ export default function Navbar() {
             <Code className="w-5 h-5" />
           </div>
           <span className="font-bold text-xl tracking-tight text-white group-hover:text-[#8B5CF6] transition-colors">
-            {profileData.name}
-            <span className="text-[#8B5CF6]">.dev</span>
+            My<span className="text-[#8B5CF6]">Resume</span>
           </span>
         </a>
 

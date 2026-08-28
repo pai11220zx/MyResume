@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Send, CheckCircle2, AlertCircle, MapPin } from 'lucide-react';
+import { Mail, Send, CheckCircle2, AlertCircle, MapPin, Phone } from 'lucide-react';
+import { GithubIcon } from './Icons';
 import { supabase } from '../lib/supabaseClient';
 import { profileData } from '../data/profile';
 import SectionHeading from './common/SectionHeading';
@@ -86,25 +87,49 @@ export default function Contact() {
               <h3 className="text-xl font-bold text-white">Contact Information</h3>
               
               <div className="space-y-4">
+                {/* Phone */}
+                <a href={profileData.socialLinks.phone} className="flex items-center gap-4 text-[#A1A1AA] hover:text-white transition-colors group">
+                  <div className="w-10 h-10 rounded-xl bg-[#0F1117] border border-[#272A33] flex items-center justify-center text-[#8B5CF6] group-hover:border-[#8B5CF6]">
+                    <Phone className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="text-xs text-[#A1A1AA] block">เบอร์โทรศัพท์ (Phone)</span>
+                    <span className="text-sm font-medium text-white">{profileData.phone}</span>
+                  </div>
+                </a>
+
+                {/* Email */}
                 <a href={profileData.socialLinks.email} className="flex items-center gap-4 text-[#A1A1AA] hover:text-white transition-colors group">
                   <div className="w-10 h-10 rounded-xl bg-[#0F1117] border border-[#272A33] flex items-center justify-center text-[#8B5CF6] group-hover:border-[#8B5CF6]">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-xs text-[#A1A1AA] block">Email</span>
+                    <span className="text-xs text-[#A1A1AA] block">อีเมล (Email)</span>
                     <span className="text-sm font-medium text-white">{profileData.email}</span>
                   </div>
                 </a>
 
+                {/* Location */}
                 <div className="flex items-center gap-4 text-[#A1A1AA]">
                   <div className="w-10 h-10 rounded-xl bg-[#0F1117] border border-[#272A33] flex items-center justify-center text-[#8B5CF6]">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-xs text-[#A1A1AA] block">Location</span>
+                    <span className="text-xs text-[#A1A1AA] block">สถานที่ / มหาวิทยาลัย (Location)</span>
                     <span className="text-sm font-medium text-white">{profileData.location}</span>
                   </div>
                 </div>
+
+                {/* GitHub */}
+                <a href={profileData.socialLinks.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-[#A1A1AA] hover:text-white transition-colors group">
+                  <div className="w-10 h-10 rounded-xl bg-[#0F1117] border border-[#272A33] flex items-center justify-center text-[#8B5CF6] group-hover:border-[#8B5CF6]">
+                    <GithubIcon className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="text-xs text-[#A1A1AA] block">GitHub Profile</span>
+                    <span className="text-sm font-medium text-white">{profileData.socialLinks.github}</span>
+                  </div>
+                </a>
               </div>
             </div>
           </div>

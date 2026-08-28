@@ -11,7 +11,9 @@ export default function Footer() {
     <footer className="py-12 border-t border-[#272A33] bg-[#0F1117] text-[#A1A1AA] text-sm relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="text-center sm:text-left">
-          <span className="font-bold text-white text-base">{profileData.name}.dev</span>
+          <span className="font-bold text-white text-base">
+            My<span className="text-[#8B5CF6]">Resume</span>
+          </span>
           <p className="text-xs text-[#A1A1AA] mt-1">© {new Date().getFullYear()} {profileData.fullName}. All rights reserved.</p>
         </div>
 

@@ -70,7 +70,7 @@ export default function ProjectModal({ project, onClose }) {
           <div className="p-6 sm:p-8 space-y-6 overflow-y-auto">
             {/* Tech Badges */}
             <div className="flex flex-wrap gap-2">
-              {project.technologies.map(tech => (
+              {(project.technologies || project.tags || []).map(tech => (
                 <Badge key={tech} size="md" variant="accent">
                   {tech}
                 </Badge>

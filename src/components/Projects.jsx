@@ -81,7 +81,7 @@ export default function Projects() {
 
                 {/* Tech Badges */}
                 <div className="flex flex-wrap gap-1.5 pt-2">
-                  {project.technologies.map(tech => (
+                  {(project.technologies || project.tags || []).map(tech => (
                     <Badge key={tech}>
                       {tech}
                     </Badge>

@@ -1,76 +1,132 @@
 export const projectsData = [
   {
-    id: "smart-hotel-booking",
-    title: "Smart Hotel Booking System",
-    description: "ระบบจองห้องพักออนไลน์สำหรับจัดการห้องพัก การชำระเงิน และข้อมูลการจองของลูกค้าแบบครบวงจร",
+    id: "kadacooked",
+    title: "KaDaCooked (Unity Cooking Game)",
+    category: "Game & Web Development",
+    year: "2024",
+    description: "สร้างและพัฒนาเกมทำอาหารด้วย Unity Engine พร้อมเว็บไซต์สำหรับเผยแพร่และดาวน์โหลดเกม ผู้เล่นต้องบริหารเวลาและทำอาหารเพื่อเก็บคะแนนให้ได้มากที่สุด",
     image: "/images/projects/hotel-booking.svg",
-    year: "2026",
-    category: "Full-Stack Web App",
-    technologies: ["React", "PHP", "MySQL", "Tailwind CSS"],
-    githubUrl: "https://github.com/pai11220zx/MyResume",
-    demoUrl: "https://my-resume-pai.vercel.app",
+    technologies: ["Unity", "C#", "Web Development", "Game Design", "Vercel"],
+    tags: ["Unity", "C#", "Web Development", "Game Design", "Vercel"],
+    githubUrl: "https://github.com/664244132",
+    liveUrl: "https://github.com/664244132",
     featured: true,
     details: {
-      overview: "ระบบจัดการห้องพักโรงแรมที่ช่วยให้ผู้ใช้สามารถค้นหาห้องพัก เช็คห้องว่าง ทำการจอง และจัดการสถานะห้องพักสำหรับผู้ดูแลระบบ",
-      problem: "การจัดการห้องพักแบบเดิมใช้เวลานานและมีข้อผิดพลาดเรื่องการจองห้องซ้ำซ้อน",
-      solution: "ออกแบบระบบฐานข้อมูลแบบสัมพันธ์ (Relational DB) ที่ตรวจสอบสถานะห้องพักว่างแบบเรียลไทม์ พร้อมหน้าจอ UI ที่ใช้งานง่าย",
+      overview: "KaDaCooked เกิดจากความสนใจในการพัฒนาเกมและความตั้งใจที่จะท้าทายตนเองในการเขียนโปรแกรมด้วยภาษา C# บน Unity Engine ควบคู่กับการสร้างเว็บไซต์เพื่อแจกจ่ายและให้ผู้เล่นดาวน์โหลดเกม",
+      problem: "ต้องการสร้างประสบการณ์ความสนุกที่เล่นง่าย เข้าถึงได้ทุกคน พร้อมระบบคำนวณคะแนนและจำลองขั้นตอนการทำอาหารที่ท้าทายความเร็ว",
+      solution: "ออกแบบ Game Loop ด้วย Unity C# จัดการระบบเวลา การรับออเดอร์ การเตรียมวัตถุดิบ และพัฒนาหน้า Landing Page สำหรับดาวน์โหลดตัวเกม",
       features: [
-        "ระบบค้นหาห้องพักตามช่วงวันที่และจำนวนผู้เข้าพัก",
-        "ระบบคำนวณราคารวมและยืนยันการจอง",
-        "แดชบอร์ดจัดการห้องพักและสถานะสำหรับแอดมิน",
-        "รองรับการแสดงผลทุกหน้าจออย่างสมบูรณ์"
+        "ระบบสั่งทำอาหารและจัดการออเดอร์แบบ Real-time",
+        "ระบบจับเวลาและคำนวณคะแนน High Score",
+        "หน้าเว็บ Landing Page Responsive สำหรับดาวน์โหลดเกม",
+        "กราฟิกและเสียงประกอบเกมที่สร้างความสนุกสนาน"
       ],
-      challenges: "การจัดการเงื่อนไขเวลาและช่วงวันที่ที่อาจทับซ้อนกัน",
-      learnings: "เข้าใจการออกแบบ Database Schema และการจัดการ Form State ที่ซับซ้อนใน React"
+      challenges: "การจัดการ State ของวัตถุดิบอาหารและจังหวะเวลาใน Unity ให้ลื่นไหลไม่กระตุก",
+      learnings: "เข้าใจโครงสร้าง Game Development วงจรชีวิตของเกม (Update Loop, Physics) และการผสานงานระหว่าง Game Engine กับ Web Deployment"
     }
   },
   {
-    id: "dev-portfolio",
-    title: "Modern Developer Portfolio",
-    description: "เว็บไซต์พอร์ตโฟลิโอส่วนตัวและเรซูเม่ออนไลน์ ออกแบบสไตล์ Dark Theme ด้วย React, Tailwind และ Framer Motion",
+    id: "dev-note-snippets",
+    title: "Dev Note Snippets & VS Code Extension",
+    category: "Developer Tools",
+    year: "2024",
+    description: "แพลตฟอร์มเว็บไซต์สำหรับจัดเก็บ Code Snippets, AI Prompts และ Markdowns พร้อมทั้งสร้างเป็น Extension บน Visual Studio Code เพื่อเพิ่มความสะดวกรวดเร็วในการเขียนโปรแกรม",
     image: "/images/projects/dev-portfolio.svg",
-    year: "2026",
-    category: "Frontend & Animation",
-    technologies: ["React", "Tailwind CSS", "Framer Motion", "Supabase", "Vercel"],
-    githubUrl: "https://github.com/pai11220zx/MyResume",
-    demoUrl: "https://my-resume-pai.vercel.app",
+    technologies: ["React", "TypeScript", "VS Code Extension", "Tailwind CSS", "Markdowns"],
+    tags: ["React", "TypeScript", "VS Code Extension", "Tailwind CSS", "Markdowns"],
+    githubUrl: "https://github.com/664244132",
+    liveUrl: "https://github.com/664244132",
     featured: true,
     details: {
-      overview: "เว็บไซต์นำเสนอผลงานและทักษะของนักพัฒนาซอฟต์แวร์ที่เน้น Modern Developer Aesthetic พร้อมระบบส่งข้อความติดต่อผ่าน Supabase",
-      problem: "เรซูเม่แบบเอกสาร PDF ทั่วไปไม่สามารถแสดงความสามารถด้านการสร้าง Interactive UI และ Animation ได้",
-      solution: "สร้าง Single Page Application ที่มีแอนิเมชันลื่นไหล รองรับ Accessibility และเชื่อมต่อฐานข้อมูลคลาวด์",
+      overview: "เครื่องมือที่พัฒนาขึ้นจาก Pain Point ในชีวิตประจำวันที่ต้องค้นหา Snippets, คำสั่ง Prompt และรูปแบบ Markdown ซ้ำๆ จึงสร้างระบบจัดเก็บและเชื่อมต่อกับ VS Code โดยตรง",
+      problem: "การสลับหน้าจอไปมาเพื่อหาโค้ดตัวอย่างหรือ Prompt ที่ใช้บ่อย ทำให้เสียเวลาและลด Focus ในการทำงาน",
+      solution: "พัฒนา Web Dashboard และ VS Code Extension ให้สามารถค้นหา แทรก และบันทึก Snippets / Prompts ได้ในคลิกเดียว",
       features: [
-        "แอนิเมชันลื่นไหลด้วย Framer Motion พร้อมรองรับ Prefers-reduced-motion",
-        "Project Detail Modal แสดงรายละเอียดเชิงลึก",
-        "Contact Form บันทึกลง Supabase PostgreSQL พร้อมระบบป้องกัน Spam",
-        "Responsive 100% Mobile-First"
+        "ระบบจัดหมวดหมู่ Code, Prompts และ Markdowns",
+        "VS Code Extension สำหรับดึง Snippets มาใช้งานได้ทันที",
+        "ระบบ Search ค้นหาอย่างรวดเร็ว",
+        "รองรับการจัดเก็บข้อมูลแบบเป็นระบบและปลอดภัย"
       ],
-      challenges: "การควบคุม Bundle Size และการจัดระเบียบโครงสร้าง Component ให้ Reuse ได้สูงสุด",
-      learnings: "เชี่ยวชาญการใช้ Tailwind CSS Utility, Framer Motion Stagger และ Supabase Row Level Security"
+      challenges: "การเรียนรู้ VS Code Extension API และการสื่อสารข้อมูลระหว่าง Extension กับ Web Storage",
+      learnings: "เข้าใจกระบวนการพัฒนาเครื่องมือสำหรับนักพัฒนา (Developer Experience) และการจัดการ State ด้วย TypeScript"
     }
   },
   {
-    id: "university-database-system",
-    title: "University Database Management",
-    description: "ระบบจำลองการจัดการข้อมูลนักศึกษา รายวิชา และผลการเรียน พร้อมการออกรายงานสรุป",
+    id: "ai-portfolio-simulator",
+    title: "AI Investment Portfolio Simulator",
+    category: "AI & Financial Tech",
+    year: "2024",
+    description: "เว็บไซต์พอร์ตจำลองการลงทุน สามารถวางแผนการลงทุน วิเคราะห์หุ้นและข้อมูลเชิงลึกต่างๆ โดยมีระบบ AI ช่วยเหลือและให้คำแนะนำหุ้น",
     image: "/images/projects/database-system.svg",
-    year: "2025",
-    category: "Database & Backend",
-    technologies: ["PostgreSQL", "Python", "SQL"],
-    githubUrl: "https://github.com/pai11220zx",
-    demoUrl: "",
+    technologies: ["React", "AI Integration", "PostgreSQL", "Tailwind CSS", "Data Analysis"],
+    tags: ["React", "AI Integration", "PostgreSQL", "Tailwind CSS", "Data Analysis"],
+    githubUrl: "https://github.com/664244132",
+    liveUrl: "https://github.com/664244132",
+    featured: true,
+    details: {
+      overview: "ระบบจำลองพอร์ตการลงทุนที่เปิดโอกาสให้ผู้ใช้งานได้ทดลองวางแผนการเงิน วิเคราะห์หุ้น และทดสอบกลยุทธ์การลงทุนโดยไม่ต้องเสี่ยงกับเงินจริง พร้อมผู้ช่วย AI ในการสรุปมุมมองข้อมูล",
+      problem: "ผู้เริ่มต้นลงทุนมักขาดเครื่องมือฝึกฝนและขาดคำแนะนำที่เข้าใจง่ายในการอ่านงบการเงินและแนวโน้มตลาด",
+      solution: "สร้างอินเทอร์เฟซพอร์ตจำลองที่คำนวณผลตอบแทนเสมือนจริง และนำ AI มาช่วยสรุปข้อมูลและวิเคราะห์แนวโน้ม",
+      features: [
+        "จำลองการซื้อขายและติดตามผลตอบแทนของพอร์ตการลงทุน",
+        "ระบบ AI Assistant ให้ข้อมูลเชิงลึกและแนวโน้มหุ้น",
+        "แดชบอร์ดสรุปสัดส่วนการลงทุนและกราฟสถิติ",
+        "จัดเก็บข้อมูลประวัติการลงทุนอย่างเป็นระบบ"
+      ],
+      challenges: "การออกแบบคำสั่ง Prompt และเชื่อมต่อ AI ให้ตอบข้อมูลที่แม่นยำและเป็นประโยชน์",
+      learnings: "การเชื่อมต่อ AI APIs เข้ากับ Web Application และการจัดการข้อมูลเชิงสถิติในรูปแบบ Real-time"
+    }
+  },
+  {
+    id: "my-resume",
+    title: "MyResume Portfolio & Academic Journey",
+    category: "Web Application",
+    year: "2024",
+    description: "เว็บไซต์เรซูเม่และพอร์ตโฟลิโอส่วนตัวเพื่อแสดงผลงานทั้งงานวิชาการและงานกิจกรรม สะท้อนเส้นทางการพัฒนาตนเองตั้งแต่จุดเริ่มต้นจนถึงปัจจุบัน",
+    image: "/images/projects/dev-portfolio.svg",
+    technologies: ["React 18", "Tailwind CSS", "Framer Motion", "WebGL (ogl)", "Supabase"],
+    tags: ["React 18", "Tailwind CSS", "Framer Motion", "WebGL (ogl)", "Supabase"],
+    githubUrl: "https://github.com/664244132",
+    liveUrl: "https://github.com/664244132",
+    featured: true,
+    details: {
+      overview: "เว็บไซต์ Portfolio & Resume ส่วนตัวที่พัฒนาด้วย React 18 และ Tailwind CSS สไตล์ Modern Dark Aesthetic พร้อมระบบ WebGL Glow Cursor และเชื่อมต่อฐานข้อมูล Supabase PostgreSQL",
+      problem: "ต้องการพื้นที่รวมศูนย์ข้อมูลประวัติการศึกษา ทักษะ ผลงาน และช่องทางติดต่อที่สวยงาม ทันสมัย และเข้าถึงได้ง่ายทุกอุปกรณ์",
+      solution: "ออกแบบและพัฒนาเว็บสไตล์โมเดิร์น โทนสีมืดสไตล์นักพัฒนา รองรับ Responsive Design และมีแบบฟอร์มติดต่อที่เชื่อมต่อ Cloud Database",
+      features: [
+        "Responsive Dark Theme UI สวยงามบนทุกขนาดหน้าจอ",
+        "WebGL Glow Cursor Trail Shader เพิ่มมิติการเคลื่อนไหว",
+        "Modal แสดงรายละเอียดโปรเจกต์เชิงลึก (Accessible Dialog)",
+        "แบบฟอร์มส่งข้อความติดต่อพร้อมบันทึกลง Supabase PostgreSQL"
+      ],
+      challenges: "การจัดระเบียบโครงสร้างโค้ดแบบ DRY และการคุมขนาด Vendor Chunks ให้โหลดรวดเร็ว",
+      learnings: "การใช้งาน Framer Motion, WebGL Shaders, Supabase Database และแนวทางการจัดทำ Accessible Web Standards"
+    }
+  },
+  {
+    id: "pbru-clean-air-projects",
+    title: "PBRU Web Projects & PM 2.5 Sound Pitching",
+    category: "Academic & Institutional Web",
+    year: "2024",
+    description: "ชุดระบบเว็บไซต์ที่พัฒนาขึ้นสำหรับคณะเทคโนโลยีสารสนเทศ มรภ.เพชรบุรี รวมถึงเว็บสาขาวิทยาการคอมพิวเตอร์ เว็บประกวดโครงการ PM 2.5 และเว็บตรวจจับเสียงเปิดงาน Pitching",
+    image: "/images/projects/hotel-booking.svg",
+    technologies: ["HTML/CSS", "JavaScript", "PHP", "MySQL", "Web Audio API"],
+    tags: ["HTML/CSS", "JavaScript", "PHP", "MySQL", "Web Audio API"],
+    githubUrl: "https://github.com/664244132",
+    liveUrl: "https://github.com/664244132",
     featured: false,
     details: {
-      overview: "โครงงานการออกแบบและเขียนคำสั่ง SQL สำหรับจัดการข้อมูลนักศึกษาและการลงทะเบียนเรียน",
-      problem: "ข้อมูลมีความซับซ้อนและจำเป็นต้องมี Foreign Key Constraints ที่ถูกต้อง",
-      solution: "วิเคราะห์ Normalized ER Diagram ถึงระดับ 3NF และเขียน Trigger/Views เพื่อสร้างรายงาน",
+      overview: "ผลงานที่สร้างและพัฒนาขึ้นระหว่างการทำงานเป็นนักศึกษาจ้างงาน (Earn while learn) ให้กับคณะเทคโนโลยีสารสนเทศ มหาวิทยาลัยราชภัฏเพชรบุรี",
+      problem: "กิจกรรมของคณะต้องการระบบรองรับการลงทะเบียน การสร้างหน้าเว็บผ่าน QR Code และระบบตรวจจับระดับเสียงเพื่อเปิดพิธีแบบสร้างสรรค์",
+      solution: "พัฒนาเว็บสมัครแข่งขันโครงงานวิทยาศาสตร์ Clean Air For Life, เว็บ QR Code สร้างหน้าเว็บสำหรับกิจกรรม และระบบใช้ Web Audio API ตรวจจับเสียงเพื่อเปิดงาน Pitching",
       features: [
-        "ออกแบบฐานข้อมูล 3NF ป้องกันข้อมูลซ้ำซ้อน",
-        "สร้าง SQL Views สำหรับสรุปเกรดเฉลี่ย",
-        "คำสั่งค้นหาข้อมูลนักศึกษาที่มีประสิทธิภาพสูง"
+        "เว็บไซต์สาขาวิทยาการคอมพิวเตอร์ คณะเทคโนโลยีสารสนเทศ PBRU",
+        "ระบบรับสมัครประกวดแข่งขันโครงงานวิทยาศาสตร์ Clean Air For Life",
+        "ระบบสแกน QR Code สำหรับสร้างหน้าเว็บมอบให้ผู้ร่วมกิจกรรม",
+        "ระบบตรวจจับระดับเสียง (Sound Detection) เพื่อเปิดงาน Pitching"
       ],
-      challenges: "การจัดการ Join หลายตารางโดยรักษา Performance",
-      learnings: "หลักการออกแบบ Relational Database และการเขียน SQL Query ขั้นสูง"
+      challenges: "การเขียนโค้ดอ่านค่าสัญญาณไมโครโฟนผ่าน Web Audio API ให้ตรวจจับระดับเดซิเบลได้อย่างแม่นยำเพื่อสั่ง Trigger แอนิเมชันเปิดงาน",
+      learnings: "การประยุกต์ใช้งาน Web Audio API ในงานอีเวนต์จริง และการพัฒนาเว็บแอปพลิเคชันตอบโจทย์องค์กร"
     }
   }
 ];
