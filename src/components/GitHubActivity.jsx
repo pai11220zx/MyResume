@@ -1,0 +1,48 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ExternalLink } from 'lucide-react';
+import { GithubIcon } from './Icons';
+import { profileData } from '../data/profile';
+import SectionHeading from './common/SectionHeading';
+
+export default function GitHubActivity() {
+  return (
+    <section className="py-20 relative z-10 border-t border-[#272A33]/50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          tag="Developer Activity"
+          title="GitHub Activity & Repositories"
+          className="mb-12"
+        />
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="max-w-4xl mx-auto p-8 card-surface text-center space-y-6"
+        >
+          <div className="inline-flex p-4 rounded-2xl bg-[#0F1117] border border-[#272A33] text-[#8B5CF6]">
+            <GithubIcon className="w-10 h-10" />
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-white">Explore My GitHub Repositories</h3>
+            <p className="text-sm text-[#A1A1AA] max-w-xl mx-auto mt-2">
+              ติดตามความเคลื่อนไหว ซอร์สโค้ดของโปรเจกต์ต่างๆ และการพัฒนาอย่างต่อเนื่องได้ที่ GitHub Profile ของผม
+            </p>
+          </div>
+
+          <a
+            href={profileData.socialLinks.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary"
+          >
+            <span>Visit GitHub Profile</span>
+            <ExternalLink className="w-4 h-4" />
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  );
+}

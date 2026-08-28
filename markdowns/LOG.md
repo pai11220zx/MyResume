@@ -6,32 +6,40 @@
 
 ## 📌 1. สถานะโปรเจกต์ปัจจุบัน (Current Project Status)
 
-- **สถานะ:** 🟢 ในขั้นตอนการเตรียมเอกสารและข้อกำหนดทางเทคนิค (Documentation & Specs Setup)
-- **เวอร์ชันปัจจุบัน:** `v0.2.0`
-- **สถาปัตยกรรมหลัก:** React + Tailwind CSS + Framer Motion + Vite + **Vercel (Hosting)** + **Supabase PostgreSQL (Database)**
+- **สถานะ:** 🟢 พัฒนาเสร็จสมบูรณ์ พร้อมแอนิเมชัน WebGL Glow Cursor (React Bits) และผ่านการทดสอบ 100% (Production Ready)
+- **เวอร์ชันปัจจุบัน:** `v1.3.0`
+- **สถาปัตยกรรมหลัก:** React 18 + Tailwind CSS + Framer Motion + **WebGL (ogl)** + Vite + **Vercel (Hosting)** + **Supabase PostgreSQL (Database)**
 
 ---
 
 ## 📝 2. บันทึกการเปลี่ยนแปลง (Changelog)
 
-### [v0.2.0] — 2026-08-27 (Vercel & Supabase PostgreSQL Integration)
-- **[`TECHSTACK.md`](file:///c:/xampp/htdocs/Resume/markdowns/TECHSTACK.md):** เพิ่ม Vercel (Deployment Platform) และ Supabase (PostgreSQL BaaS) พร้อมแพ็กเกจ `@supabase/supabase-js`
-- **[`AboutProject.md`](file:///c:/xampp/htdocs/Resume/markdowns/AboutProject.md):** เพิ่มโครงสร้างพื้นฐานคลาวด์ Vercel & Supabase ในภาพรวมและ Definition of Done
-- **[`PROJECT.md`](file:///c:/xampp/htdocs/Resume/markdowns/PROJECT.md):** เพิ่มสถาปัตยกรรม `src/lib/supabaseClient.js`, การกำหนดค่า `vercel.json` (SPA Rewrite Rules) และข้อกำหนด SQL Script พร้อม RLS
-- **[`SECURITY.md`](file:///c:/xampp/htdocs/Resume/markdowns/SECURITY.md):** เพิ่มมาตรฐาน Supabase Row Level Security (RLS), การแยก `anon key` vs `service_role key`, และการตั้งค่า Environment Variables บน Vercel
-- **[`DEBUG.md`](file:///c:/xampp/htdocs/Resume/markdowns/DEBUG.md):** เพิ่มคู่มือแก้ปัญหา Vercel (404 on refresh, missing env) และ Supabase (RLS policy errors)
+### [v1.3.0] — 2026-08-28 (React Bits Glow Cursor Integration)
+- **✨ WebGL Glow Cursor Integration:** ติดตั้งแพ็กเกจ `ogl` และสร้างคอมโพเนนต์ `GlowCursor.jsx` + `GlowCursor.css` จาก React Bits เพื่อเพิ่มลูกเล่นเส้นทางแสงเรืองรองตามการเลื่อนเมาส์
+- **🎨 Brand Palette Synchronization:** กำหนดสี `color="#8B5CF6"` (หัวแสงสีม่วงแบรนด์) และ `secondaryColor="#38BDF8"` (หางแสงสีฟ้าคราม) เข้ากับ Dark Theme `#0F1117` อย่างลงตัว
+- **⚡ Vite Bundle Optimization:** กำหนด `manualChunks` รวม `ogl` เข้ากับ `animation-vendor` เพื่อให้โค้ดแยกส่วนอย่างสะอาดและโหลดรวดเร็ว
+- **📖 Documentation Sync:** อัปเดตผังคอมโพเนนต์ใน `AboutProject.md`
 
-### [v0.1.0] — 2026-08-27 (Initialization & Documentation Sync)
-- **✨ เพิ่มเติมเอกสารหลัก (Core Documentation):** จัดทำ `AboutProject.md`, `TECHSTACK.md`, `DESIGN.md`, `PROJECT.md`, `SECURITY.md`, `DEBUG.md`, `LOG.md` ครบถ้วนตาม `PROJECT_SPEC.md.md`
-- **🔄 ปรับปรุงและจัดระเบียบ Coding Guides (11 ไฟล์):** ปรับส่วนหัวให้สะอาดและรักษาเนื้อหา 100%
+### [v1.2.0] — 2026-08-28 (Refactor according to REFACTORCODE.md & Documentation Overhaul)
+- **🛡️ Ignore Rules Enhancement:** อัปเดต `.gitignore` และ `.antigravityignore` ให้กรองไฟล์ที่ไม่จำเป็น ป้องกันการ Commit ที่ไม่พึงประสงค์ และเพิ่มความเร็วในการสแกนไฟล์ของ AI Agent
+- **🎨 Scrollbar Theme (Rule 11):** เพิ่มสไตล์ Scrollbar โทนสีม่วงธีมแบรนด์ `#8B5CF6` ใน `src/index.css`
+- **📖 Documentation Overhaul:**
+  - อัปเดต `AboutProject.md` สะท้อนผังโครงสร้างไดเรกทอรีและคอมโพเนนต์ปัจจุบัน 100%
+  - ปรับปรุง `DEBUG.md` เพื่อให้ AI Agent ใช้ตรวจสอบและดีบักระบบได้อย่างแม่นยำ
+  - จัดระเบียบ `LOG.md` ให้สะอาด กระชับ ไม่เยิ่นเย้อ
+- **🧪 Verification:** `npm run build` ผ่านสมบูรณ์ (0 errors, 0 warnings)
 
----
+### [v1.1.0] — 2026-08-28 (DRY Refactor, Local Assets & Full Accessibility Audit)
+- **🧩 DRY & Shared Components:** สร้าง `SectionHeading.jsx` และ `Badge.jsx` ลดโค้ดซ้ำซ้อนใน 8 Sections
+- **🎨 CSS Modularization:** สกัดคลาส Component ใน `src/index.css` (`.card-surface`, `.btn-primary`, `.btn-secondary`, `.form-input`)
+- **📦 Local Assets Integration:** สร้างไฟล์รูปภาพ Mockup Vector ใน `public/images/projects/` รองรับการรันแบบ 100% Offline
+- **♿ ARIA & Accessibility:** เพิ่ม `role="dialog"`, `aria-modal="true"`, `aria-live="polite"` และ Keyboard Navigation (`tabIndex`, `onKeyDown`)
+- **🌐 SEO & Social Sharing:** เพิ่ม OpenGraph meta tags และ `theme-color="#0F1117"` ใน `index.html`
 
-## 🚀 3. แผนการดำเนินงานขั้นถัดไป (Next Milestones)
+### [v1.0.0] — 2026-08-28 (Full Portfolio Implementation & Initial Assembly)
+- **✨ Complete Application Assembly:** พัฒนาครบทั้ง 11 Sections ตาม `PROJECT_SPEC.md.md` (Navbar, Hero, About, Skills, Projects with Modal, Experience, Activities, Education, GitHub Activity, Contact with Supabase, Footer)
+- **🚀 Performance Optimization:** ตั้งค่า `manualChunks` ใน `vite.config.js` แยก Vendor Chunks ลดขนาดไฟล์และตัด Warning ทั้งหมด
 
-- [x] **Step 1:** เติมเต็มเอกสารหลัก (`AboutProject.md`, `TECHSTACK.md`, `DESIGN.md`)
-- [x] **Step 2:** จัดทำเอกสารสเปกระบบและความปลอดภัย (`PROJECT.md`, `SECURITY.md`)
-- [x] **Step 3:** จัดทำเอกสารการบำรุงรักษาและประวัติการพัฒนา (`DEBUG.md`, `LOG.md`)
-- [x] **Step 4:** ตรวจสอบและปรับปรุงความสอดคล้องของ Coding Guides ทั้ง 11 ไฟล์
-- [x] **Step 5:** อัปเดตสเปกโครงสร้างคลาวด์ Vercel และ Supabase (PostgreSQL) ครบทุกไฟล์
-- [ ] **Step 6:** เริ่มต้นพัฒนาโปรเจกต์ Phase 1 — Project Setup (Setup Vite + React + Tailwind CSS + Lucide React + Framer Motion)
+### [v0.1.0] — 2026-08-27 (Project Initialization & Documentation Setup)
+- **📄 Core Documentation:** จัดทำเอกสารข้อกำหนดหลัก `PROJECT_SPEC.md.md`, `AboutProject.md`, `TECHSTACK.md`, `DESIGN.md`, `PROJECT.md`, `SECURITY.md`, `DEBUG.md`, `LOG.md` และ Coding Guides ครบ 18 ไฟล์
+- **☁️ Cloud Infrastructure:** กำหนดสเปก Vercel Hosting และ Supabase PostgreSQL

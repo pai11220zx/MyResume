@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="dbBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F1117"/>
+      <stop offset="100%" stop-color="#151A26"/>
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#dbBgGrad)"/>
+
+  <!-- Window Frame -->
+  <rect x="60" y="40" width="680" height="370" rx="16" fill="#171A21" stroke="#272A33" stroke-width="2"/>
+  
+  <!-- Window Header -->
+  <rect x="60" y="40" width="680" height="44" rx="16" fill="#13161C"/>
+  <path d="M60 84 H740" stroke="#272A33" stroke-width="1"/>
+  
+  <!-- Controls -->
+  <circle cx="85" cy="62" r="6" fill="#EF4444" opacity="0.8"/>
+  <circle cx="105" cy="62" r="6" fill="#F59E0B" opacity="0.8"/>
+  <circle cx="125" cy="62" r="6" fill="#10B981" opacity="0.8"/>
+  <text x="400" y="66" fill="#A1A1AA" font-family="monospace" font-size="12" text-anchor="middle">pgAdmin4 — university_db.sql</text>
+
+  <!-- Left: SQL Query Editor -->
+  <rect x="80" y="100" width="340" height="290" rx="8" fill="#10131A" stroke="#272A33" stroke-width="1"/>
+  <text x="100" y="130" fill="#06B6D4" font-family="monospace" font-weight="bold" font-size="13">SELECT</text>
+  <text x="160" y="130" fill="#FFFFFF" font-family="monospace" font-size="12">s.student_id, s.name, c.title,</text>
+  <text x="160" y="150" fill="#FFFFFF" font-family="monospace" font-size="12">g.grade_point</text>
+  
+  <text x="100" y="180" fill="#06B6D4" font-family="monospace" font-weight="bold" font-size="13">FROM</text>
+  <text x="145" y="180" fill="#F59E0B" font-family="monospace" font-size="12">students s</text>
+  
+  <text x="100" y="210" fill="#06B6D4" font-family="monospace" font-weight="bold" font-size="13">JOIN</text>
+  <text x="145" y="210" fill="#F59E0B" font-family="monospace" font-size="12">enrollments e</text>
+  <text x="260" y="210" fill="#06B6D4" font-family="monospace" font-weight="bold" font-size="12">ON</text>
+  <text x="285" y="210" fill="#A1A1AA" font-family="monospace" font-size="11">s.id = e.student_id</text>
+
+  <text x="100" y="240" fill="#06B6D4" font-family="monospace" font-weight="bold" font-size="13">JOIN</text>
+  <text x="145" y="240" fill="#F59E0B" font-family="monospace" font-size="12">courses c</text>
+  <text x="235" y="240" fill="#06B6D4" font-family="monospace" font-weight="bold" font-size="12">ON</text>
+  <text x="260" y="240" fill="#A1A1AA" font-family="monospace" font-size="11">e.course_id = c.id</text>
+
+  <text x="100" y="270" fill="#06B6D4" font-family="monospace" font-weight="bold" font-size="13">WHERE</text>
+  <text x="155" y="270" fill="#FFFFFF" font-family="monospace" font-size="12">s.faculty = 'IT'</text>
+  <text x="100" y="300" fill="#06B6D4" font-family="monospace" font-weight="bold" font-size="13">ORDER BY</text>
+  <text x="180" y="300" fill="#FFFFFF" font-family="monospace" font-size="12">g.grade_point DESC;</text>
+
+  <!-- Query status badge -->
+  <rect x="100" y="340" width="180" height="30" rx="6" fill="#10B981" opacity="0.15" stroke="#10B981" stroke-width="1"/>
+  <circle cx="115" cy="355" r="4" fill="#10B981"/>
+  <text x="128" y="359" fill="#10B981" font-family="system-ui, sans-serif" font-weight="600" font-size="11">Execution Time: 4.2ms</text>
+
+  <!-- Right: Relational Schema & Tables Visualizer -->
+  <rect x="440" y="100" width="280" height="290" rx="8" fill="#13161C" stroke="#272A33" stroke-width="1"/>
+  
+  <!-- Table 1: students -->
+  <rect x="455" y="115" width="250" height="75" rx="6" fill="#1E222D" stroke="#06B6D4" stroke-width="1"/>
+  <rect x="455" y="115" width="250" height="22" rx="6" fill="#06B6D4" opacity="0.2"/>
+  <text x="470" y="131" fill="#06B6D4" font-family="monospace" font-weight="bold" font-size="11">TABLE: students (3NF)</text>
+  <text x="470" y="152" fill="#FFFFFF" font-family="monospace" font-size="10">PK  id: UUID</text>
+  <text x="470" y="168" fill="#A1A1AA" font-family="monospace" font-size="10">    name, faculty, year</text>
+
+  <!-- Relationship Connector Line -->
+  <path d="M580 190 V210" stroke="#06B6D4" stroke-width="2" stroke-dasharray="4 2"/>
+
+  <!-- Table 2: enrollments -->
+  <rect x="455" y="210" width="250" height="85" rx="6" fill="#1E222D" stroke="#3B82F6" stroke-width="1"/>
+  <rect x="455" y="210" width="250" height="22" rx="6" fill="#3B82F6" opacity="0.2"/>
+  <text x="470" y="226" fill="#38BDF8" font-family="monospace" font-weight="bold" font-size="11">TABLE: enrollments</text>
+  <text x="470" y="247" fill="#FFFFFF" font-family="monospace" font-size="10">FK  student_id -> students.id</text>
+  <text x="470" y="263" fill="#FFFFFF" font-family="monospace" font-size="10">FK  course_id  -> courses.id</text>
+  <text x="470" y="279" fill="#A1A1AA" font-family="monospace" font-size="10">    grade_point, semester</text>
+
+  <!-- Bottom Metric -->
+  <rect x="455" y="310" width="250" height="60" rx="6" fill="#10131A" stroke="#272A33"/>
+  <text x="470" y="333" fill="#FFFFFF" font-family="system-ui, sans-serif" font-weight="bold" font-size="12">PostgreSQL Database Schema</text>
+  <text x="470" y="352" fill="#A1A1AA" font-family="system-ui, sans-serif" font-size="10">Normalized 3NF Architecture & SQL Views</text>
+</svg>
