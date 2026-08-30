@@ -16,8 +16,8 @@ const getTransform = (rotateX, rotateY) => `rotateX(${rotateX.toFixed(3)}deg) ro
 
 const DepthText = ({
   text = 'Elevate',
-  layers = 34,
-  depth = 2.4,
+  layers = 24,
+  depth = 2.0,
   faceColor = '#f8fafc',
   depthColor = '#7c3aed',
   tilt = 7.5,
@@ -26,7 +26,7 @@ const DepthText = ({
   perspective = 900,
   autoOrbit = true,
   orbitSpeed = 0.35,
-  fontSize = 'clamp(3rem, 12vw, 7rem)',
+  fontSize = 'clamp(2rem, 5vw, 4rem)',
   fontWeight = 900,
   shadow = true,
   className = '',
@@ -67,6 +67,7 @@ const DepthText = ({
 
     let frameId = 0;
     let activePointer = false;
+    let isVisible = true;
     let startTime = performance.now();
     const current = { ...baseRotation };
     const target = { ...baseRotation };
@@ -76,6 +77,7 @@ const DepthText = ({
     };
 
     const handlePointerMove = event => {
+      if (!isVisible) return;
       const rect = root.getBoundingClientRect();
       if (!rect.width || !rect.height) return;
 
@@ -94,12 +96,14 @@ const DepthText = ({
     };
 
     if (canTrackPointer) {
-      window.addEventListener('pointermove', handlePointerMove);
-      window.addEventListener('pointerleave', handlePointerLeave);
-      window.addEventListener('blur', handlePointerLeave);
+      window.addEventListener('pointermove', handlePointerMove, { passive: true });
+      window.addEventListener('pointerleave', handlePointerLeave, { passive: true });
+      window.addEventListener('blur', handlePointerLeave, { passive: true });
     }
 
     const tick = now => {
+      if (!isVisible) return;
+
       if ((!canTrackPointer || !activePointer) && autoOrbit) {
         const elapsed = (now - startTime) / 1000;
         const orbit = elapsed * safeOrbitSpeed * Math.PI * 2;
@@ -114,17 +118,34 @@ const DepthText = ({
       frameId = requestAnimationFrame(tick);
     };
 
+    // Performance Optimization: Pause rAF when out of view
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          isVisible = entry.isIntersecting;
+          if (isVisible) {
+            cancelAnimationFrame(frameId);
+            frameId = requestAnimationFrame(tick);
+          } else {
+            cancelAnimationFrame(frameId);
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(root);
     applyTransform();
     frameId = requestAnimationFrame(tick);
 
     return () => {
+      observer.disconnect();
       if (canTrackPointer) {
         window.removeEventListener('pointermove', handlePointerMove);
         window.removeEventListener('pointerleave', handlePointerLeave);
         window.removeEventListener('blur', handlePointerLeave);
       }
       cancelAnimationFrame(frameId);
-      startTime = 0;
     };
   }, [autoOrbit, baseRotation, pointerTracking, safeOrbitSpeed, safeSmoothing, safeTilt]);
 

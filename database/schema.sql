@@ -1,36 +1,52 @@
 -- ============================================================
 -- SQL Schema for Developer Portfolio
 -- Table: contact_messages (ตารางบันทึกข้อความจาก Contact Form)
--- รองรับทั้ง pgAdmin 4 (Local PostgreSQL) และ Supabase Cloud
+-- รองรับ: pgAdmin 4 (Local PostgreSQL) และ Supabase Cloud 100%
 -- ============================================================
 
--- 1. สร้างตาราง contact_messages
+-- 1. เปิดใช้งาน Extension สำหรับสร้าง UUID (จำเป็นสำหรับ pgAdmin 4 / PostgreSQL)
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+-- 2. สร้างตาราง contact_messages
 CREATE TABLE IF NOT EXISTS contact_messages (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    name TEXT NOT NULL,
-    email TEXT NOT NULL,
-    subject TEXT,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    subject VARCHAR(255) DEFAULT 'General Inquiry',
     message TEXT NOT NULL,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 2. เปิดใช้งาน Row Level Security (RLS)
+-- 3. สร้าง Index เพื่อเพิ่มความเร็วในการสืบค้นข้อมูลตามวันเวลาและอีเมล
+CREATE INDEX IF NOT EXISTS idx_contact_messages_created_at ON contact_messages(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_contact_messages_email ON contact_messages(email);
+
+-- ============================================================
+-- สำหรับ pgAdmin 4 (Local PostgreSQL ทั่วไป)
+-- ไม่จำเป็นต้องใช้ RLS Role ของ Supabase (anon/authenticated)
+-- สามารถรันคำสั่งด้านล่างนี้ได้ทันที:
+-- ============================================================
+-- ให้สิทธิ์ผู้ใช้ทั่วไปสามารถเพิ่มข้อมูลลงตารางได้
+GRANT ALL ON TABLE contact_messages TO public;
+
+-- ============================================================
+-- (เฉพาะกรณีรันบน Supabase Cloud เท่านั้น)
+-- หากนำไปรันบน Supabase SQL Editor ให้คัดลอกบล็อกด้านล่างนี้ไปรันเพิ่ม:
+-- ============================================================
+/*
 ALTER TABLE contact_messages ENABLE ROW LEVEL SECURITY;
-
--- 3. ลบ Policy เดิมออกก่อน (ถ้ามี) เพื่อป้องกันการสร้างซ้ำ
 DROP POLICY IF EXISTS "Allow public insert messages" ON contact_messages;
-DROP POLICY IF EXISTS "Allow public select messages" ON contact_messages;
+DROP POLICY IF EXISTS "Allow authenticated select messages" ON contact_messages;
 
--- 4. กำหนดสิทธิ์ให้ผู้ใช้ทั่วไป (Public / Anon) สามารถกดส่งข้อความได้ (INSERT)
 CREATE POLICY "Allow public insert messages"
 ON contact_messages
 FOR INSERT
-TO public
+TO anon, authenticated
 WITH CHECK (true);
 
--- 5. กำหนดสิทธิ์ให้อ่านข้อมูลข้อความได้ (SELECT)
-CREATE POLICY "Allow public select messages"
+CREATE POLICY "Allow authenticated select messages"
 ON contact_messages
 FOR SELECT
-TO public
+TO authenticated
 USING (true);
+*/

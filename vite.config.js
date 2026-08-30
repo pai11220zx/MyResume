@@ -10,13 +10,12 @@ export default defineConfig({
   build: {
     target: 'esnext',
     cssCodeSplit: true,
-    chunkSizeWarningLimit: 600,
+    chunkSizeWarningLimit: 700,
     rollupOptions: {
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
-          'animation-vendor': ['framer-motion', 'ogl'],
-          'supabase-vendor': ['@supabase/supabase-js'],
+          'animation-vendor': ['framer-motion', 'ogl', 'lenis'],
           'icons-vendor': ['lucide-react']
         }
       }

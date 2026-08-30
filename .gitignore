@@ -2,19 +2,21 @@
 node_modules/
 .pnp
 .pnp.js
+.yarn/install-state.gz
 
 # Production Build Outputs
 dist/
 dist-ssr/
 build/
 *.local
+out/
 
-# Environment Variables & Secrets (Keep .env.example)
+# Environment Variables & Secrets (Preserve .env.example)
 .env
 .env.*
 !.env.example
 
-# Logs
+# Logs & Debugging
 logs/
 *.log
 npm-debug.log*
@@ -23,7 +25,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Editor Directories & Files
+# Editor & IDE Directories
 .vscode/*
 !.vscode/extensions.json
 .idea/
@@ -32,8 +34,10 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+.fleet/
+.cursor/
 
-# OS Generated Files
+# OS Metadata & Cache
 .DS_Store
 .DS_Store?
 ._*
@@ -43,8 +47,20 @@ ehthumbs.db
 Thumbs.db
 desktop.ini
 
-# Temporary & Deployment Files
+# Caches & Temporary Files
+.cache/
+.vite/
+.turbo/
+.eslintcache
+*.tsbuildinfo
 .temp/
 .tmp/
 .vercel
-*.tsbuildinfo
+coverage/
+*.pdf.backup
+
+# AI Agent & Tooling Directories
+.agents/
+.agents/skills/
+.codex/
+.impeccable/

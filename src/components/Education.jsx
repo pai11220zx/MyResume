@@ -4,10 +4,11 @@ import { GraduationCap, BookOpen, Calendar, Award } from 'lucide-react';
 import { educationList } from '../data/education';
 import SectionHeading from './common/SectionHeading';
 import Badge from './common/Badge';
+import IconBox from './common/IconBox';
 
 export default function Education() {
   return (
-    <section className="py-20 relative z-10 border-t border-[#272A33]/40">
+    <section id="education" className="py-20 relative z-10 border-t border-[#272A33]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           tag="Academic Background"
@@ -28,24 +29,23 @@ export default function Education() {
             >
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                 <div className="flex items-start gap-4">
-                  <div className="w-11 h-11 rounded-xl bg-[#8B5CF6]/10 flex items-center justify-center text-[#8B5CF6] shrink-0">
-                    <GraduationCap className="w-5 h-5" />
-                  </div>
+                  <IconBox icon={GraduationCap} size="md" />
                   <div>
-                    <span className="text-xs font-semibold text-[#8B5CF6] uppercase tracking-wider">{edu.status}</span>
-                    <h3 className="text-xl font-bold text-white mt-0.5">{edu.institution}</h3>
-                    <p className="text-sm font-medium text-white/90">{edu.degree} — {edu.faculty}</p>
-                    <p className="text-xs text-[#A1A1AA] mt-1 leading-relaxed">{edu.description}</p>
+                    <span className="text-xs font-bold text-[#8B5CF6] uppercase tracking-wider">{edu.status}</span>
+                    <h3 className="text-xl font-bold text-white mt-0.5 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">{edu.institution}</h3>
+                    <p className="mt-1 text-xs sm:text-sm text-[#E2E8F0] font-normal leading-relaxed drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
+                      {edu.description}
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex sm:flex-col items-start sm:items-end gap-2 shrink-0">
-                  <Badge variant="default" className="flex items-center gap-1">
+                  <Badge variant="default" className="flex items-center gap-1 shadow-sm">
                     <Calendar className="w-3 h-3 text-[#8B5CF6]" />
                     <span>{edu.period}</span>
                   </Badge>
                   {edu.gpa && (
-                    <Badge variant="accent" className="flex items-center gap-1 font-bold">
+                    <Badge variant="default" className="flex items-center gap-1 font-bold shadow-sm">
                       <Award className="w-3 h-3 text-[#8B5CF6]" />
                       <span>GPA {edu.gpa}</span>
                     </Badge>
@@ -54,7 +54,7 @@ export default function Education() {
               </div>
 
               <div className="pt-2 pl-15 sm:pl-15">
-                <h4 className="text-xs font-semibold text-[#A1A1AA] uppercase tracking-wider mb-2.5 flex items-center gap-2">
+                <h4 className="text-xs font-bold text-[#CBD5E1] uppercase tracking-wider mb-2.5 flex items-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
                   <BookOpen className="w-4 h-4 text-[#8B5CF6]" />
                   <span>หลักสูตรและรายวิชาสำคัญ (Relevant Coursework)</span>
                 </h4>

@@ -1,14 +1,17 @@
 # Dependencies
 node_modules/**
 
-# Build Outputs & Generated Assets
+# Build Outputs & Generated Artifacts
 dist/**
 dist-ssr/**
 build/**
+out/**
 
-# Version Control & Package Managers
+# Version Control & Large Lockfiles
 .git/**
 package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
 # Environment & Logs
 .env
@@ -17,8 +20,18 @@ package-lock.json
 *.log
 logs/**
 
-# Platform Deployment Cache
+# Platform Deployment & Tool Caches
 .vercel/**
+.cache/**
+.vite/**
+.turbo/**
+.idea/**
+.vscode/**
+coverage/**
 
-# Binary & PDF files
+# Binary & PDF files (Ignore heavy non-code assets)
 *.pdf
+*.zip
+*.tar.gz
+*.exe
+

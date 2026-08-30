@@ -1,34 +1,22 @@
 import React from 'react';
-import { Sparkles } from 'lucide-react';
-import BlurText from './BlurText';
 
 export default function SectionHeading({
   tag,
   title,
   description,
-  icon: Icon = Sparkles,
   className = "mb-16",
   align = "center"
 }) {
   return (
-    <div className={`text-${align} ${className}`}>
-      {tag && (
-        <div className="inline-flex items-center gap-2 text-[#8B5CF6] text-sm font-semibold tracking-wider uppercase mb-2">
-          <Icon className="w-4 h-4" />
-          <span>{tag}</span>
-        </div>
-      )}
-      <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight flex justify-center">
-        <BlurText
-          text={title}
-          delay={70}
-          animateBy="words"
-          direction="top"
-          className="justify-center text-center font-bold"
-        />
+    <div className={`text-${align} ${className} flex flex-col items-center`}>
+      {/* Clean Solid Section Title */}
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] mb-2 text-center">
+        {title}
       </h2>
+
+      {/* Section Description without fade in */}
       {description && (
-        <p className="text-sm text-[#A1A1AA] mt-2 max-w-2xl mx-auto">
+        <p className="mt-2 max-w-2xl text-sm sm:text-base text-[#E2E8F0] font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] text-center">
           {description}
         </p>
       )}

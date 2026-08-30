@@ -20,8 +20,8 @@ export default function Projects() {
           description="ผลงานและระบบที่พัฒนาขึ้นจริง"
         />
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+        {/* Minimalist Editorial Projects Grid (Frameless Media Cards) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-12">
           {projectsData.map((project, index) => (
             <motion.div
               key={project.id}
@@ -29,14 +29,14 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, delay: index * 0.08 }}
-              className="group rounded-2xl bg-[#171A21]/30 border border-[#272A33]/60 hover:border-[#8B5CF6]/50 overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:shadow-[#8B5CF6]/10"
+              className="group flex flex-col justify-between space-y-4"
             >
-              {/* Thumbnail Image */}
+              {/* Thumbnail Image Container */}
               <div
                 role="button"
                 tabIndex={0}
                 aria-label={`View details for ${project.title}`}
-                className="relative h-48 w-full overflow-hidden bg-[#0F1117] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
+                className="relative aspect-video w-full overflow-hidden rounded-2xl border border-[#272A33]/60 bg-[#0F1117]/60 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] group-hover:border-[#8B5CF6]/50 transition-all shadow-md"
                 onClick={() => setSelectedProject(project)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
@@ -54,14 +54,11 @@ export default function Projects() {
                   height="225"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 will-change-transform"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F1117] via-transparent to-transparent opacity-80" />
-                <span className="absolute top-3 right-3 px-2.5 py-1 text-[11px] font-semibold rounded-md bg-[#0F1117]/80 text-[#8B5CF6] border border-[#272A33]/60 backdrop-blur-md">
-                  {project.category}
-                </span>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#07090E]/90 via-transparent to-transparent opacity-80" />
               </div>
 
-              {/* Card Body */}
-              <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+              {/* Content Body */}
+              <div className="flex-1 flex flex-col justify-between space-y-3">
                 <div>
                   <h3
                     role="button"
@@ -74,31 +71,31 @@ export default function Projects() {
                         setSelectedProject(project);
                       }
                     }}
-                    className="text-xl font-bold text-white group-hover:text-[#8B5CF6] transition-colors cursor-pointer flex items-center justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] rounded"
+                    className="text-lg sm:text-xl font-bold text-white group-hover:text-[#8B5CF6] transition-colors cursor-pointer flex items-center justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] rounded drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]"
                   >
                     <span>{project.title}</span>
                     <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity text-[#8B5CF6]" />
                   </h3>
-                  <p className="text-sm text-[#A1A1AA] line-clamp-2 mt-2 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#CBD5E1] font-normal line-clamp-2 mt-1.5 leading-relaxed drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
                     {project.description}
                   </p>
                 </div>
 
                 {/* Tech Badges */}
-                <div className="flex flex-wrap gap-1.5 pt-2">
+                <div className="flex flex-wrap gap-1.5 pt-1">
                   {(project.technologies || project.tags || []).map(tech => (
-                    <Badge key={tech}>
+                    <Badge key={tech} size="sm">
                       {tech}
                     </Badge>
                   ))}
                 </div>
 
-                {/* Card Action Links */}
-                <div className="pt-4 border-t border-[#272A33]/50 flex items-center justify-between">
+                {/* Action Links */}
+                <div className="pt-3 border-t border-[#272A33]/30 flex items-center justify-between">
                   <button
                     type="button"
                     onClick={() => setSelectedProject(project)}
-                    className="text-xs font-semibold text-[#8B5CF6] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] rounded cursor-pointer"
+                    className="text-xs font-bold text-[#8B5CF6] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] rounded cursor-pointer"
                   >
                     View Details &rarr;
                   </button>
@@ -109,18 +106,18 @@ export default function Projects() {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-lg bg-[#0F1117] border border-[#272A33] text-[#A1A1AA] hover:text-white hover:border-[#8B5CF6]/50 transition-colors"
+                        className="p-2 rounded-lg bg-[#0F1117]/80 border border-[#272A33] text-[#E2E8F0] hover:text-white hover:border-[#8B5CF6]/50 transition-colors shadow-sm"
                         aria-label="GitHub Repository"
                       >
                         <GithubIcon className="w-4 h-4" />
                       </a>
                     )}
-                    {project.demoUrl && (
+                    {(project.demoUrl || project.liveUrl) && (
                       <a
-                        href={project.demoUrl}
+                        href={project.demoUrl || project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-lg bg-[#0F1117] border border-[#272A33] text-[#A1A1AA] hover:text-white hover:border-[#8B5CF6]/50 transition-colors"
+                        className="p-2 rounded-lg bg-[#0F1117]/80 border border-[#272A33] text-[#E2E8F0] hover:text-white hover:border-[#8B5CF6]/50 transition-colors shadow-sm"
                         aria-label="Live Demo"
                       >
                         <ExternalLink className="w-4 h-4" />
