@@ -12,8 +12,9 @@ export default function SmoothScroll({ children }) {
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 0.9,
-      touchMultiplier: 1.5,
+      touchMultiplier: 1.0,
       infinite: false,
+      syncTouch: false
     });
 
     window.__lenis = lenis;

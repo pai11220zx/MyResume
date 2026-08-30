@@ -16,6 +16,7 @@
   input,
   textarea,
   select,
+  [role="button"],
   .btn-primary,
   .btn-secondary {
     touch-action: manipulation;
@@ -47,15 +48,17 @@
 }
 
 @layer components {
-  /* Performance Rendering Optimizations: Off-screen Content Skipping & Layout Isolation */
+  /* Performance Rendering Optimizations: Off-screen Content Skipping */
   #about,
   #skills,
   #projects,
+  #experience,
+  #activities,
   #education,
+  #github,
   #contact {
     content-visibility: auto;
     contain-intrinsic-size: 0 650px;
-    contain: layout style;
   }
 
   /* GPU Hardware Acceleration */
@@ -65,7 +68,11 @@
     perspective: 1000px;
   }
 
-  /* High-Contrast Readable Text Utilities */
+  .text-title-readable {
+    color: #FFFFFF;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+  }
+
   .text-secondary-readable {
     color: #E2E8F0;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);

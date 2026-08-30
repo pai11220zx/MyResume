@@ -10,7 +10,7 @@ export const profileData = {
   phone: "095-882-9113",
   email: "664244132@mail.pbru.ac.th",
   location: "มหาวิทยาลัยราชภัฏเพชรบุรี",
-  resumeUrl: "/resume.pdf",
+  resumeUrl: "/resume/Resume_purachet.pdf",
   languages: [
     { language: "ภาษาไทย", level: "เจ้าของภาษา (Native)", tag: "TH" },
     { language: "ภาษาอังกฤษ", level: "ระดับดี (B1)", tag: "EN" },
@@ -23,7 +23,7 @@ export const profileData = {
     phone: "tel:0958829113"
   },
   highlights: [
-    { label: "Education", value: "Computer Science", subValue: "PBRU (ชั้นปีที่ 4, GPA 2.80)" },
+    { label: "Education", value: "Computer Science", subValue: "PBRU (ชั้นปีที่ 4)" },
     { label: "Target Internship", value: "Automation", subValue: "Software & Automated Systems" },
     { label: "Motto", value: "Never Stop Learning", subValue: "Continuous Growth" }
   ]

@@ -7,7 +7,7 @@ import SectionHeading from './common/SectionHeading';
 
 export default function GitHubActivity() {
   return (
-    <section className="py-20 relative z-10 border-t border-[#272A33]/50">
+    <section id="github" className="py-20 relative z-10 border-t border-[#272A33]/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           tag="Developer Activity"
@@ -26,8 +26,8 @@ export default function GitHubActivity() {
             <GithubIcon className="w-10 h-10" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-white">Explore My GitHub Repositories</h3>
-            <p className="text-sm text-[#A1A1AA] max-w-xl mx-auto mt-2">
+            <h3 className="text-xl font-bold text-white text-title-readable">Explore My GitHub Repositories</h3>
+            <p className="text-sm text-secondary-readable max-w-xl mx-auto mt-2 font-normal">
               ติดตามความเคลื่อนไหว ซอร์สโค้ดของโปรเจกต์ต่างๆ และการพัฒนาอย่างต่อเนื่องได้ที่ GitHub Profile ของผม
             </p>
           </div>

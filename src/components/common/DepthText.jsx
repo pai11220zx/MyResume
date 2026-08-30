@@ -35,7 +35,9 @@ const DepthText = ({
   const rootRef = useRef(null);
   const stageRef = useRef(null);
 
-  const safeLayers = clamp(Math.round(Number(layers) || 1), 2, MAX_LAYERS);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const initialLayers = isMobile ? Math.min(Math.round(Number(layers) || 1), 12) : Math.round(Number(layers) || 1);
+  const safeLayers = clamp(initialLayers, 2, MAX_LAYERS);
   const safeDepth = clamp(Number(depth) || 0, 0, 12);
   const safeTilt = clamp(Number(tilt) || 0, 0, 12);
   const safeSmoothing = clamp(Number(smoothing) || 0.14, 0.02, 0.35);
@@ -76,14 +78,19 @@ const DepthText = ({
       stage.style.transform = getTransform(current.x, current.y);
     };
 
+    let cachedRect = null;
+    const updateRect = () => {
+      if (root) cachedRect = root.getBoundingClientRect();
+    };
+
     const handlePointerMove = event => {
       if (!isVisible) return;
-      const rect = root.getBoundingClientRect();
-      if (!rect.width || !rect.height) return;
+      if (!cachedRect) updateRect();
+      if (!cachedRect || !cachedRect.width || !cachedRect.height) return;
 
       activePointer = true;
-      const x = clamp((event.clientX - (rect.left + rect.width / 2)) / (rect.width * 0.8), -1, 1);
-      const y = clamp((event.clientY - (rect.top + rect.height / 2)) / (rect.height * 0.8), -1, 1);
+      const x = clamp((event.clientX - (cachedRect.left + cachedRect.width / 2)) / (cachedRect.width * 0.8), -1, 1);
+      const y = clamp((event.clientY - (cachedRect.top + cachedRect.height / 2)) / (cachedRect.height * 0.8), -1, 1);
 
       target.x = baseRotation.x - y * safeTilt;
       target.y = baseRotation.y + x * safeTilt;
@@ -99,6 +106,9 @@ const DepthText = ({
       window.addEventListener('pointermove', handlePointerMove, { passive: true });
       window.addEventListener('pointerleave', handlePointerLeave, { passive: true });
       window.addEventListener('blur', handlePointerLeave, { passive: true });
+      window.addEventListener('resize', updateRect, { passive: true });
+      window.addEventListener('scroll', updateRect, { passive: true });
+      updateRect();
     }
 
     const tick = now => {
@@ -144,6 +154,8 @@ const DepthText = ({
         window.removeEventListener('pointermove', handlePointerMove);
         window.removeEventListener('pointerleave', handlePointerLeave);
         window.removeEventListener('blur', handlePointerLeave);
+        window.removeEventListener('resize', updateRect);
+        window.removeEventListener('scroll', updateRect);
       }
       cancelAnimationFrame(frameId);
     };

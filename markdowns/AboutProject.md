@@ -59,9 +59,19 @@ Resume/
 │
 ├── public/
 │   ├── favicon.svg          # โลโก้ Favicon สไตล์ Dark Theme
-│   ├── resume.pdf           # ไฟล์ PDF เรซูเม่สำหรับดาวน์โหลด
+│   ├── resume/
+│   │   └── Resume_purachet.pdf # ไฟล์ PDF เรซูเม่ฉบับเต็มสำหรับดาวน์โหลด
+│   ├── projects/            # รูปภาพผลงานโปรเจกต์จริงทุกชิ้นงาน (Local Assets)
+│   │   ├── CaDaCooked/
+│   │   ├── DevNote/
+│   │   ├── investment/
+│   │   ├── resume/
+│   │   ├── cleanair/
+│   │   ├── cleanairtoys/
+│   │   ├── comsci/
+│   │   └── cleanairvoice/
 │   └── images/
-│       └── projects/        # รูปภาพ Mockup Vector ผลงานโปรเจกต์
+│       └── projects/        # รูปภาพ Vector สำรอง
 │           ├── database-system.svg
 │           ├── dev-portfolio.svg
 │           └── hotel-booking.svg
@@ -91,20 +101,25 @@ Resume/
     │   │   ├── SectionHeading.jsx # หัวข้อประจำ Section แบบมาตรฐาน (Title + Description)
     │   │   ├── SmoothScroll.jsx   # Lenis Inertia Smooth Scrolling Provider
     │   │   ├── SoftAurora.css     # สไตล์แสงออโรร่า
-    │   │   └── SoftAurora.jsx     # แสงออโรร่า WebGL Shader
+    │   │   ├── SoftAurora.jsx     # แสงออโรร่า WebGL Shader
+    │   │   ├── Toast.css          # สไตล์กล่องแจ้งเตือนสถานะผลงานแบบ Portal
+    │   │   └── Toast.jsx          # คอมโพเนนต์แจ้งเตือนสถานะผลงานแบบ Portal (DRY)
     │   │
     │   ├── About.jsx        # ข้อมูลประวัติ, เป้าหมายการทำงาน (Career Objective), และทักษะภาษา
-    │   ├── Activities.jsx   # กิจกรรมและใบประกาศนียบัตร (พร้อมใช้งาน)
+    │   ├── Activities.jsx   # กิจกรรมและใบประกาศนียบัตร (พร้อม id="activities")
     │   ├── Contact.jsx      # Contact Information Grid (โทรศัพท์, อีเมล, มหาวิทยาลัย, GitHub)
-    │   ├── Education.jsx    # ประวัติการศึกษาสองสถาบันและรายวิชา
-    │   ├── Experience.jsx   # ไทม์ไลน์ประสบการณ์ (พร้อมใช้งาน)
+    │   ├── Education.jsx    # ประวัติการศึกษาสองสถาบันและวุฒิการศึกษา
+    │   ├── Experience.jsx   # ไทม์ไลน์ประสบการณ์และเส้นทางการเรียนรู้
     │   ├── Footer.jsx       # ส่วนท้ายเว็บและปุ่ม Back-to-Top
-    │   ├── GitHubActivity.jsx # การ์ดแสดงกิจกรรมบน GitHub (พร้อมใช้งาน)
+    │   ├── GitHubActivity.jsx # การ์ดแสดงกิจกรรมบน GitHub (พร้อม id="github")
     │   ├── Hero.jsx         # ส่วนหัวต้อนรับ, 3D DepthText, และลิงก์ติดต่อตรง
     │   ├── Icons.jsx        # SVG Vector Icons สำหรับแบรนด์ (GitHub, LinkedIn)
     │   ├── Navbar.jsx       # แถบเนวิเกชัน Glassmorphic Sticky พร้อม Ghost Resume Button
+    │   ├── ProjectCard.jsx  # คอมโพเนนต์การ์ดโปรเจกต์แบบแยกส่วน (DRY Architecture)
+    │   ├── Projects.css     # ไฟล์ CSS สำหรับการจัดเลย์เอาต์การ์ดโปรเจกต์และแอนิเมชัน
+    │   ├── ProjectModal.css # ไฟล์ CSS สำหรับป๊อปอัป Modal และ Feature List
     │   ├── ProjectModal.jsx # ป๊อปอัปแสดงรายละเอียดโปรเจกต์เชิงลึก (Accessible Dialog Guard)
-    │   └── Projects.jsx     # กริดแสดงผลงานโปรเจกต์แบบ Frameless Media Cards
+    │   └── Projects.jsx     # กริดแสดงผลงานโปรเจกต์แบบ 9-Items Grid พร้อมระบบ Pagination
     │
     ├── data/                # Static Data Layer (Zero Latency)
     │   ├── activities.js    # ข้อมูลกิจกรรม
@@ -119,7 +134,7 @@ Resume/
     │   └── utils.js         # cn() Class Merge Helper
     │
     └── pages/
-        └── Home.jsx         # Landing Page รวมทุก Section หลัก
+        └── Home.jsx         # Landing Page รวมทุก Section หลัก (Hero, About, Skills, Projects, Experience, Activities, Education, GitHubActivity, Contact)
 ```
 
 ---

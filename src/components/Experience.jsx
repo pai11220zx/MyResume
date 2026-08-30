@@ -35,11 +35,11 @@ export default function Experience() {
                     <Calendar className="w-3.5 h-3.5" />
                     {item.period}
                   </Badge>
-                  <span className="text-xs text-[#A1A1AA]">{item.organization}</span>
+                  <span className="text-xs text-muted-readable font-medium">{item.organization}</span>
                 </div>
 
-                <h3 className="text-xl font-bold text-white">{item.role}</h3>
-                <p className="text-sm text-[#A1A1AA] leading-relaxed">{item.description}</p>
+                <h3 className="text-xl font-bold text-white text-title-readable">{item.role}</h3>
+                <p className="text-sm text-secondary-readable leading-relaxed">{item.description}</p>
 
                 {/* Skills tags */}
                 <div className="flex flex-wrap gap-1.5 pt-2">

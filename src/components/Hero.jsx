@@ -10,7 +10,7 @@ export default function Hero() {
     <section id="home" className="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center flex flex-col items-center">
         {/* Intro Greeting (Plain text, no fade in) */}
-        <div className="text-base sm:text-lg font-semibold text-[#E2E8F0] mb-4 tracking-wide uppercase drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+        <div className="text-base sm:text-lg font-semibold text-secondary-readable mb-4 tracking-wide uppercase">
           Hello, I'm
         </div>
 
@@ -36,17 +36,17 @@ export default function Hero() {
 
         {/* Subtitle / Role & Affiliation (Plain text, no fade in) */}
         <div className="max-w-5xl mx-auto mb-4 flex flex-col items-center">
-          <h2 className="text-lg sm:text-2xl font-bold text-[#FFFFFF] leading-relaxed drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)] text-center">
+          <h2 className="text-lg sm:text-2xl font-bold text-title-readable leading-relaxed text-center">
             {profileData.title}
           </h2>
-          <p className="mt-2 text-xs sm:text-sm md:text-base text-[#E2E8F0] font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] text-center whitespace-normal sm:whitespace-nowrap">
+          <p className="mt-2 text-xs sm:text-sm md:text-base text-secondary-readable font-medium text-center whitespace-normal sm:whitespace-nowrap">
             สาขาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยราชภัฏเพชรบุรี (PBRU) | มุ่งเน้นงานด้าน Automation & Software Development
           </p>
         </div>
 
         {/* Short Bio / Motto (Plain text, no fade in) */}
         <div className="max-w-2xl mx-auto mb-8 flex justify-center">
-          <p className="text-sm sm:text-base text-[#F1F5F9] font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] text-center">
+          <p className="text-sm sm:text-base text-secondary-readable font-medium text-center">
             {profileData.shortBio}
           </p>
         </div>

@@ -57,7 +57,7 @@ export default function Contact() {
                   <span className="text-xs text-[#8B5CF6] uppercase tracking-wider font-bold block mb-1">
                     {item.label}
                   </span>
-                  <span className="text-sm sm:text-base font-bold text-white group-hover:text-[#8B5CF6] transition-colors break-words drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
+                  <span className="text-sm sm:text-base font-bold text-white group-hover:text-[#8B5CF6] transition-colors break-words text-secondary-readable">
                     {item.value}
                   </span>
                 </div>

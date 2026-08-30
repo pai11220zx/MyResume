@@ -7,7 +7,7 @@ import Badge from './common/Badge';
 
 export default function Activities() {
   return (
-    <section className="py-20 relative z-10 border-t border-[#272A33]/40">
+    <section id="activities" className="py-20 relative z-10 border-t border-[#272A33]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           tag="Achievements"
@@ -28,14 +28,14 @@ export default function Activities() {
             >
               <div className="flex items-center justify-between">
                 <Badge variant="accent">{act.date}</Badge>
-                <span className="text-xs text-[#CBD5E1] font-semibold drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">{act.organization}</span>
+                <span className="text-xs text-muted-readable font-semibold">{act.organization}</span>
               </div>
-              <h3 className="text-lg font-bold text-white flex items-center gap-2 group-hover:text-[#8B5CF6] transition-colors drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+              <h3 className="text-lg font-bold text-white flex items-center gap-2 group-hover:text-[#8B5CF6] transition-colors text-title-readable">
                 <Award className="w-4 h-4 text-[#8B5CF6] shrink-0" />
                 <span>{act.title}</span>
               </h3>
               <div className="pl-6">
-                <p className="text-sm text-[#E2E8F0] font-normal leading-relaxed drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
+                <p className="text-sm text-secondary-readable font-normal leading-relaxed">
                   {act.description}
                 </p>
               </div>

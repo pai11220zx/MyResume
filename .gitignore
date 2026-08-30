@@ -58,6 +58,7 @@ desktop.ini
 .vercel
 coverage/
 *.pdf.backup
+*.bak
 
 # AI Agent & Tooling Directories
 .agents/

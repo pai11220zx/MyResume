@@ -82,7 +82,7 @@ export default function Skills() {
               transition={{ duration: 0.4, delay: catIdx * 0.1 }}
               className="space-y-6"
             >
-              <h3 className="text-xl font-bold text-white pb-2 border-b border-[#272A33]/40 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+              <h3 className="text-xl font-bold text-white pb-2 border-b border-[#272A33]/40 text-title-readable">
                 {cat.category}
               </h3>
 
@@ -96,8 +96,8 @@ export default function Skills() {
                     >
                       <IconBox icon={IconComp} size="sm" />
                       <div className="min-w-0">
-                        <div className="text-sm font-semibold text-white group-hover:text-[#8B5CF6] transition-colors truncate drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">{skill.name}</div>
-                        <div className="text-xs text-[#CBD5E1] font-medium drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">{skill.level}</div>
+                        <div className="text-sm font-semibold text-white group-hover:text-[#8B5CF6] transition-colors truncate text-secondary-readable">{skill.name}</div>
+                        <div className="text-xs text-muted-readable font-medium">{skill.level}</div>
                       </div>
                     </div>
                   );

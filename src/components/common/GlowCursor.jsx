@@ -313,9 +313,9 @@ const GlowCursor = ({
       if (!destroyed) raf = requestAnimationFrame(render);
     };
 
-    window.addEventListener('resize', resize);
-    window.addEventListener('pointermove', updatePointer);
-    window.addEventListener('pointerleave', onPointerLeave);
+    window.addEventListener('resize', resize, { passive: true });
+    window.addEventListener('pointermove', updatePointer, { passive: true });
+    window.addEventListener('pointerleave', onPointerLeave, { passive: true });
 
     resize();
     raf = requestAnimationFrame(render);

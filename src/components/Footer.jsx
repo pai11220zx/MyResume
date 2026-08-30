@@ -11,18 +11,20 @@ export default function Footer() {
     <footer className="py-12 border-t border-[#272A33]/60 bg-[#05060A]/80 backdrop-blur-md text-[#E2E8F0] text-sm relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="text-center sm:text-left">
-          <span className="font-bold text-white text-base drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+          <span className="font-bold text-white text-base text-title-readable">
             My<span className="text-[#8B5CF6]">Resume</span>
           </span>
-          <p className="text-xs text-[#CBD5E1] mt-1 font-medium drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">© {new Date().getFullYear()} {profileData.fullName}. All rights reserved.</p>
+          <p className="text-xs text-muted-readable mt-1 font-medium">© {new Date().getFullYear()} {profileData.fullName}. All rights reserved.</p>
         </div>
 
         {/* Quick Nav Links */}
-        <div className="flex items-center gap-6 text-xs font-semibold text-[#CBD5E1]">
-          <a href="#home" className="hover:text-[#8B5CF6] transition-colors drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">Home</a>
-          <a href="#about" className="hover:text-[#8B5CF6] transition-colors drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">About</a>
-          <a href="#projects" className="hover:text-[#8B5CF6] transition-colors drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">Projects</a>
-          <a href="#contact" className="hover:text-[#8B5CF6] transition-colors drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">Contact</a>
+        <div className="flex items-center gap-6 text-xs font-semibold text-muted-readable">
+          <a href="#home" className="hover:text-[#8B5CF6] transition-colors">Home</a>
+          <a href="#about" className="hover:text-[#8B5CF6] transition-colors">About</a>
+          <a href="#projects" className="hover:text-[#8B5CF6] transition-colors">Projects</a>
+          <a href="#experience" className="hover:text-[#8B5CF6] transition-colors">Experience</a>
+          <a href="#education" className="hover:text-[#8B5CF6] transition-colors">Education</a>
+          <a href="#contact" className="hover:text-[#8B5CF6] transition-colors">Contact</a>
         </div>
 
         {/* Back to top button */}

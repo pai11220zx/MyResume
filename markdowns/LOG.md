@@ -6,29 +6,40 @@
 
 ## 📌 1. สถานะโปรเจกต์ปัจจุบัน (Current Project Status)
 
-- **สถานะ:** 🟢 ปรับปรุง UI แสดงผลเนื้อหาเป็น Minimalist Editorial & Content-First เรียบร้อย (Production Ready)
-- **เวอร์ชันปัจจุบัน:** `v1.6.0`
+- **สถานะ:** 🟢 สถาปัตยกรรมระบบสมบูรณ์แบบ 100% (Clean Code, DRY, Accessibility & Production Ready)
+- **เวอร์ชันปัจจุบัน:** `v1.7.0`
 - **สถาปัตยกรรมหลัก:** React 18 + Tailwind CSS + Framer Motion + **WebGL (ogl)** + Vite + **Vercel (Hosting)** + **Supabase PostgreSQL (Database)**
 
 ---
 
 ## 📝 2. บันทึกการเปลี่ยนแปลง (Changelog)
 
-### [v1.6.0] — 2026-08-30 (Minimalist Editorial UI Redesign, Lenis & DRY Architecture)
-- **🎨 Minimalist Editorial Redesign:** ปรับปรุง `About.jsx`, `Projects.jsx`, และ `Contact.jsx` เป็นสไตล์ Editorial Layout ที่เน้นเนื้อหาโดยตรง ปลดแอนิเมชัน Fade-in ที่ไม่จำเป็น เพื่อความรวดเร็วในการอ่านข้อมูล
-- **🌌 WebGL DarkVeil & GlowCursor:** ผสานพื้นหลัง Shader `DarkVeil.jsx` และ `GlowCursor.jsx` ขับเคลื่อนด้วย `ogl` ให้ภาพลักษณ์ล้ำสมัย เบาเครื่อง และไม่บล็อกการคลิก (`pointer-events-none`)
-- **🚀 Lenis Smooth Scroll:** ติดตั้งและผสาน `<SmoothScroll />` มอบการเลื่อนหน้าจอที่มีแรงเฉื่อยลื่นไหล พร้อมระบบล็อก Scrollbar อัตโนมัติเมื่อเปิด ProjectModal
-- **💎 Glassmorphic Navbar & Ghost Resume CTA:** ปรับ Navbar เมื่อเลื่อนลงมาให้โปร่งแสงสไตล์ Glassmorphism และปรับปุ่ม Resume เป็น Ghost Button เรืองแสงสีม่วง
-- **📦 DRY Architecture & IconBox Component:** รวมศูนย์โครงสร้างกล่องไอคอนสร้างเป็น [`IconBox.jsx`](file:///c:/xampp/htdocs/Resume/src/components/common/IconBox.jsx) ใช้งานร่วมกันใน 4 คอมโพเนนต์หลัก
-- **🔗 Live Demo & Semantic Anchoring:** เชื่อมต่อปุ่ม Live Demo `(project.demoUrl || project.liveUrl)` ครบถ้วน และเพิ่ม `id="education"` รองรับ CSS Containment
-- **🛡️ Ignore Rules & Full Markdown Compliance:** ปรับปรุง `.gitignore` และ `.antigravityignore` ให้กรองไฟล์แคช/ขยะครบถ้วน พร้อมอัปเดต `AboutProject.md` และ `DEBUG.md`
-- **🧪 Verification:** `npm run build` ผ่านสมบูรณ์ 100% (0 errors, 0 warnings)
+### [v1.7.0] — 2026-08-31 (Full Codebase Refactoring, DRY Architecture & Hardening)
+- **📦 Component Decoupling & DRY Refactoring:**
+  - แยกคอมโพเนนต์ [`ProjectCard.jsx`](file:///c:/xampp/htdocs/Resume/src/components/ProjectCard.jsx) ออกมาเป็นการ์ดเดี่ยว ทำให้ [`Projects.jsx`](file:///c:/xampp/htdocs/Resume/src/components/Projects.jsx) สั้นลงกว่า 50% อ่านเข้าใจง่ายและดูแลรักษาสะดวก
+  - สกัดคอมโพเนนต์แจ้งเตือนกลาง [`Toast.jsx`](file:///c:/xampp/htdocs/Resume/src/components/common/Toast.jsx) พร้อมระบบ Portal Mount ไปยัง `document.body`
+  - แยกไฟล์สไตล์ CSS เฉพาะ: [`Projects.css`](file:///c:/xampp/htdocs/Resume/src/components/Projects.css), [`ProjectModal.css`](file:///c:/xampp/htdocs/Resume/src/components/ProjectModal.css), และ [`Toast.css`](file:///c:/xampp/htdocs/Resume/src/components/common/Toast.css)
+- **🌐 Complete Section Integration in `Home.jsx`:**
+  - ผสาน Section ทั้งหมดเข้าสู่ [`Home.jsx`](file:///c:/xampp/htdocs/Resume/src/pages/Home.jsx) ได้แก่ `Hero`, `About`, `Skills`, `Projects`, `Experience`, `Activities`, `Education`, `GitHubActivity`, และ `Contact`
+  - ปรับปรุง Navigation Links ใน [`Navbar.jsx`](file:///c:/xampp/htdocs/Resume/src/components/Navbar.jsx) และ [`Footer.jsx`](file:///c:/xampp/htdocs/Resume/src/components/Footer.jsx) ให้เชื่อมต่อไปยังทุก Section อย่างราบรื่น
+- **🎨 Typography & Contrast Standardization:**
+  - สร้าง Utility Classes กลางใน [`index.css`](file:///c:/xampp/htdocs/Resume/src/index.css) (`.text-title-readable`, `.text-secondary-readable`, `.text-muted-readable`) แทนที่ Arbitrary Drop-shadows ซ้ำซ้อน
+  - อัปเดต `content-visibility: auto` ครอบคลุมทุก Section ID เพื่อเพิ่มประสิทธิภาพการเรนเดอร์สูงสุด
+- **🛡️ Accessibility & Performance Hardening:**
+  - เพิ่ม `aria-hidden="true"` ให้กับ Canvas พื้นหลังใน [`DarkVeil.jsx`](file:///c:/xampp/htdocs/Resume/src/components/common/DarkVeil.jsx)
+  - ปรับปรุง Key ใน [`ScrollReveal.jsx`](file:///c:/xampp/htdocs/Resume/src/components/common/ScrollReveal.jsx) ให้เป็น Stable Composite Key
+- **⚙️ Ignore Configurations & Documentation Refresh:**
+  - อัปเดต [`.gitignore`](file:///c:/xampp/htdocs/Resume/.gitignore) และ [`.antigravityignore`](file:///c:/xampp/htdocs/Resume/.antigravityignore) กรองไฟล์ที่ไม่จำเป็นต่อ Git และ AI Agents อย่างรัดกุม
+  - อัปเดตคู่มือ [`AboutProject.md`](file:///c:/xampp/htdocs/Resume/markdowns/AboutProject.md) และ [`DEBUG.md`](file:///c:/xampp/htdocs/Resume/markdowns/DEBUG.md) ให้ตรงกับโครงสร้างจริง
 
-### [v1.0.0 - v1.5.0] — 2026-08-27 ถึง 2026-08-28 (Historical Milestones Summary)
-- **v1.5.0:** ปรับปรุงข้อมูลส่วนตัวของ ปุรเชษฐ์ อบรม (PURACHET AOBORM) เปลี่ยนแบรนด์เป็น **MyResume** และบันทึกประวัติการศึกษา/ผลงานโครงการจริง
-- **v1.4.0:** ตัดส่วน `<Experience />` และ `<GitHubActivity />` ออกจากหน้าหลักตามความต้องการของผู้ใช้เพื่อความกระชับ
-- **v1.3.0:** ผสาน WebGL Glow Cursor Trail และปรับแต่ง Vite Vendor Chunks
-- **v1.2.0:** ปรับแต่งธีม Scrollbar สีม่วงแบรนด์ `#8B5CF6` และตรวจสอบกฎ `REFACTORCODE.md`
-- **v1.1.0:** สกัด Reusable Components (`SectionHeading`, `Badge`), ทำความสะอาด CSS และเตรียม Local Assets 100%
-- **v1.0.0 & v0.1.0:** Setup โปรเจกต์ React + Vite + Tailwind CSS + Framer Motion ครบ 11 Sections พร้อมเอกสารคู่มือตั้งต้น
+### [v1.6.0] — 2026-08-30 (Minimalist Editorial UI, WebGL Shaders & Real Projects Showcase)
+- **🎨 Minimalist Editorial Redesign:** ปรับปรุง UI เป็นสไตล์ Editorial Layout ที่เน้นเนื้อหาโดยตรง ปลดแอนิเมชัน Fade-in ที่ไม่จำเป็น
+- **🌌 WebGL DarkVeil & GlowCursor:** ผสานพื้นหลัง Shader `DarkVeil.jsx` และ `GlowCursor.jsx` ขับเคลื่อนด้วย `ogl` น้ำหนักเบา ไม่บล็อกการคลิก
+- **🚀 Lenis Smooth Scroll:** ติดตั้ง `<SmoothScroll />` มอบการเลื่อนหน้าจอที่มีแรงเฉื่อยลื่นไหล พร้อมระบบล็อก Scrollbar อัตโนมัติเมื่อเปิด ProjectModal
+- **💼 Real Projects Showcase:** อัปเดตข้อมูลผลงานและภาพพรีวิว Local Assets ครบทั้ง 8 ชิ้นงาน (CaDaCooked, DevNote, Investment, Resume, CleanAir, CleanAirToys, Com-Sci PBRU, CleanAirVoice)
+
+### [v1.0.0 - v1.5.0] — 2026-08-27 ถึง 2026-08-28 (Milestones Summary)
+- **v1.5.0:** ปรับปรุงข้อมูลส่วนตัวเป็น ปุรเชษฐ์ อบรม (MyResume)
+- **v1.0.0:** Setup โปรเจกต์ React + Vite + Tailwind CSS + Framer Motion ครบวงจร
+
 

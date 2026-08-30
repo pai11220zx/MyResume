@@ -4,7 +4,10 @@ import Hero from '../components/Hero';
 import About from '../components/About';
 import Skills from '../components/Skills';
 import Projects from '../components/Projects';
+import Experience from '../components/Experience';
+import Activities from '../components/Activities';
 import Education from '../components/Education';
+import GitHubActivity from '../components/GitHubActivity';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 
@@ -17,7 +20,10 @@ export default function Home() {
         <About />
         <Skills />
         <Projects />
+        <Experience />
+        <Activities />
         <Education />
+        <GitHubActivity />
         <Contact />
       </main>
       <Footer />

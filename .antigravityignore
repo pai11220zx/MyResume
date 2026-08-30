@@ -29,9 +29,15 @@ logs/**
 .vscode/**
 coverage/**
 
-# Binary & PDF files (Ignore heavy non-code assets)
+# Binary, Media & Heavy Non-Code Files (Ignore heavy non-code assets for AI Agents)
 *.pdf
 *.zip
 *.tar.gz
 *.exe
+*.mp4
+*.mp3
+*.wav
+*.avi
+*.bak
+
 

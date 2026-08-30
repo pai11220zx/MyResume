@@ -1,0 +1,42 @@
+﻿/* Projects Section & ProjectCard Styles */
+.project-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-card-thumbnail {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid rgba(39, 42, 51, 0.6);
+  background-color: rgba(15, 17, 23, 0.6);
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.project-card-thumbnail:hover {
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+.project-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.project-card-thumbnail:hover .project-card-image {
+  transform: scale(1.05);
+}
+
+.project-card-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

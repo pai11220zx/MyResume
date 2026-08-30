@@ -5,15 +5,7 @@ export const educationList = [
     faculty: "คณะเทคโนโลยีสารสนเทศ",
     period: "2566 – ปัจจุบัน",
     status: "กำลังศึกษาระดับปริญญาตรี ชั้นปีที่ 4",
-    gpa: "2.80 / 4.00",
-    description: "ศึกษาโครงสร้างข้อมูล อัลกอริทึม ระบบฐานข้อมูล การพัฒนาเว็บแอปพลิเคชัน การเขียนโปรแกรมเชิงวัตถุ และระบบอัตโนมัติ",
-    coursework: [
-      "Data Structures & Algorithms",
-      "Object-Oriented Programming (OOP)",
-      "Database Systems (SQL, PostgreSQL, MySQL)",
-      "Web Application Development",
-      "Software Engineering & Automation Principles"
-    ]
+    description: "ศึกษาโครงสร้างข้อมูล อัลกอริทึม ระบบฐานข้อมูล การพัฒนาเว็บแอปพลิเคชัน การเขียนโปรแกรมเชิงวัตถุ และระบบอัตโนมัติ"
   },
   {
     institution: "โรงเรียนเตรียมอุดมศึกษาพัฒนาการปราณบุรี",
@@ -21,13 +13,7 @@ export const educationList = [
     faculty: "แผนการเรียน อังกฤษ - จีน",
     period: "2563 – 2566",
     status: "สำเร็จการศึกษา",
-    gpa: null,
-    description: "พัฒนาทักษะด้านการสื่อสารภาษาอังกฤษและภาษาจีน ควบคู่กับพื้นฐานด้านเทคโนโลยีสารสนเทศและการคิดเชิงตรรกะ",
-    coursework: [
-      "English Language Communication (B1)",
-      "Chinese Language Basics",
-      "Information Technology Basics"
-    ]
+    description: "พัฒนาทักษะด้านการสื่อสารภาษาอังกฤษและภาษาจีน ควบคู่กับพื้นฐานด้านเทคโนโลยีสารสนเทศและการคิดเชิงตรรกะ"
   }
 ];
 

@@ -1,0 +1,48 @@
+﻿/* Project Detail Modal Styles */
+.project-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+
+.project-modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 56rem;
+  background-color: #090B10;
+  border: 1px solid #272A33;
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  z-index: 10;
+  margin: auto;
+  cursor: default;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .project-modal-dialog {
+    max-width: 64rem;
+  }
+}
+
+.project-modal-body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  flex: 1;
+}
+
+.project-modal-feature-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  background-color: rgba(15, 17, 23, 0.3);
+  border: 1px solid rgba(39, 42, 51, 0.4);
+}

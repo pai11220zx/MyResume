@@ -1,6 +1,6 @@
 # 🐞 คู่มือการแก้ปัญหาและดีบักสำหรับ AI Agents (Debugging & Troubleshooting Guide)
 
-เอกสารนี้รวบรวมแนวทางและวิธีแก้ไขปัญหาทางเทคนิคที่พบบ่อย (Common Issues & Solutions) สำหรับ **AI Agents และนักพัฒนา** ในการตรวจสอบและแก้ปัญหาโปรเจกต์ **Developer Portfolio Website** (React 18 + Tailwind CSS + Framer Motion + Vite + Vercel + Supabase)
+เอกสารนี้รวบรวมแนวทางและวิธีแก้ไขปัญหาทางเทคนิคที่พบบ่อย (Common Issues & Solutions) สำหรับ **AI Agents และนักพัฒนา** ในการตรวจสอบและแก้ปัญหาโปรเจกต์ **Developer Portfolio Website** (React 18 + Tailwind CSS + Framer Motion + WebGL + Vite + Vercel + Supabase)
 
 ---
 
@@ -9,6 +9,7 @@
 1. **ห้ามรันคำสั่งแก้ Database โดยตรง (Rule 10):** หากพบปัญหาเรื่องตารางฐานข้อมูล ให้ตรวจสอบและแก้ไขในไฟล์ `database/schema.sql` เพื่อให้ผู้ใช้นำไปรันเองบน Supabase SQL Editor
 2. **ห้ามรัน Git Push / Commit (Rule 11):** ให้ปล่อยให้ผู้ใช้เป็นผู้จัดการ Git เอง
 3. **ตรวจสอบ Build เสมอ:** หลังแก้ไขโค้ด ให้สั่งรัน `npm run build` เพื่อพิสูจน์ว่าไม่มี Syntax Error หรือ Missing Import
+4. **รักษาหลักการ DRY และ 1 Component ต่อ 1 ไฟล์:** หากพบคอมโพเนนต์ยาวหรือมีความซ้ำซ้อน ให้แยกโมดูลย่อยและแยกไฟล์ `.css` ให้เป็นระเบียบ
 
 ---
 
@@ -60,14 +61,14 @@
 
 ### 🔴 ปัญหาที่ 4.1: หน้าเว็บยังเลื่อนได้เบื้องหลังขณะเปิด ProjectModal
 - **สาเหตุ:** Lenis ควบคุม Scroll Event แบบ Virtual Scroll ทำให้ `overflow: hidden` บน `body` อย่างเดียวอาจไม่หยุดการเลื่อน
-- **วิธีแก้:** ใน [`SmoothScroll.jsx`](file:///c:/xampp/htdocs/Resume/src/components/common/SmoothScroll.jsx) มีการผูก Lenis instance ไว้ที่ `window.__lenisInstance` และใน [`ProjectModal.jsx`](file:///c:/xampp/htdocs/Resume/src/components/ProjectModal.jsx) จะสั่ง `lenis.stop()` เมื่อเปิด และ `lenis.start()` เมื่อปิด
+- **วิธีแก้:** ใน [`SmoothScroll.jsx`](file:///c:/xampp/htdocs/Resume/src/components/common/SmoothScroll.jsx) มีการผูก Lenis instance ไว้ที่ `window.__lenis` และใน [`ProjectModal.jsx`](file:///c:/xampp/htdocs/Resume/src/components/ProjectModal.jsx) จะสั่ง `window.__lenis?.stop()` เมื่อเปิด และ `window.__lenis?.start()` เมื่อปิด
 
 ### 🔴 ปัญหาที่ 4.2: การเลื่อนในกล่อง Modal ติดขัด
 - **วิธีแก้:** กล่อง Modal ที่มี Scrollable Content ต้องใส่ `data-lenis-prevent` หรือให้ Lenis หยุดทำงานระหว่างเปิด Modal
 
 ---
 
-## 5. ปัญหาเกี่ยวกับ CSS, Borders และการแสดงผล
+## 5. ปัญหาเกี่ยวกับ CSS, Typography, Borders และการแสดงผล
 
 ### 🔴 ปัญหาที่ 5.1: เกิด Horizontal Scrollbar บนอุปกรณ์พกพา
 - **สาเหตุ:** แอนิเมชัน `x: 100` หรือ Element ที่มีความกว้างคงที่ล้นหน้าจอ
@@ -78,6 +79,12 @@
 
 ### 🔴 ปัญหาที่ 5.3: ตรวจพบ `border-l-4` หรือเส้นขอบหนาไม่เท่ากัน (Rule 16)
 - **วิธีแก้:** ห้ามใช้ `border-l-4` หรือเส้นขอบเฉพาะด้าน ทุก Card/Container ต้องใช้เส้นขอบ 1px รอบด้านอย่างสม่ำเสมอ (`border border-[#272A33]`)
+
+### 🔴 ปัญหาที่ 5.4: ข้อความอ่านยากเมื่ออยู่บน WebGL Background
+- **วิธีแก้:** ใช้ Utility Classes กลางใน `src/index.css`:
+  - `.text-title-readable` สำหรับหัวข้อ
+  - `.text-secondary-readable` สำหรับเนื้อหาหลัก
+  - `.text-muted-readable` สำหรับข้อความย่อย
 
 ---
 
@@ -96,7 +103,7 @@
 
 ### 🔴 ปัญหาที่ 7.1: ปุ่ม Live Demo ไม่แสดงแม้มี URL
 - **สาเหตุ:** `projects.js` กำหนดคีย์ `liveUrl` แต่คอมโพเนนต์ตรวจสอบเฉพาะ `project.demoUrl`
-- **วิธีแก้:** ใช้เงื่อนไข `(project.demoUrl || project.liveUrl)` ในทั้ง `Projects.jsx` และ `ProjectModal.jsx`
+- **วิธีแก้:** ใช้เงื่อนไข `(project.demoUrl || project.liveUrl)` ในทั้ง `Projects.jsx`, `ProjectCard.jsx`, และ `ProjectModal.jsx`
 
 ---
 
@@ -141,6 +148,8 @@
 | 6 | **Offline Assets (Rule 4)** | ห้ามมี URL CDN ภายนอกใน `index.html` หรือคอมโพเนนต์ |
 | 7 | **Database Safety (Rule 10)** | ห้ามรัน SQL อัตโนมัติ จัดเตรียมใน `database/schema.sql` เท่านั้น |
 | 8 | **Git Safety (Rule 11)** | ห้ามรัน `git commit` หรือ `git push` |
+| 9 | **Key Stability** | ห้ามใช้ Array index เดี่ยวๆ เป็น key ให้ใช้ Stable ID หรือ Composite Key |
+| 10 | **Canvas Accessibility** | ทุกพื้นหลัง Canvas ต้องใส่ `aria-hidden="true"` |
 
 ---
 

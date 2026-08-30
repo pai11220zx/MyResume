@@ -1,10 +1,23 @@
-import React, { useEffect } from 'react';
+﻿import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, AlertCircle, CheckCircle2, Sparkles } from 'lucide-react';
+import { X, ExternalLink, AlertCircle, CheckCircle2, Sparkles, Lightbulb, Flame, Info } from 'lucide-react';
 import { GithubIcon } from './Icons';
 import Badge from './common/Badge';
+import './ProjectModal.css';
 
-export default function ProjectModal({ project, onClose }) {
+/**
+ * Project Detail Modal Component
+ * หน้าต่างแสดงรายละเอียดเชิงลึกของโปรเจกต์ (Overview, Problem, Solution, Features, Challenges, Learnings)
+ * 
+ * @param {Object} props
+ * @param {Object|null} props.project - ข้อมูลโปรเจกต์ที่ถูกเลือก
+ * @param {Function} props.onClose - ฟังก์ชันปิดหน้าต่าง Modal
+ * @param {Function} [props.onNotice] - ฟังก์ชันแจ้งเตือนสถานะเมื่อคลิกปุ่มภายนอก
+ */
+export default function ProjectModal({ project, onClose, onNotice }) {
+  const [inlineNotice, setInlineNotice] = useState(null);
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose();
@@ -23,21 +36,28 @@ export default function ProjectModal({ project, onClose }) {
     };
   }, [onClose]);
 
-  if (!project) return null;
+  if (!project || typeof document === 'undefined') return null;
 
-  return (
+  const hasLiveLink = Boolean(project.demoUrl || project.liveUrl);
+  const liveTargetUrl = project.demoUrl || project.liveUrl;
+
+  return createPortal(
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-        {/* Backdrop overlay */}
+      <div
+        className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 md:p-6 overflow-hidden"
+        data-lenis-prevent="true"
+      >
+        {/* Backdrop overlay (Rule 13: Backdrop Click Close) */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/85 backdrop-blur-md cursor-pointer"
+          className="project-modal-backdrop"
+          aria-hidden="true"
         />
 
-        {/* Modal Content Box */}
+        {/* Modal Content Box (Rule 13: Content Box Propagation Guard) */}
         <motion.div
           role="dialog"
           aria-modal="true"
@@ -46,42 +66,48 @@ export default function ProjectModal({ project, onClose }) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 15 }}
           onClick={(e) => e.stopPropagation()}
-          className="relative w-full max-w-3xl bg-[#090B10] border border-[#272A33] rounded-3xl shadow-2xl overflow-hidden z-10 my-8 cursor-default max-h-[90vh] flex flex-col"
+          data-lenis-prevent="true"
+          className="project-modal-dialog"
         >
           {/* Header image banner */}
-          <div className="relative h-56 sm:h-72 w-full overflow-hidden shrink-0 bg-[#05060A]">
+          <div className="relative h-48 sm:h-64 md:h-72 lg:h-80 w-full overflow-hidden shrink-0 bg-[#05060A]">
             <img
               src={project.image}
               alt={project.title}
               decoding="async"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#090B10] via-[#090B10]/50 to-transparent" />
-            
+            <div className="absolute inset-0 bg-gradient-to-t from-[#090B10] via-[#090B10]/60 to-transparent" />
+
             {/* Close Button */}
             <button
               type="button"
               onClick={onClose}
-              className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[#05060A]/80 border border-[#272A33] text-white hover:text-[#8B5CF6] flex items-center justify-center transition-colors shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
-              aria-label="Close modal"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#05060A]/85 border border-[#272A33] text-white hover:text-[#8B5CF6] hover:border-[#8B5CF6]/50 flex items-center justify-center transition-all shadow-lg backdrop-blur-md z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] cursor-pointer"
+              aria-label="ปิดหน้าต่างรายละเอียด"
             >
               <X className="w-5 h-5" />
             </button>
 
             {/* Title on Image */}
-            <div className="absolute bottom-4 left-6 right-6">
-              <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-[#8B5CF6] text-white inline-block mb-2 shadow-sm">
-                {project.category} • {project.year}
-              </span>
-              <h2 id="modal-project-title" className="text-2xl sm:text-3xl font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">{project.title}</h2>
+            <div className="absolute bottom-3 sm:bottom-5 left-4 sm:left-7 right-4 sm:right-7">
+              <h2
+                id="modal-project-title"
+                className="text-xl sm:text-2xl md:text-3xl font-bold text-white leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]"
+              >
+                {project.title}
+              </h2>
             </div>
           </div>
 
           {/* Scrollable details body */}
-          <div className="p-6 sm:p-8 space-y-6 overflow-y-auto">
+          <div
+            className="p-4 sm:p-6 md:p-8 space-y-6 project-modal-body"
+            data-lenis-prevent="true"
+          >
             {/* Tech Badges */}
             <div className="flex flex-wrap gap-2">
-              {(project.technologies || project.tags || []).map(tech => (
+              {(project.technologies || project.tags || []).map((tech) => (
                 <Badge key={tech} size="md">
                   {tech}
                 </Badge>
@@ -89,72 +115,148 @@ export default function ProjectModal({ project, onClose }) {
             </div>
 
             {/* Overview */}
-            <div className="space-y-1.5">
-              <h4 className="text-xs font-bold text-[#8B5CF6] uppercase tracking-wider drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">Overview</h4>
-              <p className="text-white text-sm sm:text-base leading-relaxed drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">{project.details?.overview || project.description}</p>
+            <div className="space-y-2">
+              <h4 className="text-xs font-bold text-[#8B5CF6] uppercase tracking-wider drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                ภาพรวมโครงการ (Overview)
+              </h4>
+              <p className="text-white text-sm sm:text-base leading-relaxed drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                {project.details?.overview || project.description}
+              </p>
             </div>
 
             {/* Problem & Solution Editorial Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-4 rounded-2xl border border-[#272A33]/70 bg-[#0F1117]/50 space-y-1.5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-4 sm:p-5 rounded-2xl border border-[#272A33]/70 bg-[#0F1117]/50 space-y-2">
                 <div className="flex items-center gap-2 text-rose-400 font-bold text-sm">
-                  <AlertCircle className="w-4 h-4" />
-                  <span>Problem</span>
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  <span>ปัญหาและที่มา (Problem)</span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#E2E8F0] leading-relaxed font-normal">{project.details?.problem}</p>
+                <p className="text-xs sm:text-sm text-[#E2E8F0] leading-relaxed font-normal">
+                  {project.details?.problem}
+                </p>
               </div>
-              <div className="p-4 rounded-2xl border border-[#272A33]/70 bg-[#0F1117]/50 space-y-1.5">
+              <div className="p-4 sm:p-5 rounded-2xl border border-[#272A33]/70 bg-[#0F1117]/50 space-y-2">
                 <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm">
-                  <CheckCircle2 className="w-4 h-4" />
-                  <span>Solution</span>
+                  <CheckCircle2 className="w-4 h-4 shrink-0" />
+                  <span>แนวทางการแก้ปัญหา (Solution)</span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#E2E8F0] leading-relaxed font-normal">{project.details?.solution}</p>
+                <p className="text-xs sm:text-sm text-[#E2E8F0] leading-relaxed font-normal">
+                  {project.details?.solution}
+                </p>
               </div>
             </div>
 
             {/* Features list */}
-            {project.details?.features && (
-              <div className="space-y-2.5">
-                <h4 className="text-xs font-bold text-[#8B5CF6] uppercase tracking-wider drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">Key Features</h4>
-                <ul className="space-y-2">
+            {project.details?.features && project.details.features.length > 0 && (
+              <div className="space-y-3">
+                <h4 className="text-xs font-bold text-[#8B5CF6] uppercase tracking-wider drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                  ฟีเจอร์หลัก (Key Features)
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {project.details.features.map((feat) => (
-                    <li key={feat} className="flex items-start gap-2 text-sm text-[#F1F5F9] font-medium">
+                    <div
+                      key={feat}
+                      className="project-modal-feature-card text-xs sm:text-sm text-[#F1F5F9] font-medium"
+                    >
                       <Sparkles className="w-4 h-4 text-[#8B5CF6] shrink-0 mt-0.5" />
                       <span>{feat}</span>
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             )}
 
+            {/* Challenges & Learnings Grid */}
+            {(project.details?.challenges || project.details?.learnings) && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                {project.details?.challenges && (
+                  <div className="p-4 sm:p-5 rounded-2xl border border-[#272A33]/70 bg-[#0F1117]/50 space-y-2">
+                    <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
+                      <Flame className="w-4 h-4 shrink-0" />
+                      <span>ความท้าทาย (Challenges)</span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-[#E2E8F0] leading-relaxed font-normal">
+                      {project.details.challenges}
+                    </p>
+                  </div>
+                )}
+                {project.details?.learnings && (
+                  <div className="p-4 sm:p-5 rounded-2xl border border-[#272A33]/70 bg-[#0F1117]/50 space-y-2">
+                    <div className="flex items-center gap-2 text-cyan-400 font-bold text-sm">
+                      <Lightbulb className="w-4 h-4 shrink-0" />
+                      <span>สิ่งที่ได้เรียนรู้ (Key Learnings)</span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-[#E2E8F0] leading-relaxed font-normal">
+                      {project.details.learnings}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Inline Status Notice if triggered */}
+            <AnimatePresence>
+              {inlineNotice && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0, y: 10 }}
+                  animate={{ opacity: 1, height: 'auto', y: 0 }}
+                  exit={{ opacity: 0, height: 0, y: 10 }}
+                  className="p-3.5 rounded-xl bg-[#8B5CF6]/15 border border-[#8B5CF6]/40 flex items-center gap-3 text-sm text-[#E2E8F0]"
+                >
+                  <div className="w-7 h-7 rounded-lg bg-[#8B5CF6]/30 flex items-center justify-center text-[#8B5CF6] shrink-0">
+                    <Info className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1 font-medium">
+                    <span className="text-[#8B5CF6] font-semibold mr-1.5">สถานะผลงาน:</span>
+                    {inlineNotice}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
             {/* Action Buttons */}
-            <div className="pt-4 border-t border-[#272A33]/40 flex flex-wrap gap-4 justify-end">
+            <div className="pt-5 border-t border-[#272A33]/40 flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-3">
               {project.githubUrl && (
                 <a
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#0F1117] border border-[#272A33] text-white hover:border-[#8B5CF6] text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
+                  className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#0F1117] border border-[#272A33] text-white hover:border-[#8B5CF6] text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
                 >
                   <GithubIcon className="w-4 h-4" />
                   <span>View Source Code</span>
                 </a>
               )}
-              {(project.demoUrl || project.liveUrl) && (
+              {hasLiveLink ? (
                 <a
-                  href={project.demoUrl || project.liveUrl}
+                  href={liveTargetUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-sm font-medium transition-colors shadow-md shadow-[#8B5CF6]/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
+                  className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-sm font-medium transition-colors shadow-md shadow-[#8B5CF6]/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
                 >
                   <ExternalLink className="w-4 h-4" />
-                  <span>Live Demo</span>
+                  <span>ลิ้งค์ผลงาน</span>
                 </a>
-              )}
+              ) : project.statusNotice ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setInlineNotice(project.statusNotice);
+                    if (onNotice) {
+                      onNotice(project.statusNotice);
+                    }
+                  }}
+                  className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-sm font-medium transition-colors shadow-md shadow-[#8B5CF6]/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] cursor-pointer"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  <span>ลิ้งค์ผลงาน</span>
+                </button>
+              ) : null}
             </div>
           </div>
         </motion.div>
       </div>
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
