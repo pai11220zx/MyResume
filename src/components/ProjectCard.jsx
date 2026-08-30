@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, ArrowUpRight } from 'lucide-react';
 import { GithubIcon } from './Icons';
+import { useLanguage } from '../context/LanguageContext';
 import Badge from './common/Badge';
 import './Projects.css';
 
@@ -21,6 +22,20 @@ export default function ProjectCard({
   onSelectProject,
   onTriggerNotice
 }) {
+  const { language, t } = useLanguage();
+
+  const getLocalized = (obj) => {
+    if (!obj) return '';
+    if (typeof obj === 'object') {
+      return obj[language] || obj.th || '';
+    }
+    return obj;
+  };
+
+  const projectTitle = getLocalized(project.title);
+  const projectDesc = getLocalized(project.description);
+  const projectNotice = getLocalized(project.statusNotice);
+
   const handleCardKeyDown = (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -43,14 +58,14 @@ export default function ProjectCard({
       <div
         role="button"
         tabIndex={0}
-        aria-label={`ดูรายละเอียดโครงการ ${project.title}`}
+        aria-label={`${t('projects.viewDetails')}: ${projectTitle}`}
         className="project-card-thumbnail focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
         onClick={() => onSelectProject(project)}
         onKeyDown={handleCardKeyDown}
       >
         <img
           src={project.image}
-          alt={project.title}
+          alt={projectTitle}
           loading="lazy"
           decoding="async"
           width="400"
@@ -66,16 +81,16 @@ export default function ProjectCard({
           <h3
             role="button"
             tabIndex={0}
-            aria-label={`ดูรายละเอียดโครงการ ${project.title}`}
+            aria-label={`${t('projects.viewDetails')}: ${projectTitle}`}
             onClick={() => onSelectProject(project)}
             onKeyDown={handleCardKeyDown}
             className="text-lg sm:text-xl font-bold text-white group-hover:text-[#8B5CF6] transition-colors cursor-pointer flex items-center justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] rounded text-secondary-readable"
           >
-            <span>{project.title}</span>
+            <span>{projectTitle}</span>
             <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity text-[#8B5CF6]" />
           </h3>
           <p className="text-xs sm:text-sm text-[#CBD5E1] font-normal project-card-description mt-1.5 leading-relaxed text-muted-readable">
-            {project.description}
+            {projectDesc}
           </p>
         </div>
 
@@ -95,7 +110,7 @@ export default function ProjectCard({
             onClick={() => onSelectProject(project)}
             className="text-xs font-bold text-[#8B5CF6] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] rounded cursor-pointer"
           >
-            View Details &rarr;
+            {t('projects.viewDetails')} &rarr;
           </button>
 
           <div className="flex items-center gap-2">
@@ -116,21 +131,21 @@ export default function ProjectCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-[#0F1117]/80 border border-[#272A33] text-[#E2E8F0] hover:text-white hover:border-[#8B5CF6]/50 transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
-                aria-label="ลิ้งค์ผลงาน"
-                title="ลิ้งค์ผลงาน"
+                aria-label={t('projects.liveDemo')}
+                title={t('projects.liveDemo')}
               >
                 <ExternalLink className="w-4 h-4" />
               </a>
-            ) : project.statusNotice ? (
+            ) : projectNotice ? (
               <button
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  onTriggerNotice(project.statusNotice);
+                  onTriggerNotice(projectNotice);
                 }}
                 className="p-2 rounded-lg bg-[#0F1117]/80 border border-[#272A33] text-[#E2E8F0] hover:text-white hover:border-[#8B5CF6]/50 transition-colors shadow-sm cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
-                aria-label="ลิ้งค์ผลงาน"
-                title="ลิ้งค์ผลงาน"
+                aria-label={t('projects.liveDemo')}
+                title={t('projects.liveDemo')}
               >
                 <ExternalLink className="w-4 h-4" />
               </button>

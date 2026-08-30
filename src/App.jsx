@@ -3,11 +3,13 @@ import Home from './pages/Home';
 import GlowCursor from './components/common/GlowCursor';
 import DarkVeil from './components/common/DarkVeil';
 import SmoothScroll from './components/common/SmoothScroll';
+import { LanguageProvider } from './context/LanguageContext';
 
 export default function App() {
   return (
-    <SmoothScroll>
-      <div className="relative min-h-screen bg-[#07090E] text-white selection:bg-[#8B5CF6]/30 selection:text-[#8B5CF6]">
+    <LanguageProvider>
+      <SmoothScroll>
+        <div className="relative min-h-screen bg-[#07090E] text-white selection:bg-[#8B5CF6]/30 selection:text-[#8B5CF6]">
       {/* Ambient Background DarkVeil Shader */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-75">
         <DarkVeil
@@ -44,5 +46,6 @@ export default function App() {
       </GlowCursor>
     </div>
     </SmoothScroll>
+    </LanguageProvider>
   );
 }

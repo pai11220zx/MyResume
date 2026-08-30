@@ -2,24 +2,35 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar } from 'lucide-react';
 import { experienceData } from '../data/experience';
+import { useLanguage } from '../context/LanguageContext';
 import SectionHeading from './common/SectionHeading';
 import Badge from './common/Badge';
 
 export default function Experience() {
+  const { language, t } = useLanguage();
+
+  const getLocalized = (obj) => {
+    if (!obj) return '';
+    if (typeof obj === 'object') {
+      return obj[language] || obj.th || '';
+    }
+    return obj;
+  };
+
   return (
     <section id="experience" className="py-24 relative z-10 border-t border-[#272A33]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          tag="Timeline"
-          title="Experience & Journey"
-          description="เส้นทางการเรียนรู้และประสบการณ์ในการพัฒนาซอฟต์แวร์"
+          tag={t('experience.tag')}
+          title={t('experience.title')}
+          description={t('experience.description')}
         />
 
         {/* Timeline Items */}
         <div className="max-w-3xl mx-auto relative pl-6 sm:pl-8 border-l border-[#272A33] space-y-12">
           {experienceData.map((item, index) => (
             <motion.div
-              key={`${item.role}-${item.period}`}
+              key={`${getLocalized(item.role)}-${getLocalized(item.period)}`}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -33,17 +44,17 @@ export default function Experience() {
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <Badge variant="accent">
                     <Calendar className="w-3.5 h-3.5" />
-                    {item.period}
+                    {getLocalized(item.period)}
                   </Badge>
-                  <span className="text-xs text-muted-readable font-medium">{item.organization}</span>
+                  <span className="text-xs text-muted-readable font-medium">{getLocalized(item.organization)}</span>
                 </div>
 
-                <h3 className="text-xl font-bold text-white text-title-readable">{item.role}</h3>
-                <p className="text-sm text-secondary-readable leading-relaxed">{item.description}</p>
+                <h3 className="text-xl font-bold text-white text-title-readable">{getLocalized(item.role)}</h3>
+                <p className="text-sm text-secondary-readable leading-relaxed">{getLocalized(item.description)}</p>
 
                 {/* Skills tags */}
                 <div className="flex flex-wrap gap-1.5 pt-2">
-                  {item.skills.map(skill => (
+                  {(item.skills || []).map(skill => (
                     <Badge key={skill}>
                       {skill}
                     </Badge>

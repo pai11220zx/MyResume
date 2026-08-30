@@ -8,8 +8,8 @@ node_modules/
 dist/
 dist-ssr/
 build/
-*.local
 out/
+*.local
 
 # Environment Variables & Secrets (Preserve .env.example)
 .env
@@ -37,7 +37,7 @@ lerna-debug.log*
 .fleet/
 .cursor/
 
-# OS Metadata & Cache
+# OS Metadata & System Files
 .DS_Store
 .DS_Store?
 ._*
@@ -59,9 +59,11 @@ desktop.ini
 coverage/
 *.pdf.backup
 *.bak
+*.backup
+*.orig
+*.old
 
-# AI Agent & Tooling Directories
+# AI Agent Local Cache & Tooling Directories
 .agents/
-.agents/skills/
 .codex/
 .impeccable/

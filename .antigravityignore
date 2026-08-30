@@ -33,11 +33,18 @@ coverage/**
 *.pdf
 *.zip
 *.tar.gz
+*.rar
+*.7z
 *.exe
 *.mp4
 *.mp3
 *.wav
 *.avi
+*.mov
 *.bak
+*.backup
+*.tmp
+*.temp
+*.iso
 
 

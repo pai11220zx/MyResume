@@ -3,21 +3,32 @@ import { motion } from 'framer-motion';
 import { Mail, Phone } from 'lucide-react';
 import { GithubIcon } from './Icons';
 import { profileData } from '../data/profile';
+import { useLanguage } from '../context/LanguageContext';
 import DepthText from './common/DepthText';
 
 export default function Hero() {
+  const { language, t } = useLanguage();
+
+  const getLocalized = (obj) => {
+    if (!obj) return '';
+    if (typeof obj === 'object') {
+      return obj[language] || obj.th || '';
+    }
+    return obj;
+  };
+
   return (
     <section id="home" className="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center flex flex-col items-center">
-        {/* Intro Greeting (Plain text, no fade in) */}
+        {/* Intro Greeting */}
         <div className="text-base sm:text-lg font-semibold text-secondary-readable mb-4 tracking-wide uppercase">
-          Hello, I'm
+          {t('hero.greeting')}
         </div>
 
         {/* 3D DepthText Name */}
         <div className="mb-6 flex justify-center py-2">
           <DepthText
-            text={profileData.name}
+            text={getLocalized(profileData.name)}
             layers={32}
             depth={2.2}
             faceColor="#FFFFFF"
@@ -34,20 +45,20 @@ export default function Hero() {
           />
         </div>
 
-        {/* Subtitle / Role & Affiliation (Plain text, no fade in) */}
+        {/* Subtitle / Role & Affiliation */}
         <div className="max-w-5xl mx-auto mb-4 flex flex-col items-center">
           <h2 className="text-lg sm:text-2xl font-bold text-title-readable leading-relaxed text-center">
-            {profileData.title}
+            {getLocalized(profileData.title)}
           </h2>
           <p className="mt-2 text-xs sm:text-sm md:text-base text-secondary-readable font-medium text-center whitespace-normal sm:whitespace-nowrap">
-            สาขาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยราชภัฏเพชรบุรี (PBRU) | มุ่งเน้นงานด้าน Automation & Software Development
+            {t('hero.affiliation')}
           </p>
         </div>
 
-        {/* Short Bio / Motto (Plain text, no fade in) */}
+        {/* Short Bio / Motto */}
         <div className="max-w-2xl mx-auto mb-8 flex justify-center">
           <p className="text-sm sm:text-base text-secondary-readable font-medium text-center">
-            {profileData.shortBio}
+            {getLocalized(profileData.shortBio)}
           </p>
         </div>
 

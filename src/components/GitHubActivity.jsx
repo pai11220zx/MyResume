@@ -3,15 +3,18 @@ import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { GithubIcon } from './Icons';
 import { profileData } from '../data/profile';
+import { useLanguage } from '../context/LanguageContext';
 import SectionHeading from './common/SectionHeading';
 
 export default function GitHubActivity() {
+  const { t } = useLanguage();
+
   return (
     <section id="github" className="py-20 relative z-10 border-t border-[#272A33]/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          tag="Developer Activity"
-          title="GitHub Activity & Repositories"
+          tag={t('github.tag')}
+          title={t('github.title')}
           className="mb-12"
         />
 
@@ -26,9 +29,9 @@ export default function GitHubActivity() {
             <GithubIcon className="w-10 h-10" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-white text-title-readable">Explore My GitHub Repositories</h3>
+            <h3 className="text-xl font-bold text-white text-title-readable">{t('github.explore')}</h3>
             <p className="text-sm text-secondary-readable max-w-xl mx-auto mt-2 font-normal">
-              ติดตามความเคลื่อนไหว ซอร์สโค้ดของโปรเจกต์ต่างๆ และการพัฒนาอย่างต่อเนื่องได้ที่ GitHub Profile ของผม
+              {t('github.description')}
             </p>
           </div>
 
@@ -38,7 +41,7 @@ export default function GitHubActivity() {
             rel="noopener noreferrer"
             className="btn-primary"
           >
-            <span>Visit GitHub Profile</span>
+            <span>{t('github.visit')}</span>
             <ExternalLink className="w-4 h-4" />
           </a>
         </motion.div>

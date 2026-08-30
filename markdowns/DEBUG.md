@@ -177,3 +177,44 @@ npm run build
 # 3. ล้างแคชกรณี Vite แสดงผลไม่อัปเดต
 npm run dev -- --force
 ```
+
+---
+
+## 11. คู่มือการจัดการและดีบักระบบ 2 ภาษา (Bilingual & i18n Troubleshooting)
+
+### 🔴 ปัญหาที่ 11.1: เพิ่มข้อความใหม่แล้วไม่แสดงผลหรือขึ้น Key แทน
+- **สาเหตุ:** ไม่ได้ใส่ key ใน [`src/data/translations.js`](file:///c:/xampp/htdocs/Resume/src/data/translations.js) ทั้งฝั่ง `th` และ `en`
+- **วิธีแก้:** เพิ่มคู่ Key-Value ให้ตรงกันทั้งสองภาษา เช่น:
+  ```javascript
+  export const translations = {
+    th: { 'feature.new': 'คุณสมบัติใหม่' },
+    en: { 'feature.new': 'New Feature' }
+  };
+  ```
+
+### 🔴 ปัญหาที่ 11.2: ข้อมูลใน `src/data/` แสดงผลเป็น `[object Object]`
+- **สาเหตุ:** ฟิลด์ข้อมูลถูกแปลงเป็น `{ th: '...', en: '...' }` แต่คอมโพเนนต์เรียกใช้ตัวแปรตรงๆ โดยไม่ผ่านตัวช่วยแปลงภาษา
+- **วิธีแก้:** ใช้ฟังก์ชัน Helper `getLocalized` หรือดึงตาม `language`:
+  ```javascript
+  const { language } = useLanguage();
+  const getLocalized = (obj) => typeof obj === 'object' && obj !== null ? (obj[language] || obj.th || '') : obj;
+  ```
+
+### 🔴 ปัญหาที่ 11.3: ข้อความภาษาอังกฤษใช้ศัพท์ยากเกินไป (Non-Beginner-Friendly Vocabulary)
+- **สาเหตุ:** มีการใช้คำศัพท์เทคนิคขั้นสูงหรือศัพท์เชิงวิชาการ (Overcomplicated Academic Jargon) ทำให้ผู้เริ่มต้นอ่านทำความเข้าใจได้ยาก
+- **วิธีแก้:** ตรวจสอบและแทนที่ด้วยคำศัพท์พื้นฐาน (Beginner-Friendly Basic English) ที่กระชับและตรงไปตรงมา:
+  | คำศัพท์เดิมที่ซับซ้อน | คำศัพท์พื้นฐานที่แนะนำ (Beginner-Friendly) |
+  |---|---|
+  | `Mitigate emergent environmental hazards` | `Handle kitchen fires and challenges` |
+  | `Procedural bouncy locomotion` | `Bouncy animation and walking movement` |
+  | `Institutional-grade quantitative intelligence` | `Real-time portfolio tracking and profit calculation` |
+  | `Stateless JWT enforcement with automated scanner` | `Secure login with JWT and automatic safety scanner` |
+  | `Phonetic engine with automated filler-word truncation` | `Speech recognition that understands natural speaking` |
+  | `High-stakes state banquet` | `Special banquet event` |
+
+### 🔴 ปัญหาที่ 11.4: มาตรฐานปุ่ม RESUME และตัวสลับภาษาบน Navbar
+- **ข้อกำหนด:** 
+  1. ปุ่มดาวน์โหลดเรซูเม่บน Navbar ให้แสดงผลคำว่า **`RESUME`** ตลอดเวลาทั้งภาษาไทยและอังกฤษ เพื่อความเป็นสากลและตรงกับแบรนด์
+  2. ตัวสลับภาษา `[ TH | EN ]` ต้องใช้ดีไซน์เส้นขอบโปร่งแสง `border border-[#8B5CF6]/40` และไม่มีแสงฟุ้ง (No Bloom Shadow) เพื่อความสบายตา คลีน และกลมกลืนกับปุ่ม RESUME
+
+

@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, AlertCircle, CheckCircle2, Sparkles, Lightbulb, Flame, Info } from 'lucide-react';
 import { GithubIcon } from './Icons';
+import { useLanguage } from '../context/LanguageContext';
 import Badge from './common/Badge';
 import './ProjectModal.css';
 
@@ -16,7 +17,16 @@ import './ProjectModal.css';
  * @param {Function} [props.onNotice] - ฟังก์ชันแจ้งเตือนสถานะเมื่อคลิกปุ่มภายนอก
  */
 export default function ProjectModal({ project, onClose, onNotice }) {
+  const { language, t } = useLanguage();
   const [inlineNotice, setInlineNotice] = useState(null);
+
+  const getLocalized = (obj) => {
+    if (!obj) return '';
+    if (typeof obj === 'object') {
+      return obj[language] || obj.th || '';
+    }
+    return obj;
+  };
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -37,6 +47,11 @@ export default function ProjectModal({ project, onClose, onNotice }) {
   }, [onClose]);
 
   if (!project || typeof document === 'undefined') return null;
+
+  const projectTitle = getLocalized(project.title);
+  const projectDesc = getLocalized(project.description);
+  const projectNotice = getLocalized(project.statusNotice);
+  const details = project.details?.[language] || project.details?.th || project.details || {};
 
   const hasLiveLink = Boolean(project.demoUrl || project.liveUrl);
   const liveTargetUrl = project.demoUrl || project.liveUrl;
@@ -73,7 +88,7 @@ export default function ProjectModal({ project, onClose, onNotice }) {
           <div className="relative h-48 sm:h-64 md:h-72 lg:h-80 w-full overflow-hidden shrink-0 bg-[#05060A]">
             <img
               src={project.image}
-              alt={project.title}
+              alt={projectTitle}
               loading="eager"
               fetchPriority="high"
               decoding="async"
@@ -88,7 +103,7 @@ export default function ProjectModal({ project, onClose, onNotice }) {
               type="button"
               onClick={onClose}
               className="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#05060A]/85 border border-[#272A33] text-white hover:text-[#8B5CF6] hover:border-[#8B5CF6]/50 flex items-center justify-center transition-all shadow-lg backdrop-blur-md z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] cursor-pointer"
-              aria-label="ปิดหน้าต่างรายละเอียด"
+              aria-label={t('modal.close')}
             >
               <X className="w-5 h-5" />
             </button>
@@ -99,7 +114,7 @@ export default function ProjectModal({ project, onClose, onNotice }) {
                 id="modal-project-title"
                 className="text-xl sm:text-2xl md:text-3xl font-bold text-white leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]"
               >
-                {project.title}
+                {projectTitle}
               </h2>
             </div>
           </div>
@@ -121,10 +136,10 @@ export default function ProjectModal({ project, onClose, onNotice }) {
             {/* Overview */}
             <div className="space-y-2">
               <h4 className="text-xs font-bold text-[#8B5CF6] uppercase tracking-wider drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-                ภาพรวมโครงการ (Overview)
+                {t('modal.overview')}
               </h4>
               <p className="text-white text-sm sm:text-base leading-relaxed drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-                {project.details?.overview || project.description}
+                {details.overview || projectDesc}
               </p>
             </div>
 
@@ -133,31 +148,31 @@ export default function ProjectModal({ project, onClose, onNotice }) {
               <div className="p-4 sm:p-5 rounded-2xl border border-[#272A33]/70 bg-[#0F1117]/50 space-y-2">
                 <div className="flex items-center gap-2 text-rose-400 font-bold text-sm">
                   <AlertCircle className="w-4 h-4 shrink-0" />
-                  <span>ปัญหาและที่มา (Problem)</span>
+                  <span>{t('modal.problem')}</span>
                 </div>
                 <p className="text-xs sm:text-sm text-[#E2E8F0] leading-relaxed font-normal">
-                  {project.details?.problem}
+                  {details.problem}
                 </p>
               </div>
               <div className="p-4 sm:p-5 rounded-2xl border border-[#272A33]/70 bg-[#0F1117]/50 space-y-2">
                 <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm">
                   <CheckCircle2 className="w-4 h-4 shrink-0" />
-                  <span>แนวทางการแก้ปัญหา (Solution)</span>
+                  <span>{t('modal.solution')}</span>
                 </div>
                 <p className="text-xs sm:text-sm text-[#E2E8F0] leading-relaxed font-normal">
-                  {project.details?.solution}
+                  {details.solution}
                 </p>
               </div>
             </div>
 
             {/* Features list */}
-            {project.details?.features && project.details.features.length > 0 && (
+            {details.features && details.features.length > 0 && (
               <div className="space-y-3">
                 <h4 className="text-xs font-bold text-[#8B5CF6] uppercase tracking-wider drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-                  ฟีเจอร์หลัก (Key Features)
+                  {t('modal.features')}
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  {project.details.features.map((feat) => (
+                  {details.features.map((feat) => (
                     <div
                       key={feat}
                       className="project-modal-feature-card text-xs sm:text-sm text-[#F1F5F9] font-medium"
@@ -171,27 +186,27 @@ export default function ProjectModal({ project, onClose, onNotice }) {
             )}
 
             {/* Challenges & Learnings Grid */}
-            {(project.details?.challenges || project.details?.learnings) && (
+            {(details.challenges || details.learnings) && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                {project.details?.challenges && (
+                {details.challenges && (
                   <div className="p-4 sm:p-5 rounded-2xl border border-[#272A33]/70 bg-[#0F1117]/50 space-y-2">
                     <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
                       <Flame className="w-4 h-4 shrink-0" />
-                      <span>ความท้าทาย (Challenges)</span>
+                      <span>{t('modal.challenges')}</span>
                     </div>
                     <p className="text-xs sm:text-sm text-[#E2E8F0] leading-relaxed font-normal">
-                      {project.details.challenges}
+                      {details.challenges}
                     </p>
                   </div>
                 )}
-                {project.details?.learnings && (
+                {details.learnings && (
                   <div className="p-4 sm:p-5 rounded-2xl border border-[#272A33]/70 bg-[#0F1117]/50 space-y-2">
                     <div className="flex items-center gap-2 text-cyan-400 font-bold text-sm">
                       <Lightbulb className="w-4 h-4 shrink-0" />
-                      <span>สิ่งที่ได้เรียนรู้ (Key Learnings)</span>
+                      <span>{t('modal.learnings')}</span>
                     </div>
                     <p className="text-xs sm:text-sm text-[#E2E8F0] leading-relaxed font-normal">
-                      {project.details.learnings}
+                      {details.learnings}
                     </p>
                   </div>
                 )}
@@ -211,7 +226,7 @@ export default function ProjectModal({ project, onClose, onNotice }) {
                     <Info className="w-4 h-4" />
                   </div>
                   <div className="flex-1 font-medium">
-                    <span className="text-[#8B5CF6] font-semibold mr-1.5">สถานะผลงาน:</span>
+                    <span className="text-[#8B5CF6] font-semibold mr-1.5">{t('modal.statusTitle')}:</span>
                     {inlineNotice}
                   </div>
                 </motion.div>
@@ -228,7 +243,7 @@ export default function ProjectModal({ project, onClose, onNotice }) {
                   className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#0F1117] border border-[#272A33] text-white hover:border-[#8B5CF6] text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
                 >
                   <GithubIcon className="w-4 h-4" />
-                  <span>View Source Code</span>
+                  <span>{t('modal.viewSource')}</span>
                 </a>
               )}
               {hasLiveLink ? (
@@ -239,21 +254,21 @@ export default function ProjectModal({ project, onClose, onNotice }) {
                   className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-sm font-medium transition-colors shadow-md shadow-[#8B5CF6]/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
                 >
                   <ExternalLink className="w-4 h-4" />
-                  <span>ลิ้งค์ผลงาน</span>
+                  <span>{t('modal.liveLink')}</span>
                 </a>
-              ) : project.statusNotice ? (
+              ) : projectNotice ? (
                 <button
                   type="button"
                   onClick={() => {
-                    setInlineNotice(project.statusNotice);
+                    setInlineNotice(projectNotice);
                     if (onNotice) {
-                      onNotice(project.statusNotice);
+                      onNotice(projectNotice);
                     }
                   }}
                   className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-sm font-medium transition-colors shadow-md shadow-[#8B5CF6]/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] cursor-pointer"
                 >
                   <ExternalLink className="w-4 h-4" />
-                  <span>ลิ้งค์ผลงาน</span>
+                  <span>{t('modal.liveLink')}</span>
                 </button>
               ) : null}
             </div>

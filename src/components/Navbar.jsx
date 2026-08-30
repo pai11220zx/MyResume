@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, FileText, Code } from 'lucide-react';
+import { Menu, X, FileText, Code, Languages } from 'lucide-react';
 import { profileData } from '../data/profile';
+import { useLanguage } from '../context/LanguageContext';
 import GooeyNav from './common/GooeyNav';
 import IconBox from './common/IconBox';
 
-const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Education', href: '#education' },
-  { label: 'Contact', href: '#contact' },
-];
-
 export default function Navbar() {
+  const { language, setLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+
+  const navItems = [
+    { label: t('nav.home'), href: '#home' },
+    { label: t('nav.about'), href: '#about' },
+    { label: t('nav.skills'), href: '#skills' },
+    { label: t('nav.projects'), href: '#projects' },
+    { label: t('nav.experience'), href: '#experience' },
+    { label: t('nav.education'), href: '#education' },
+    { label: t('nav.contact'), href: '#contact' },
+  ];
 
   useEffect(() => {
     let ticking = false;
@@ -51,13 +53,13 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [language]);
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#07090E]/60 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/30 py-3'
+          ? 'bg-[#07090E]/80 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/30 py-3'
           : 'bg-transparent py-5'
       }`}
     >
@@ -77,6 +79,7 @@ export default function Navbar() {
         {/* Desktop Gooey Navigation */}
         <div className="hidden md:flex items-center">
           <GooeyNav
+            key={language}
             items={navItems}
             particleCount={6}
             particleDistances={[50, 10]}
@@ -85,8 +88,42 @@ export default function Navbar() {
           />
         </div>
 
-        {/* Resume CTA & Social in Navbar (Prominent Ghost Button) */}
+        {/* Desktop Language Switcher & Resume CTA */}
         <div className="hidden md:flex items-center gap-3">
+          {/* Language Toggle Button */}
+          <div
+            className="flex items-center p-1 rounded-xl border border-[#8B5CF6]/40 bg-transparent hover:border-[#8B5CF6] transition-all duration-300 backdrop-blur-sm"
+            role="group"
+            aria-label="Language Selector"
+          >
+            <button
+              type="button"
+              onClick={() => setLanguage('th')}
+              className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all duration-300 cursor-pointer ${
+                language === 'th'
+                  ? 'bg-[#8B5CF6] text-white'
+                  : 'text-[#94A3B8] hover:text-white hover:bg-[#8B5CF6]/10'
+              }`}
+              aria-label="Switch to Thai language"
+              aria-pressed={language === 'th'}
+            >
+              TH
+            </button>
+            <button
+              type="button"
+              onClick={() => setLanguage('en')}
+              className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all duration-300 cursor-pointer ${
+                language === 'en'
+                  ? 'bg-[#8B5CF6] text-white'
+                  : 'text-[#94A3B8] hover:text-white hover:bg-[#8B5CF6]/10'
+              }`}
+              aria-label="Switch to English language"
+              aria-pressed={language === 'en'}
+            >
+              EN
+            </button>
+          </div>
+
           <a
             href={profileData.resumeUrl}
             target="_blank"
@@ -94,12 +131,38 @@ export default function Navbar() {
             className="group inline-flex items-center gap-2.5 py-2.5 px-5 rounded-xl text-sm font-bold text-white bg-transparent hover:bg-[#8B5CF6]/20 border border-[#8B5CF6]/40 hover:border-[#8B5CF6] transition-all duration-300 hover:shadow-[0_0_25px_rgba(139,92,246,0.5)] hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
           >
             <FileText className="w-4 h-4 text-[#8B5CF6] group-hover:scale-110 transition-transform" />
-            <span>Resume</span>
+            <span>RESUME</span>
           </a>
         </div>
 
-        {/* Mobile menu button */}
-        <div className="flex md:hidden items-center">
+        {/* Mobile menu and language toggle */}
+        <div className="flex md:hidden items-center gap-2">
+          {/* Mobile Language Switcher */}
+          <div
+            className="flex items-center p-0.5 rounded-lg border border-[#8B5CF6]/40 bg-transparent"
+            role="group"
+            aria-label="Mobile Language Selector"
+          >
+            <button
+              type="button"
+              onClick={() => setLanguage('th')}
+              className={`px-2 py-0.5 text-xs font-bold rounded-md transition-all ${
+                language === 'th' ? 'bg-[#8B5CF6] text-white' : 'text-[#94A3B8] hover:text-white'
+              }`}
+            >
+              TH
+            </button>
+            <button
+              type="button"
+              onClick={() => setLanguage('en')}
+              className={`px-2 py-0.5 text-xs font-bold rounded-md transition-all ${
+                language === 'en' ? 'bg-[#8B5CF6] text-white' : 'text-[#94A3B8] hover:text-white'
+              }`}
+            >
+              EN
+            </button>
+          </div>
+
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -145,7 +208,7 @@ export default function Navbar() {
                   className="btn-primary w-full py-3 text-sm font-semibold"
                 >
                   <FileText className="w-4 h-4" />
-                  <span>Download Resume (PDF)</span>
+                  <span>{t('hero.resume')} (PDF)</span>
                 </a>
               </div>
             </div>

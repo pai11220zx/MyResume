@@ -3,29 +3,40 @@ import { motion } from 'framer-motion';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { GithubIcon } from './Icons';
 import { profileData } from '../data/profile';
+import { useLanguage } from '../context/LanguageContext';
 import SectionHeading from './common/SectionHeading';
 import IconBox from './common/IconBox';
 
 export default function Contact() {
+  const { language, t } = useLanguage();
+
+  const getLocalized = (obj) => {
+    if (!obj) return '';
+    if (typeof obj === 'object') {
+      return obj[language] || obj.th || '';
+    }
+    return obj;
+  };
+
   const contactChannels = [
     {
       icon: Phone,
-      label: 'เบอร์โทรศัพท์ (Phone)',
+      label: t('contact.phoneLabel'),
       value: profileData.phone,
       href: profileData.socialLinks.phone,
       isExternal: false,
     },
     {
       icon: Mail,
-      label: 'อีเมล (Email)',
+      label: t('contact.emailLabel'),
       value: profileData.email,
       href: profileData.socialLinks.email,
       isExternal: false,
     },
     {
       icon: MapPin,
-      label: 'สถานที่ / มหาวิทยาลัย (Location)',
-      value: profileData.location,
+      label: t('contact.locationLabel'),
+      value: getLocalized(profileData.location),
       href: null,
       isExternal: false,
     },
@@ -42,9 +53,9 @@ export default function Contact() {
     <section id="contact" className="py-24 relative z-10 border-t border-[#272A33]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          tag="Get In Touch"
-          title="ติดต่อเรา (Contact)"
-          description="มีโปรเจกต์ที่สนใจหรือต้องการพูดคุย สามารถติดต่อได้โดยตรงตามช่องทางด้านล่างครับ"
+          tag={t('contact.tag')}
+          title={t('contact.title')}
+          description={t('contact.description')}
         />
 
         {/* Minimalist Editorial Contact Information Grid */}

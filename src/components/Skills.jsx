@@ -29,6 +29,7 @@ import {
   Code
 } from 'lucide-react';
 import { skillsData } from '../data/skills';
+import { useLanguage } from '../context/LanguageContext';
 import SectionHeading from './common/SectionHeading';
 import IconBox from './common/IconBox';
 
@@ -62,20 +63,30 @@ const iconLookup = {
 };
 
 export default function Skills() {
+  const { language, t } = useLanguage();
+
+  const getLocalized = (obj) => {
+    if (!obj) return '';
+    if (typeof obj === 'object') {
+      return obj[language] || obj.th || '';
+    }
+    return obj;
+  };
+
   return (
     <section id="skills" className="py-24 relative z-10 border-t border-[#272A33]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          tag="Tech Stack"
-          title="Skills & Technologies"
-          description="ประสบการณ์ทางภาษา เครื่องมือ โปรแกรม และระบบอัตโนมัติ (ระดับเบื้องต้น - ประยุกต์ใช้งาน)"
+          tag={t('skills.tag')}
+          title={t('skills.title')}
+          description={t('skills.description')}
         />
 
         {/* Skills Grid by Category (Frameless Floating) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-10">
           {skillsData.map((cat, catIdx) => (
             <motion.div
-              key={cat.category}
+              key={getLocalized(cat.category) || catIdx}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -83,7 +94,7 @@ export default function Skills() {
               className="space-y-6"
             >
               <h3 className="text-xl font-bold text-white pb-2 border-b border-[#272A33]/40 text-title-readable">
-                {cat.category}
+                {getLocalized(cat.category)}
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -97,7 +108,7 @@ export default function Skills() {
                       <IconBox icon={IconComp} size="sm" />
                       <div className="min-w-0">
                         <div className="text-sm font-semibold text-white group-hover:text-[#8B5CF6] transition-colors truncate text-secondary-readable">{skill.name}</div>
-                        <div className="text-xs text-muted-readable font-medium">{skill.level}</div>
+                        <div className="text-xs text-muted-readable font-medium">{getLocalized(skill.level)}</div>
                       </div>
                     </div>
                   );

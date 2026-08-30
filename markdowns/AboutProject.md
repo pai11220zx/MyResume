@@ -9,11 +9,12 @@
 เว็บไซต์นี้เป็น **Modern Personal Developer Portfolio / Online Resume** ที่พัฒนาขึ้นเพื่อนำเสนอตัวตน ทักษะความสามารถ ผลงานซอฟต์แวร์ (Projects), ประสบการณ์ (Experience), กิจกรรม (Activities), การศึกษา (Education) และระบบรับข้อความติดต่อสำหรับนักพัฒนาซอฟต์แวร์
 
 ### 🌟 จุดเด่นของโปรเจกต์ (Core Highlights):
+- **Full Bilingual Support (TH / EN Real-time Toggle):** ระบบสลับ 2 ภาษาไทย-อังกฤษแบบเรียลไทม์ทั่วทั้งโปรเจกต์ ทั้ง UI Headers, Navigation, Buttons, Modals, Toasts และเนื้อหาโปรเจกต์เชิงลึก ผ่าน React Context (`LanguageContext.jsx`) พร้อมจดจำภาษาลงใน `localStorage` และซิงค์ `<html lang="...">`
 - **Minimalist Editorial & Content-First Design:** โครงสร้างหน้าเว็บแบบเน้นเนื้อหา อ่านง่าย สบายตา ไม่มีแอนิเมชัน Fade-in บดบังสายตา
 - **WebGL DarkVeil Background & Glow Cursor:** ขับเคลื่อนฉากหลังแบบไดนามิกด้วย Shader WebGL (`DarkVeil.jsx` และ `GlowCursor.jsx` พัฒนาบน `ogl`) ให้ความสว่าง นุ่มนวล ลึกลับ และเบาเครื่อง (High Performance)
 - **Physics-based Inertia Smooth Scrolling:** ขับเคลื่อนการเลื่อนหน้าจอด้วย **Lenis** (`SmoothScroll.jsx`) มอบประสบการณ์ Scroll ที่ลื่นไหล นุ่มนวล ระดับ Awwwards พร้อมระบบจัดการล็อก Scrollbar อัตโนมัติเมื่อเปิด Modal
 - **3D DepthText Hero Display:** นำเสนอชื่อ "Purachet Aobrom" ด้วยคอมโพเนนต์ 3D Layered Canvas Text พร้อมระบบ Pointer Tracking และ Auto Orbiting
-- **Glassmorphic Floating Navbar & Ghost CTA:** แถบนำทางโปร่งแสงสไตล์ Glassmorphism เมื่อเลื่อนหน้าจอ พร้อมปุ่ม Resume แบบ Ghost Button เรืองแสงม่วง
+- **Glassmorphic Floating Navbar & Ghost CTA:** แถบนำทางโปร่งแสงสไตล์ Glassmorphism เมื่อเลื่อนหน้าจอ พร้อมปุ่มสลับภาษา `[ TH | EN ]` สไตล์มินิมอลเข้าชุด และปุ่ม **RESUME** แบบ Ghost Button สม่ำเสมอทั้งภาษาไทยและอังกฤษ
 - **DRY & Shared Components Architecture:** รวมศูนย์คอมโพเนนต์ส่วนกลาง (`IconBox`, `SectionHeading`, `Badge`, `Icons`) ลดโค้ดซ้ำซ้อนและควบคุมสไตล์ได้จากจุดเดียว
 - **Accessible Frameless Media Cards & Project Modal:** แสดงผลงานโครงการด้วยการ์ดลอยอิสระ (Frameless) พร้อม Dialog ป๊อปอัปดูรายละเอียดเชิงลึกที่มีระบบ Event Bubbling Guard ป้องกันการปิดโดยไม่ตั้งใจ
 - **100% Offline-Ready Assets:** รูปภาพและไอคอนทั้งหมดเก็บอยู่ภายในโปรเจกต์ ไม่พึ่งพา CDN ภายนอก
@@ -80,9 +81,12 @@ Resume/
 │   └── convert-webp.js      # สคริปต์ Node.js สำหรับแปลงรูปภาพ PNG เป็น WebP ผ่าน sharp
 │
 └── src/
-    ├── App.jsx              # Main Root Component ผสาน DarkVeil, GlowCursor และ SmoothScroll
+    ├── App.jsx              # Main Root Component ผสาน LanguageProvider, DarkVeil, GlowCursor และ SmoothScroll
     ├── index.css            # Tailwind Directives, Scrollbar Theme & Component Classes
     ├── main.jsx             # React DOM Mounting Entry Point
+    │
+    ├── context/             # React Context Providers
+    │   └── LanguageContext.jsx # Context สำหรับสลับภาษา TH/EN แบบ Real-time และซิงค์ LocalStorage
     │
     ├── components/          # UI Components
     │   ├── common/          # Reusable Shared Components (DRY)
@@ -117,20 +121,21 @@ Resume/
     │   ├── GitHubActivity.jsx # การ์ดแสดงกิจกรรมบน GitHub (พร้อม id="github")
     │   ├── Hero.jsx         # ส่วนหัวต้อนรับ, 3D DepthText, และลิงก์ติดต่อตรง
     │   ├── Icons.jsx        # SVG Vector Icons สำหรับแบรนด์ (GitHub, LinkedIn)
-    │   ├── Navbar.jsx       # แถบเนวิเกชัน Glassmorphic Sticky พร้อม Ghost Resume Button
+    │   ├── Navbar.jsx       # แถบเนวิเกชัน Glassmorphic Sticky พร้อมปุ่มสลับภาษา TH/EN และ Resume Button
     │   ├── ProjectCard.jsx  # คอมโพเนนต์การ์ดโปรเจกต์แบบแยกส่วน (DRY Architecture)
     │   ├── Projects.css     # ไฟล์ CSS สำหรับการจัดเลย์เอาต์การ์ดโปรเจกต์และแอนิเมชัน
     │   ├── ProjectModal.css # ไฟล์ CSS สำหรับป๊อปอัป Modal และ Feature List
     │   ├── ProjectModal.jsx # ป๊อปอัปแสดงรายละเอียดโปรเจกต์เชิงลึก (Accessible Dialog Guard)
     │   └── Projects.jsx     # กริดแสดงผลงานโปรเจกต์แบบ 9-Items Grid พร้อมระบบ Pagination
     │
-    ├── data/                # Static Data Layer (Zero Latency)
-    │   ├── activities.js    # ข้อมูลกิจกรรม
-    │   ├── education.js     # ข้อมูลการศึกษา
-    │   ├── experience.js    # ข้อมูลประสบการณ์
-    │   ├── profile.js       # ข้อมูลส่วนตัว ช่องทางติดต่อ ลิงก์
-    │   ├── projects.js      # ข้อมูลโปรเจกต์และรายละเอียดสำหรับ Modal
-    │   └── skills.js        # ข้อมูลทักษะและไอคอน
+    ├── data/                # Static Data Layer (Zero Latency & Bilingual TH/EN)
+    │   ├── activities.js    # ข้อมูลกิจกรรม (Bilingual)
+    │   ├── education.js     # ข้อมูลการศึกษา (Bilingual)
+    │   ├── experience.js    # ข้อมูลประสบการณ์ (Bilingual)
+    │   ├── profile.js       # ข้อมูลส่วนตัว ช่องทางติดต่อ ลิงก์ (Bilingual)
+    │   ├── projects.js      # ข้อมูลโปรเจกต์และรายละเอียดสำหรับ Modal (Bilingual)
+    │   ├── skills.js        # ข้อมูลทักษะและไอคอน (Bilingual)
+    │   └── translations.js  # คลังคำแปล UI Strings ภาษาไทยและอังกฤษ
     │
     ├── lib/                 # Third-party & Utilities
     │   ├── supabaseClient.js # Supabase Client Instance
@@ -151,3 +156,16 @@ Resume/
 - [x] แยกข้อมูล Static Data เพื่อการโหลดที่รวดเร็ว และมี Cloud Database รองรับการส่งข้อความ
 - [x] มีไฟล์ `database/schema.sql` พร้อม RLS Policies ปลอดภัยตาม Rule 10
 - [x] มีการตั้งค่า `vercel.json` ป้องกันปัญหา 404 เมื่อ Refresh บน Vercel
+- [x] รองรับระบบสองภาษา TH/EN แบบเรียลไทม์ พร้อมมาตรฐานภาษาอังกฤษพื้นฐานที่เข้าใจง่าย (Beginner-Friendly Basic English)
+
+---
+
+## 4. มาตรฐานภาษาอังกฤษที่เป็นมิตรต่อผู้เริ่มต้น (Beginner-Friendly Basic English Standard)
+
+โปรเจกต์นี้กำหนดแนวทางการใช้ภาษาอังกฤษในคลังคำแปล (`translations.js`) และชุดข้อมูลทั้งหมด (`src/data/`) เพื่อให้ผู้อ่านทุกระดับ รวมถึงผู้เริ่มต้นเรียนรู้ภาษาอังกฤษ (Beginner Learners) สามารถอ่านและเข้าใจสาระสำคัญของผลงานได้ทันที:
+
+1. **Simple & Direct Vocabulary:** ใช้คำศัพท์พื้นฐานที่พบได้ทั่วไปในชีวิตประจำวันและวงการคอมพิวเตอร์พื้นฐาน แทนศัพท์วิชาการขั้นสูง (เช่น ใช้ `Built and developed` แทน `Architected and synthesized`, ใช้ `Real software projects` แทน `Institutional-grade production deliverables`)
+2. **Clear & Action-Oriented Sentences:** เขียนประโยคสั้น กระชับ เน้นบอกว่าระบบ "ทำอะไร" "แก้ปัญหาอย่างไร" และ "ใช้เครื่องมืออะไร"
+3. **No Ambiguous Technical Jargon:** หลีกเลี่ยงการใช้คำศัพท์เฉพาะทางที่คลุมเครือ หากจำเป็นต้องระบุเทคโนโลยี ให้ระบุชื่อเครื่องมือตรงๆ เช่น `React`, `PHP`, `MySQL`, `Unity 3D`
+4. **Symmetric Bilingual Schema:** ทุก Object ข้อมูลที่มีการแสดงผลจะต้องมีโครงสร้าง `{ th: "...", en: "..." }` ควบคู่กันเสมอ เพื่อป้องกันปัญหาข้อมูลขาดหายหรือแสดงผลไม่ครบถ้วน
+

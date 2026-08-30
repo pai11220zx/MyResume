@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { projectsData } from '../data/projects';
+import { useLanguage } from '../context/LanguageContext';
 import SectionHeading from './common/SectionHeading';
 import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
@@ -14,6 +15,7 @@ const PROJECTS_PER_PAGE = 9;
  * ส่วนแสดงรายการผลงานและระบบที่พัฒนาขึ้นจริง พร้อมระบบแบ่งหน้า (Pagination) และ Modal แสดงรายละเอียด
  */
 export default function Projects() {
+  const { t } = useLanguage();
   const [selectedProject, setSelectedProject] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [toastNotice, setToastNotice] = useState(null);
@@ -49,14 +51,14 @@ export default function Projects() {
       <Toast
         message={toastNotice}
         onClose={() => setToastNotice(null)}
-        title="สถานะผลงาน"
+        title={t('modal.statusTitle')}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          tag="Featured Work"
-          title="Projects & Applications"
-          description="ผลงานและระบบที่พัฒนาขึ้นจริง"
+          tag={t('projects.tag')}
+          title={t('projects.title')}
+          description={t('projects.description')}
         />
 
         {/* Minimalist Editorial Projects Grid (9 per page) */}
@@ -82,7 +84,7 @@ export default function Projects() {
               className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#0F1117]/90 border border-[#272A33] text-sm text-[#CBD5E1] hover:text-white hover:border-[#8B5CF6]/50 disabled:opacity-35 disabled:pointer-events-none transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
             >
               <ChevronLeft className="w-4 h-4" />
-              <span>ก่อนหน้า</span>
+              <span>{t('projects.prev')}</span>
             </button>
 
             <div className="flex items-center gap-1.5">
@@ -108,7 +110,7 @@ export default function Projects() {
               onClick={() => handlePageChange(currentPage + 1)}
               className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#0F1117]/90 border border-[#272A33] text-sm text-[#CBD5E1] hover:text-white hover:border-[#8B5CF6]/50 disabled:opacity-35 disabled:pointer-events-none transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
             >
-              <span>ถัดไป</span>
+              <span>{t('projects.next')}</span>
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>

@@ -1,8 +1,19 @@
 import React from 'react';
 import { ArrowUp } from 'lucide-react';
 import { profileData } from '../data/profile';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Footer() {
+  const { language, t } = useLanguage();
+
+  const getLocalized = (obj) => {
+    if (!obj) return '';
+    if (typeof obj === 'object') {
+      return obj[language] || obj.th || '';
+    }
+    return obj;
+  };
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -14,17 +25,17 @@ export default function Footer() {
           <span className="font-bold text-white text-base text-title-readable">
             My<span className="text-[#8B5CF6]">Resume</span>
           </span>
-          <p className="text-xs text-muted-readable mt-1 font-medium">© {new Date().getFullYear()} {profileData.fullName}. All rights reserved.</p>
+          <p className="text-xs text-muted-readable mt-1 font-medium">© {new Date().getFullYear()} {getLocalized(profileData.name)}. {t('footer.rights')}</p>
         </div>
 
         {/* Quick Nav Links */}
         <div className="flex items-center gap-6 text-xs font-semibold text-muted-readable">
-          <a href="#home" className="hover:text-[#8B5CF6] transition-colors">Home</a>
-          <a href="#about" className="hover:text-[#8B5CF6] transition-colors">About</a>
-          <a href="#projects" className="hover:text-[#8B5CF6] transition-colors">Projects</a>
-          <a href="#experience" className="hover:text-[#8B5CF6] transition-colors">Experience</a>
-          <a href="#education" className="hover:text-[#8B5CF6] transition-colors">Education</a>
-          <a href="#contact" className="hover:text-[#8B5CF6] transition-colors">Contact</a>
+          <a href="#home" className="hover:text-[#8B5CF6] transition-colors">{t('nav.home')}</a>
+          <a href="#about" className="hover:text-[#8B5CF6] transition-colors">{t('nav.about')}</a>
+          <a href="#projects" className="hover:text-[#8B5CF6] transition-colors">{t('nav.projects')}</a>
+          <a href="#experience" className="hover:text-[#8B5CF6] transition-colors">{t('nav.experience')}</a>
+          <a href="#education" className="hover:text-[#8B5CF6] transition-colors">{t('nav.education')}</a>
+          <a href="#contact" className="hover:text-[#8B5CF6] transition-colors">{t('nav.contact')}</a>
         </div>
 
         {/* Back to top button */}
@@ -32,7 +43,8 @@ export default function Footer() {
           type="button"
           onClick={scrollToTop}
           className="p-2.5 rounded-xl bg-[#171A21] border border-[#272A33] text-[#E2E8F0] hover:text-white hover:border-[#8B5CF6] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] shadow-sm"
-          aria-label="Scroll back to top"
+          aria-label={t('footer.backToTop')}
+          title={t('footer.backToTop')}
         >
           <ArrowUp className="w-4 h-4" />
         </button>
