@@ -171,6 +171,16 @@ const GlowCursor = ({
   };
 
   useEffect(() => {
+    // Skip WebGL initialization completely on mobile / touch devices to conserve battery & GPU
+    const isTouchOrMobile = () => {
+      if (typeof window === 'undefined') return true;
+      const isCoarsePointer = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+      const isNarrowScreen = window.innerWidth <= 768;
+      return isCoarsePointer || isNarrowScreen;
+    };
+
+    if (isTouchOrMobile()) return;
+
     const container = containerRef.current;
     const canvas = canvasRef.current;
     if (!container || !canvas) return;

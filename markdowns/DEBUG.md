@@ -99,11 +99,23 @@
 
 ---
 
-## 7. ปัญหาเกี่ยวกับข้อมูลโปรเจกต์ & ลิงก์
+## 7. ปัญหาเกี่ยวกับข้อมูลโปรเจกต์ ลิงก์ และการโหลดรูปภาพ (Image Optimization)
 
 ### 🔴 ปัญหาที่ 7.1: ปุ่ม Live Demo ไม่แสดงแม้มี URL
 - **สาเหตุ:** `projects.js` กำหนดคีย์ `liveUrl` แต่คอมโพเนนต์ตรวจสอบเฉพาะ `project.demoUrl`
 - **วิธีแก้:** ใช้เงื่อนไข `(project.demoUrl || project.liveUrl)` ในทั้ง `Projects.jsx`, `ProjectCard.jsx`, และ `ProjectModal.jsx`
+
+### 🔴 ปัญหาที่ 7.2: รูปภาพโหลดช้าหรือไฟล์ PNG มีขนาดใหญ่เกินไป
+- **สาเหตุ:** ไฟล์ภาพต้นฉบับไม่ได้ถูกบีบอัด หรือไม่ได้แปลงเป็น WebP
+- **วิธีแก้:** รันคำสั่งแปลงไฟล์อัตโนมัติด้วย `sharp`:
+  ```bash
+  npm run optimize:images
+  ```
+  สคริปต์ [scripts/convert-webp.js](file:///c:/xampp/htdocs/Resume/scripts/convert-webp.js) จะสแกนและแปลงภาพ PNG ใน `public/projects/` เป็น `.webp` คุณภาพสูงและประหยัดพื้นที่ลง 70-90% ทันที
+
+### 🔴 ปัญหาที่ 7.3: แอนิเมชันเมาส์ GlowCursor เปลืองทรัพยากรบนมือถือ
+- **สาเหตุ:** หน้าจอมือถือไม่มีตัวชี้เมาส์จริง
+- **วิธีแก้:** ใน `GlowCursor.jsx` มีฟังก์ชัน `isTouchOrMobile()` ตรวจจับ `(hover: none) and (pointer: coarse)` หรือจอ `<= 768px` เพื่อข้ามการสร้าง WebGL Context และยกเลิก `requestAnimationFrame` ทันที พร้อม CSS `display: none !important;`
 
 ---
 

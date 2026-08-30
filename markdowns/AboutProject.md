@@ -61,7 +61,7 @@ Resume/
 │   ├── favicon.svg          # โลโก้ Favicon สไตล์ Dark Theme
 │   ├── resume/
 │   │   └── Resume_purachet.pdf # ไฟล์ PDF เรซูเม่ฉบับเต็มสำหรับดาวน์โหลด
-│   ├── projects/            # รูปภาพผลงานโปรเจกต์จริงทุกชิ้นงาน (Local Assets)
+│   ├── projects/            # รูปภาพผลงานโปรเจกต์จริงฟอร์แมต WebP ประสิทธิภาพสูง (88.4% Saved)
 │   │   ├── CaDaCooked/
 │   │   ├── DevNote/
 │   │   ├── investment/
@@ -75,6 +75,9 @@ Resume/
 │           ├── database-system.svg
 │           ├── dev-portfolio.svg
 │           └── hotel-booking.svg
+│
+├── scripts/
+│   └── convert-webp.js      # สคริปต์ Node.js สำหรับแปลงรูปภาพ PNG เป็น WebP ผ่าน sharp
 │
 └── src/
     ├── App.jsx              # Main Root Component ผสาน DarkVeil, GlowCursor และ SmoothScroll

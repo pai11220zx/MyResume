@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, AlertCircle, CheckCircle2, Sparkles, Lightbulb, Flame, Info } from 'lucide-react';
@@ -74,7 +74,11 @@ export default function ProjectModal({ project, onClose, onNotice }) {
             <img
               src={project.image}
               alt={project.title}
+              loading="eager"
+              fetchPriority="high"
               decoding="async"
+              width="800"
+              height="450"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#090B10] via-[#090B10]/60 to-transparent" />
