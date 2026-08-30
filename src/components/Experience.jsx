@@ -7,7 +7,7 @@ import Badge from './common/Badge';
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 relative z-10 border-t border-[#272A33]/50 bg-[#0F1117]/50">
+    <section id="experience" className="py-24 relative z-10 border-t border-[#272A33]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           tag="Timeline"
@@ -27,9 +27,9 @@ export default function Experience() {
               className="relative group"
             >
               {/* Timeline Indicator Dot */}
-              <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-[#171A21] border-2 border-[#8B5CF6] group-hover:scale-125 transition-transform" />
+              <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-[#0F1117] border-2 border-[#8B5CF6] group-hover:scale-125 transition-transform" />
 
-              <div className="p-6 rounded-2xl bg-[#171A21] border border-[#272A33] group-hover:border-[#8B5CF6]/40 transition-colors space-y-3">
+              <div className="p-6 rounded-2xl bg-[#0F1117]/40 border border-[#272A33]/60 group-hover:border-[#8B5CF6]/40 transition-colors space-y-3">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <Badge variant="accent">
                     <Calendar className="w-3.5 h-3.5" />
