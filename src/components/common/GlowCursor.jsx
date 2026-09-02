@@ -256,6 +256,17 @@ const GlowCursor = ({
       fade = 1;
     };
 
+    let isSleeping = false;
+
+    const wakeUp = () => {
+      if (isSleeping && !destroyed) {
+        isSleeping = false;
+        lastFrameTime = performance.now();
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(render);
+      }
+    };
+
     const updatePointer = event => {
       const x = clamp(event.clientX, 0, window.innerWidth);
       const y = clamp(window.innerHeight - event.clientY, 0, window.innerHeight);
@@ -264,6 +275,7 @@ const GlowCursor = ({
       target.y = y;
       pointerInside = true;
       lastInputTime = performance.now();
+      wakeUp();
     };
 
     const onPointerLeave = () => {
@@ -304,6 +316,14 @@ const GlowCursor = ({
       const fadeTarget = initialized && config.enabled && !shouldFade ? 1 : 0;
       fade += (fadeTarget - fade) * Math.min(1, fadeStep * 7);
 
+      // Smart Sleep Check: If fully faded out and idle, stop the render loop to save 100% CPU/GPU
+      if (fadeTarget === 0 && fade < 0.001) {
+        fade = 0;
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        isSleeping = true;
+        return;
+      }
+
       program.uniforms.uPointCount.value = clamp(Math.round(config.trailLength), 2, MAX_POINTS);
       program.uniforms.uColor.value = hexToRgb(config.color);
       program.uniforms.uSecondaryColor.value = hexToRgb(config.secondaryColor);
@@ -320,10 +340,10 @@ const GlowCursor = ({
       program.uniforms.uFade.value = fade;
 
       renderer.render({ scene: mesh });
-      if (!destroyed) raf = requestAnimationFrame(render);
+      if (!destroyed && !isSleeping) raf = requestAnimationFrame(render);
     };
 
-    window.addEventListener('resize', resize, { passive: true });
+    window.addEventListener('resize', () => { resize(); wakeUp(); }, { passive: true });
     window.addEventListener('pointermove', updatePointer, { passive: true });
     window.addEventListener('pointerleave', onPointerLeave, { passive: true });
 

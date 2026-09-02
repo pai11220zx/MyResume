@@ -107,7 +107,6 @@ const DepthText = ({
       window.addEventListener('pointerleave', handlePointerLeave, { passive: true });
       window.addEventListener('blur', handlePointerLeave, { passive: true });
       window.addEventListener('resize', updateRect, { passive: true });
-      window.addEventListener('scroll', updateRect, { passive: true });
       updateRect();
     }
 
@@ -155,7 +154,6 @@ const DepthText = ({
         window.removeEventListener('pointerleave', handlePointerLeave);
         window.removeEventListener('blur', handlePointerLeave);
         window.removeEventListener('resize', updateRect);
-        window.removeEventListener('scroll', updateRect);
       }
       cancelAnimationFrame(frameId);
     };

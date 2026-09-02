@@ -21,7 +21,7 @@ export default function Hero() {
         <div className="mb-6 flex justify-center py-2">
           <DepthText
             text={getLocalized(profileData.name)}
-            layers={32}
+            layers={16}
             depth={2.2}
             faceColor="#FFFFFF"
             depthColor="#7C3AED"
