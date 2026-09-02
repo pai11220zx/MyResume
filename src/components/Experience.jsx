@@ -32,7 +32,7 @@ export default function Experience() {
               {/* Timeline Indicator Dot */}
               <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-[#0F1117] border-2 border-[#8B5CF6] group-hover:scale-125 transition-transform" />
 
-              <div className="p-6 rounded-2xl bg-[#0F1117]/40 border border-[#272A33]/60 group-hover:border-[#8B5CF6]/40 transition-colors space-y-3">
+              <div className="space-y-3 pt-1">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <Badge variant="accent">
                     <Calendar className="w-3.5 h-3.5" />
@@ -41,11 +41,11 @@ export default function Experience() {
                   <span className="text-xs text-muted-readable font-medium">{getLocalized(item.organization)}</span>
                 </div>
 
-                <h3 className="text-xl font-bold text-white text-title-readable">{getLocalized(item.role)}</h3>
+                <h3 className="text-xl font-bold text-white text-title-readable group-hover:text-[#8B5CF6] transition-colors">{getLocalized(item.role)}</h3>
                 <p className="text-sm text-secondary-readable leading-relaxed">{getLocalized(item.description)}</p>
 
                 {/* Skills tags */}
-                <div className="flex flex-wrap gap-1.5 pt-2">
+                <div className="flex flex-wrap gap-1.5 pt-1">
                   {(item.skills || []).map(skill => (
                     <Badge key={skill}>
                       {skill}

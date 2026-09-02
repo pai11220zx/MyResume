@@ -95,7 +95,7 @@ export default function Contact() {
                 transition={{ duration: 0.4, delay: idx * 0.08 }}
                 className="border-b border-[#272A33]/30 pb-4"
               >
-                <div className="flex items-start justify-between gap-3 p-4 rounded-2xl group transition-all hover:bg-[#171A21]/30">
+                <div className="flex items-start justify-between gap-3 py-2 group transition-all">
                   <div className="flex items-start gap-4 min-w-0">
                     <IconBox icon={item.icon} size="md" />
                     <div className="min-w-0">

@@ -101,19 +101,18 @@ export default function GitHubActivity() {
           tag={t('github.tag')}
           title={t('github.title')}
           description={t('github.description')}
-          className="mb-12"
         />
 
-        <div className="max-w-5xl mx-auto space-y-8">
-          {/* GitHub Profile Overview Card */}
+        <div className="max-w-5xl mx-auto space-y-12">
+          {/* GitHub Profile Overview (Frameless Minimalist) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
-            className="p-6 sm:p-8 rounded-2xl bg-[#0F1117]/60 border border-[#272A33]/70 hover:border-[#8B5CF6]/40 transition-colors"
+            className="space-y-6 pb-8 border-b border-[#272A33]/40"
           >
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-6 border-b border-[#272A33]/40">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
               <div className="flex items-center gap-4">
                 <div className="p-3.5 rounded-2xl bg-[#171A21] border border-[#272A33] text-[#8B5CF6] shrink-0 shadow-md">
                   <GithubIcon className="w-8 h-8" />
@@ -140,10 +139,10 @@ export default function GitHubActivity() {
               </a>
             </div>
 
-            {/* Stats Highlights */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6">
+            {/* Stats Highlights (Frameless Row) */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4">
               {githubStats.map((stat) => (
-                <div key={stat.label} className="p-4 rounded-xl bg-[#171A21]/40 border border-[#272A33]/40 space-y-1">
+                <div key={stat.label} className="space-y-1">
                   <div className="flex items-center gap-2 text-[#8B5CF6]">
                     <stat.icon className="w-4 h-4" />
                     <span className="text-xs font-semibold text-muted-readable">{stat.label}</span>
@@ -155,8 +154,8 @@ export default function GitHubActivity() {
             </div>
           </motion.div>
 
-          {/* Top Repositories Grid */}
-          <div className="space-y-4">
+          {/* Top Repositories Grid (Frameless Minimalist List) */}
+          <div className="space-y-6">
             <div className="flex items-center justify-between">
               <h4 className="text-base sm:text-lg font-bold text-white flex items-center gap-2 text-title-readable">
                 <FolderGit2 className="w-5 h-5 text-[#8B5CF6]" />
@@ -167,7 +166,7 @@ export default function GitHubActivity() {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {topRepositories.map((repo, idx) => (
                 <motion.a
                   key={repo.name}
@@ -178,7 +177,7 @@ export default function GitHubActivity() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.35, delay: idx * 0.08 }}
-                  className="p-5 rounded-2xl bg-[#0F1117]/40 border border-[#272A33]/60 hover:border-[#8B5CF6]/50 hover:bg-[#171A21]/40 transition-all flex flex-col justify-between space-y-4 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
+                  className="py-4 border-b border-[#272A33]/40 hover:border-[#8B5CF6]/60 transition-all flex flex-col justify-between space-y-4 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6] rounded-xl"
                 >
                   <div className="space-y-2">
                     <div className="flex items-start justify-between gap-2">
@@ -200,7 +199,7 @@ export default function GitHubActivity() {
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-[#272A33]/30">
+                  <div className="flex flex-wrap items-center justify-between gap-2 pt-2">
                     <div className="flex items-center gap-1.5">
                       <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: repo.langColor }} />
                       <span className="text-xs text-muted-readable font-medium">{repo.language}</span>

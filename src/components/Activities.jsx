@@ -10,13 +10,12 @@ export default function Activities() {
   const { t, getLocalized } = useLanguage();
 
   return (
-    <section id="activities" className="py-20 relative z-10 border-t border-[#272A33]/40">
+    <section id="activities" className="py-24 relative z-10 border-t border-[#272A33]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           tag={t('activities.tag')}
           title={t('activities.title')}
           description={t('activities.description')}
-          className="mb-12"
         />
 
         <div className={`mx-auto ${activitiesData.length === 1 ? 'max-w-2xl' : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl'}`}>
@@ -27,7 +26,7 @@ export default function Activities() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="p-6 sm:p-7 rounded-2xl bg-[#0F1117]/40 border border-[#272A33]/60 group-hover:border-[#8B5CF6]/40 transition-colors flex flex-col justify-between space-y-4 group"
+              className="flex flex-col justify-between space-y-4 group"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between gap-2">
@@ -44,7 +43,7 @@ export default function Activities() {
               </div>
 
               {act.image && (
-                <div className="mt-2 overflow-hidden rounded-xl border border-[#272A33] group-hover:border-[#8B5CF6]/40 transition-colors bg-[#07090E]/60">
+                <div className="mt-2 overflow-hidden rounded-2xl border border-[#272A33]/60 group-hover:border-[#8B5CF6]/40 transition-colors">
                   <a
                     href={act.image}
                     target="_blank"

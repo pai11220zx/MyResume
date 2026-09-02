@@ -11,13 +11,12 @@ export default function Education() {
   const { t, getLocalized } = useLanguage();
 
   return (
-    <section id="education" className="py-20 relative z-10 border-t border-[#272A33]/40">
+    <section id="education" className="py-24 relative z-10 border-t border-[#272A33]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           tag={t('education.tag')}
           title={t('education.title')}
           description={t('education.description')}
-          className="mb-12"
         />
 
         <div className="max-w-4xl mx-auto space-y-8">
@@ -28,7 +27,7 @@ export default function Education() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
-              className="p-6 rounded-2xl bg-[#0F1117]/40 border border-[#272A33]/60 space-y-3"
+              className="py-4 space-y-3 border-b border-[#272A33]/30 last:border-b-0"
             >
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                 <div className="flex items-start gap-4">
