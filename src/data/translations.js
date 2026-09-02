@@ -136,6 +136,7 @@ export const translations = {
       sectionBadge: "กิจกรรม & รางวัล",
       sectionTitle: "กิจกรรมและการเข้าร่วมอบรม",
       sectionSubtitle: "การเข้าร่วมกิจกรรมวิชาการ เวิร์กช็อป และการประกวดแข่งขัน",
+      viewImage: "ดูรูปภาพขนาดเต็ม",
     },
     education: {
       tag: "Academic Background",
@@ -337,6 +338,7 @@ export const translations = {
       sectionBadge: "Activities & Awards",
       sectionTitle: "Activities & Workshops",
       sectionSubtitle: "Workshops, hackathons, and technology competitions",
+      viewImage: "View Full Image",
     },
     education: {
       tag: "Academic Background",

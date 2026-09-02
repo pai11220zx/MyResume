@@ -1,8 +1,8 @@
 export const experienceData = [
   {
     period: {
-      th: "เมษายน – กันยายน พ.ศ. 2567",
-      en: "April – September 2024"
+      th: "เมษายน – กันยายน พ.ศ. 2569",
+      en: "April – September 2026"
     },
     role: {
       th: "นักศึกษาจ้างงาน (Earn while learn) / Web Developer & Technical Staff",
