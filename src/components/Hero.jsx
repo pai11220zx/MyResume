@@ -7,15 +7,7 @@ import { useLanguage } from '../context/LanguageContext';
 import DepthText from './common/DepthText';
 
 export default function Hero() {
-  const { language, t } = useLanguage();
-
-  const getLocalized = (obj) => {
-    if (!obj) return '';
-    if (typeof obj === 'object') {
-      return obj[language] || obj.th || '';
-    }
-    return obj;
-  };
+  const { t, getLocalized } = useLanguage();
 
   return (
     <section id="home" className="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden">

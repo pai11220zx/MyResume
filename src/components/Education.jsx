@@ -8,15 +8,7 @@ import Badge from './common/Badge';
 import IconBox from './common/IconBox';
 
 export default function Education() {
-  const { language, t } = useLanguage();
-
-  const getLocalized = (obj) => {
-    if (!obj) return '';
-    if (typeof obj === 'object') {
-      return obj[language] || obj.th || '';
-    }
-    return obj;
-  };
+  const { t, getLocalized } = useLanguage();
 
   return (
     <section id="education" className="py-20 relative z-10 border-t border-[#272A33]/40">

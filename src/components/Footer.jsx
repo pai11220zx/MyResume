@@ -4,15 +4,7 @@ import { profileData } from '../data/profile';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Footer() {
-  const { language, t } = useLanguage();
-
-  const getLocalized = (obj) => {
-    if (!obj) return '';
-    if (typeof obj === 'object') {
-      return obj[language] || obj.th || '';
-    }
-    return obj;
-  };
+  const { t, getLocalized } = useLanguage();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

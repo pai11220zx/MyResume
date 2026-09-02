@@ -11,6 +11,15 @@ build/
 out/
 *.local
 
+# Platform Deployment & Cache Directories
+.vercel/
+.cache/
+.vite/
+.turbo/
+.eslintcache
+*.tsbuildinfo
+coverage/
+
 # Environment Variables & Secrets (Preserve .env.example)
 .env
 .env.*
@@ -29,13 +38,13 @@ lerna-debug.log*
 .vscode/*
 !.vscode/extensions.json
 .idea/
+.fleet/
+.cursor/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-.fleet/
-.cursor/
 
 # OS Metadata & System Files
 .DS_Store
@@ -47,21 +56,14 @@ ehthumbs.db
 Thumbs.db
 desktop.ini
 
-# Caches & Temporary Files
-.cache/
-.vite/
-.turbo/
-.eslintcache
-*.tsbuildinfo
+# Temporary, Scratch & Backup Files
 .temp/
 .tmp/
-.vercel
-coverage/
-*.pdf.backup
 *.bak
 *.backup
 *.orig
 *.old
+*.pdf.backup
 
 # AI Agent Local Cache & Tooling Directories
 .agents/

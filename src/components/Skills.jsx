@@ -63,15 +63,7 @@ const iconLookup = {
 };
 
 export default function Skills() {
-  const { language, t } = useLanguage();
-
-  const getLocalized = (obj) => {
-    if (!obj) return '';
-    if (typeof obj === 'object') {
-      return obj[language] || obj.th || '';
-    }
-    return obj;
-  };
+  const { t, getLocalized } = useLanguage();
 
   return (
     <section id="skills" className="py-24 relative z-10 border-t border-[#272A33]/40">

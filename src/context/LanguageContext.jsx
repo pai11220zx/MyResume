@@ -1,4 +1,4 @@
-﻿import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { translations } from '../data/translations';
 
 const LanguageContext = createContext();
@@ -59,6 +59,15 @@ export function LanguageProvider({ children }) {
     return current;
   };
 
+  // Helper localized object getter ({ th: "...", en: "..." } or string)
+  const getLocalized = (obj) => {
+    if (!obj) return '';
+    if (typeof obj === 'object') {
+      return obj[language] || obj.th || '';
+    }
+    return obj;
+  };
+
   const value = {
     language,
     setLanguage,
@@ -66,6 +75,7 @@ export function LanguageProvider({ children }) {
     isThai: language === 'th',
     isEnglish: language === 'en',
     t,
+    getLocalized,
     currentStrings: translations[language] || translations.th
   };
 

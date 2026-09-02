@@ -28,8 +28,11 @@ logs/**
 .idea/**
 .vscode/**
 coverage/**
+.agents/**
+.codex/**
+.impeccable/**
 
-# Binary, Media & Heavy Non-Code Files (Ignore heavy non-code assets for AI Agents)
+# Binary, Media & Heavy Non-Code Files
 *.pdf
 *.zip
 *.tar.gz

@@ -22,15 +22,7 @@ export default function ProjectCard({
   onSelectProject,
   onTriggerNotice
 }) {
-  const { language, t } = useLanguage();
-
-  const getLocalized = (obj) => {
-    if (!obj) return '';
-    if (typeof obj === 'object') {
-      return obj[language] || obj.th || '';
-    }
-    return obj;
-  };
+  const { t, getLocalized } = useLanguage();
 
   const projectTitle = getLocalized(project.title);
   const projectDesc = getLocalized(project.description);

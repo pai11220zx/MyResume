@@ -9,17 +9,20 @@
 เว็บไซต์นี้เป็น **Modern Personal Developer Portfolio / Online Resume** ที่พัฒนาขึ้นเพื่อนำเสนอตัวตน ทักษะความสามารถ ผลงานซอฟต์แวร์ (Projects), ประสบการณ์ (Experience), กิจกรรม (Activities), การศึกษา (Education) และระบบรับข้อความติดต่อสำหรับนักพัฒนาซอฟต์แวร์
 
 ### 🌟 จุดเด่นของโปรเจกต์ (Core Highlights):
-- **Full Bilingual Support (TH / EN Real-time Toggle):** ระบบสลับ 2 ภาษาไทย-อังกฤษแบบเรียลไทม์ทั่วทั้งโปรเจกต์ ทั้ง UI Headers, Navigation, Buttons, Modals, Toasts และเนื้อหาโปรเจกต์เชิงลึก ผ่าน React Context (`LanguageContext.jsx`) พร้อมจดจำภาษาลงใน `localStorage` และซิงค์ `<html lang="...">`
+- **Full Bilingual Support (TH / EN Real-time Toggle) & DRY Localization:** ระบบสลับ 2 ภาษาไทย-อังกฤษแบบเรียลไทม์ทั่วทั้งโปรเจกต์ ทั้ง UI Headers, Navigation, Buttons, Modals, Toasts และเนื้อหาโปรเจกต์เชิงลึก ผ่าน React Context (`LanguageContext.jsx`) พร้อมฟังก์ชันรวมศูนย์ `getLocalized` ลดโค้ดซ้ำซ้อน 100+ บรรทัด
+- **Enterprise HTTP Security Headers & A+ Grade Compliance:** กำหนดค่า `Content-Security-Policy`, `Permissions-Policy`, `Referrer-Policy: strict-origin-when-cross-origin` และ `HSTS` ใน `vercel.json` และ `index.html` ปราศจาก Warning
+- **Developer GitHub Ecosystem Hub:** แสดงภาพรวมสถานะนักพัฒนา, สถิติ 8+ โปรเจกต์ และการ์ด 4 ผลงานเด่น (`devnote-snippets`, `CaDaCooked-Unity3D`, `SmartPort-AI`, `MyResume-Portfolio`) พร้อม Tech Badges และลิงก์ตรงสู่ GitHub
+- **One-Click Copy Contact Channels:** ระบบคัดลอกเบอร์โทรศัพท์และอีเมลลง Clipboard ในคลิกเดียว พร้อม Visual Checkmark State และ Portal Toast Notification แจ้งเตือนสถานะทันที
 - **Minimalist Editorial & Content-First Design:** โครงสร้างหน้าเว็บแบบเน้นเนื้อหา อ่านง่าย สบายตา ไม่มีแอนิเมชัน Fade-in บดบังสายตา
 - **WebGL DarkVeil Background & Glow Cursor:** ขับเคลื่อนฉากหลังแบบไดนามิกด้วย Shader WebGL (`DarkVeil.jsx` และ `GlowCursor.jsx` พัฒนาบน `ogl`) ให้ความสว่าง นุ่มนวล ลึกลับ และเบาเครื่อง (High Performance)
 - **Physics-based Inertia Smooth Scrolling:** ขับเคลื่อนการเลื่อนหน้าจอด้วย **Lenis** (`SmoothScroll.jsx`) มอบประสบการณ์ Scroll ที่ลื่นไหล นุ่มนวล ระดับ Awwwards พร้อมระบบจัดการล็อก Scrollbar อัตโนมัติเมื่อเปิด Modal
 - **3D DepthText Hero Display:** นำเสนอชื่อ "Purachet Aobrom" ด้วยคอมโพเนนต์ 3D Layered Canvas Text พร้อมระบบ Pointer Tracking และ Auto Orbiting
 - **Glassmorphic Floating Navbar & Ghost CTA:** แถบนำทางโปร่งแสงสไตล์ Glassmorphism เมื่อเลื่อนหน้าจอ พร้อมปุ่มสลับภาษา `[ TH | EN ]` สไตล์มินิมอลเข้าชุด และปุ่ม **RESUME** แบบ Ghost Button สม่ำเสมอทั้งภาษาไทยและอังกฤษ
-- **DRY & Shared Components Architecture:** รวมศูนย์คอมโพเนนต์ส่วนกลาง (`IconBox`, `SectionHeading`, `Badge`, `Icons`) ลดโค้ดซ้ำซ้อนและควบคุมสไตล์ได้จากจุดเดียว
+- **DRY & Shared Components Architecture:** รวมศูนย์คอมโพเนนต์ส่วนกลาง (`IconBox`, `SectionHeading`, `Badge`, `Icons`, `Toast`) ลดโค้ดซ้ำซ้อนและควบคุมสไตล์ได้จากจุดเดียว
 - **Accessible Frameless Media Cards & Project Modal:** แสดงผลงานโครงการด้วยการ์ดลอยอิสระ (Frameless) พร้อม Dialog ป๊อปอัปดูรายละเอียดเชิงลึกที่มีระบบ Event Bubbling Guard ป้องกันการปิดโดยไม่ตั้งใจ
 - **100% Offline-Ready Assets:** รูปภาพและไอคอนทั้งหมดเก็บอยู่ภายในโปรเจกต์ ไม่พึ่งพา CDN ภายนอก
 - **Cloud Database Ready:** มีไฟล์ `database/schema.sql` พร้อมใช้งานร่วมกับ Supabase PostgreSQL ภายใต้มาตรฐานความปลอดภัย Row Level Security (RLS)
-- **Vercel Cloud Deployment:** รองรับการ Deploy บน Vercel พร้อมไฟล์คอนฟิก `vercel.json` สำหรับ SPA Routing Rewrites
+- **Vercel Cloud Deployment:** รองรับการ Deploy บน Vercel พร้อมไฟล์คอนฟิก `vercel.json` สำหรับ SPA Routing Rewrites และ Security Headers
 
 ---
 

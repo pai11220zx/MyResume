@@ -127,3 +127,22 @@ WITH CHECK (true);
   npm audit
   ```
 - อัปเดตแพ็กเกจที่มีช่องโหว่ความปลอดภัยทันทีเมื่อมี Patch ใหม่ออกมา
+
+---
+
+## 7. มาตรฐาน HTTP Security Headers บน Vercel และ HTML (Security Headers Compliance)
+
+เพื่อป้องกันการโจมตีทางเว็บและผ่านการตรวจสอบ Security Headers (เช่น Mozilla Observatory / SecurityHeaders.com):
+
+1. **`Content-Security-Policy` (CSP):**
+   - บังคับใช้ `default-src 'self'`, `script-src 'self'`, `style-src 'self' 'unsafe-inline'`, `connect-src 'self' https://*.supabase.co`, `object-src 'none'`, `frame-ancestors 'none'`
+   - **ปราศจาก `'unsafe-eval'` ใน `script-src`** เพื่อความปลอดภัยสูงสุด
+2. **`Permissions-Policy`:**
+   - ปิดการเข้าถึงฮาร์ดแวร์และ API ที่ไม่ได้ใช้งานในเบราว์เซอร์: `camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()`
+3. **`Referrer-Policy`:**
+   - ใช้ค่ามาตรฐานสากล: `strict-origin-when-cross-origin` เพื่อป้องกันข้อมูล URL รั่วไหลข้ามโดเมนที่ไม่ปลอดภัย
+4. **`X-Content-Type-Options`:** `nosniff` (ป้องกัน MIME Type Sniffing)
+5. **`X-Frame-Options`:** `DENY` (ป้องกัน Clickjacking)
+6. **`X-XSS-Protection`:** `1; mode=block`
+7. **`Strict-Transport-Security` (HSTS):** `max-age=31536000; includeSubDomains; preload`
+

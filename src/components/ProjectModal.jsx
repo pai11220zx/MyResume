@@ -17,16 +17,8 @@ import './ProjectModal.css';
  * @param {Function} [props.onNotice] - ฟังก์ชันแจ้งเตือนสถานะเมื่อคลิกปุ่มภายนอก
  */
 export default function ProjectModal({ project, onClose, onNotice }) {
-  const { language, t } = useLanguage();
+  const { t, getLocalized } = useLanguage();
   const [inlineNotice, setInlineNotice] = useState(null);
-
-  const getLocalized = (obj) => {
-    if (!obj) return '';
-    if (typeof obj === 'object') {
-      return obj[language] || obj.th || '';
-    }
-    return obj;
-  };
 
   useEffect(() => {
     const handleKeyDown = (e) => {

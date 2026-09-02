@@ -15,6 +15,11 @@ export default function SectionHeading({
 
   return (
     <div className={`flex flex-col ${containerAlign} ${className}`}>
+      {tag && (
+        <span className="text-xs font-bold text-[#8B5CF6] uppercase tracking-wider mb-2">
+          {tag}
+        </span>
+      )}
       {/* Clean Solid Section Title */}
       <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight text-title-readable mb-2 ${textAlign}`}>
         {title}
